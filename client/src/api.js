@@ -96,4 +96,40 @@ export default {
       .then(res => res.data)
       .catch(errHandler)
   },
+
+  getLatestPosts(){
+    return service
+      .get('/latestPosts')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  getAllPosts(){
+    return service
+      .get('/allPosts')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  getInfo(page){
+    return service
+      .get('/'+page)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  getEquipment(){
+    return service
+      .get('/equipment')
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  getGaleriePictures(){
+    return service
+      .get('/galerie')
+      .then(res => res.data)
+      .catch(errHandler)
+  }
+
 }
