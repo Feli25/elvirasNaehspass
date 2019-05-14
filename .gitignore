@@ -13,7 +13,7 @@ yarn-debug.log*
 yarn-error.log*
 
 /client/build
-
+notes.dist
 
 # Temp
 client-old

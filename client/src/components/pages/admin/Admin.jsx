@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 
 export default class Home extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //   }
-  // }
   render() {                
     return (
-      <div className="Home">
-        <h2>Admin</h2>
-        <p>This is a sample project with the MERN stack</p>
-      </div>
+      <React.Fragment>
+        <div class="page-title">
+          <h1 class="page-title">Admin</h1>
+        </div>
+
+        <section class="card-container">
+          <div class="card" style={{width: "30rem"}}>
+            <div class="card-body"><br/>
+              <a class="btnHref"href="/admin/posts">Posts verwalten</a><br/>
+              <a class="btnHref"href="/admin/kurse">Kurse Seite bearbeiten</a><br/>
+              <a class="btnHref"href="/admin/workshops">Workshop Seite bearbeiten</a><br/>
+              <a class="btnHref"href="/admin/atelier">Ausstattung</a><br/>
+              <a class="btnHref"href="/admin/galerie">Galerie</a><br/>
+            </div>
+          </div>
+        </section>
+      </React.Fragment>
     );
   }
 }

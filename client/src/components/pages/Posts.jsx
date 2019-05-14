@@ -1,17 +1,43 @@
 import React, { Component } from 'react';
+import api from '../../api';
 
 export default class Home extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //   }
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      allPosts:[]
+    }
+  }
+  componentDidMount(){
+    api.getAllPosts()
+      .then(posts=>{
+        this.setState({allPosts:posts})
+      })
+  }
+  createCardsPosts=()=>{
+    this.state.allPosts.map(post=>{
+      return (<div class="card" style="width: 30rem;">
+        {post.imgPath &&<img class="card-img-top" src={ post.imgPath } alt="Image not available"/> }
+            <div class="card-body">
+              <h5 class="card-title">{post.header}</h5>
+              <p class="card-text">{post.content}</p>
+              <h6 class="card-subtitle mb-2 text-muted"> by {post._creator.name}</h6>
+            </div>
+          </div>)
+    })
+  }
   render() {                
     return (
-      <div className="Home">
-        <h2>All Posts</h2>
-        <p>This is a sample project with the MERN stack</p>
-      </div>
+      <React.Fragment>
+        <div class="page-title">
+          <h1 class="page-title">Willkommen</h1>
+        </div>
+        <section class="card-container">
+        <p>
+          {this.createCardsPosts()}
+        </p>
+        </section>
+      </React.Fragment>
     );
   }
 }
