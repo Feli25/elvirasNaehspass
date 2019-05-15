@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 
-export default class Home extends Component {
+export default class Atelier extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -11,12 +11,13 @@ export default class Home extends Component {
   componentDidMount=()=>{
     api.getEquipment()
       .then(equ=>{
+        console.log(equ)
         this.setState({equipment:equ})
       })
       .catch(err=>{console.log(err)})
   }
   createEquipmentCards=()=>{
-    this.state.equipment.map(eq=>{
+    return this.state.equipment.map(eq=>{
       return(
             <div class="card" style={{width: "30rem"}} key={eq.name}>
             {eq.imgPath && <img src={ eq.imgPath } alt={ eq.imgName } class="card-img-top" />}
@@ -30,7 +31,7 @@ export default class Home extends Component {
   }
   render() {                
     return (
-      <React.Fragmen>
+      <React.Fragment>
         <div class="page-title">
           <h1 class="page-title">Das Atelier</h1>
         </div>
@@ -48,7 +49,7 @@ export default class Home extends Component {
             {this.createEquipmentCards()}
           </p>
         </section>
-      </React.Fragmen>
-    );
+      </React.Fragment>
+    )
   }
 }

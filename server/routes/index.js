@@ -1,70 +1,50 @@
 const express = require('express');
 const { isLoggedIn } = require('../middlewares')
 const router = express.Router();
-const Post = require('../models/Post')
-const Info = require('../models/Info')
-const Equipment = require('../models/Equipment')
-const GaleriePic = require('../models/GaleriePic')
+const nodemailer = require('nodemailer');
 
 
 
-router.get('/latestPosts', (req, res, next) => {
-  Post.find({ status: "ACTIVE" }, null, { sort: { created_at: -1 }, limit: 10 })
-    .populate('_creator')
-    .then(posts => {
-      res.json(posts);
-    })
-    .catch(err => next(err))
+let transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.GMAIL_EMAIL,
+    pass: process.env.GMAIL_PASSWORD
+  }
 });
 
-router.get('/allPosts', (req, res, next) => {
-  Post.find({ status: "ACTIVE" }, null, { sort: { created_at: -1 } })
-    .populate('_creator')
-    .then(posts => {
-      res.json(posts);
-    })
-    .catch(err => next(err))
-});
-
-router.get('/kurse', (req,res,next)=>{
-  Info.find({ category: "KURSE" })
-    .then(info =>{
-      res.json(info)
-    })
-    .catch(err => next(err))
+router.post('/kontakt', (req,res,next)=>{
+  var mailOptions = {
+    to: 'elvirasnaehspass@gmail.com',
+    from: '"Elviras Nähspass Website"',
+    subject: 'Betreff: ' + req.body.subject,
+    text: 'Jemand auf der neuen Website hat ein Kontaktformular geschickt!\n\n' +
+      'Das Kontaktformular wurde von ' + req.body.name + ' gesendet.\n\n' +
+      'Email: ' + req.body.email + '\n\n' +
+      'Die Nachricht: ' + req.body.message + '\n'
+  };
+  transporter.sendMail(mailOptions)
+    .then(sth => res.json( { success: true }))
+    .catch(err => { console.log(err) })
 })
 
-router.get('/workshops', (req,res,next)=>{
-  Info.find({ category: "WORKSHOPS" })
-    .then(info =>{
-      res.json(info)
-    })
-    .catch(err => next(err))
-})
-
-router.get('/equipment', (req,res,next)=>{
-  Equipment.find(null, null, { sort: { created_at: -1 }})
-    .then(equipment=>{
-      res.json(equipment)
-    })
-    .catch(err => next(err))
-})
-
-router.get('/galerie', (req,res,next)=>{
-  GaleriePic.find(null, null, { sort: { created_at: -1 }})
-    .then(pictures =>{
-      res.json(pictures)
-    })
-    .catch(err => next(err))
-})
-
-
-
-
-
-
-router.get('/kurse', (req,res,next)=>{
-  
+router.post("/anmeldung", (req,res,next)=>{
+  var html = `<h1>Die Anfrage:</h1><hr>`
+  if(req.body.sharing){
+    html += `<p>${req.body.name} (${req.body.email}) und ${req.body.shareName} (${req.body.shareEmail}) möchten gemeinsam diesem Kurs betreten:<br/>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
+  } else {
+    html += `<p>${req.body.name} (${req.body.email}) möchte diesem Kurs betreten:<br>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
+  }
+  html += `</p><p>Weitere Mitteilung: ${req.body.message}</p><br><hr><br>`
+  transporter.sendMail({
+    from: '"Elviras Naehspass Website"',
+    to: "elvirasnaehspass@gmail.com",
+    subject: "Eine neue Kurs Anmeldung",
+    text: req.body.message,
+    html: req.body.html
+  })
+  .then(sth => res.json( { success: true }))
+  .catch(err => { console.log(err) })
 })
 
 

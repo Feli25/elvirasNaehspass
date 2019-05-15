@@ -63,26 +63,26 @@ export default {
 
   // This is an example on how to use this method in a different file
   // api.getCountries().then(countries => { /* ... */ })
-  getCountries() {
-    return service
-      .get('/countries')
-      .then(res => res.data)
-      .catch(errHandler)
-  },
+  // getCountries() {
+  //   return service
+  //     .get('/countries')
+  //     .then(res => res.data)
+  //     .catch(errHandler)
+  // },
 
-  addCountry(body) {
-    return service
-      .post('/countries', body)
-      .then(res => res.data)
-      .catch(errHandler)
-  },
+  // addCountry(body) {
+  //   return service
+  //     .post('/countries', body)
+  //     .then(res => res.data)
+  //     .catch(errHandler)
+  // },
 
-  getSecret() {
-    return service
-      .get('/secret')
-      .then(res => res.data)
-      .catch(errHandler)
-  },
+  // getSecret() {
+  //   return service
+  //     .get('/secret')
+  //     .then(res => res.data)
+  //     .catch(errHandler)
+  // },
 
   addPicture(file) {
     const formData = new FormData()
@@ -97,18 +97,65 @@ export default {
       .catch(errHandler)
   },
 
+  sendKontakt(data){
+    return service  
+      .post("/kontakt", data)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  sendAnmeldung(data){
+    return service
+      .post("/anmeldung", data)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
   getLatestPosts(){
     return service
-      .get('/latestPosts')
+      .get('/post/latest')
       .then(res => res.data)
       .catch(errHandler)
   },
 
   getAllPosts(){
     return service
-      .get('/allPosts')
+      .get('/post/all')
       .then(res => res.data)
       .catch(errHandler)
+  },
+
+  addPost(data) {
+    if(data.picture){
+
+    } else {
+      return service
+      .post('/post/new', data)
+      .then(res => res.data)
+      .catch(errHandler)
+    }
+    // const formData = new FormData()
+    // for (const key in data) {
+    //   formData.append(key, data[key])
+    // }
+  },
+
+  deletePost(id){
+    return service 
+      .get("post/delete/"+id)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
+
+  updatePost(id,data){
+    if(data.picture){
+
+    } else {
+      return service
+      .post("/post/edit/"+id, data)
+      .then(res=>res.data)
+      .catch(errHandler)
+    }
   },
 
   getInfo(page){
@@ -118,6 +165,20 @@ export default {
       .catch(errHandler)
   },
 
+  addInfo(data){
+    return service
+      .post('/info/new', data)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  updateInfo(id,data){
+    return service
+    .post("/info/edit/"+id, data)
+    .then(res=>res.data)
+    .catch(errHandler)
+  },
+
   getEquipment(){
     return service
       .get('/equipment')
@@ -125,11 +186,54 @@ export default {
       .catch(errHandler)
   },
 
+  addEquipment(data){
+    if(data.picture){
+
+    } else {
+      return service
+      .post('/equipment/new', data)
+      .then(res => res.data)
+      .catch(errHandler)
+    }
+  },
+
+  deleteEquipment(id){
+    return service 
+      .get("/equipment/delete/"+id)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
+
+  updateEquipment(id,data){
+    if(data.picture){
+
+    } else {
+      return service
+      .post("/equipment/edit/"+id, data)
+      .then(res=>res.data)
+      .catch(errHandler)
+    }
+  },
+
   getGaleriePictures(){
     return service
       .get('/galerie')
       .then(res => res.data)
       .catch(errHandler)
-  }
+  },
+
+  addGaleriePicture(data){
+    return service
+      .post('/galerie/new', data)
+      .then(res => res.data)
+      .catch(errHandler)
+  },
+
+  deleteGaleriePicture(id){
+    return service 
+      .get("/galerie/delete/"+id)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
 
 }

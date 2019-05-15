@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const infoSchema = new Schema({
   header: String,
   content: String,
+  list: [Object],
   category: { type: String, enum: ["KURSE", "WORKSHOPS"], default: "KURSE" }
 }, {
     timestamps: {

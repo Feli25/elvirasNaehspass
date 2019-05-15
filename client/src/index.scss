@@ -1,101 +1,435 @@
-// --------------------
-// Definition of variables
-$primary: #32c3ff;
+/* 
 
+dark purple #5A1F69
+blue-purple #351F69
+grey #A5ABBC
+light purple #F9F3FD 
 
-// ----------------------------------------
-// To install Boostrap:
-// 1) Run in the client folder: $ npm i bootstrap
-// 2) Import bootstrap with the following line
-// @import '../node_modules/bootstrap/scss/bootstrap.scss';
-// 
-// To install Reactstrap:
-// 1) Run in the client folder: $ npm i reactstrap
-// 2) Go to the official documentation and take some examples: https://reactstrap.github.io/
-// import { Button } from 'reactstrap';
-// <Button color="danger">Danger!</Button>
-// ----------------------------------------
+*/
 
-
-// --------------------
-// Style reusable for all components
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+html {
+  font-size: 10px;
 }
 
-.info {
-  margin: 20px;
-  padding: 10px 20px;
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: #F9F3FD;
+  color: #5A1F69;
+  font-family: 'Alegreya', serif;
+  font-size: 1.5rem;
+  
+}
+
+
+#header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+
+#header {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-items: space-between;
+  align-content: center;
+  margin: 0;
+  padding: 10px;
+}
+
+.body-container {
+  margin-bottom: 50px;
+}
+
+#icon {
+  width: 50px;
+  height: 50px;
+}
+
+#icon2 {
+  display: none;
+}
+
+#header-title {
+  text-align: center;
+}
+
+.login-logout {
+  display: none;
+}
+
+
+.navbar {
+  border-radius: 7px;
+}
+
+.nav-style {
+  color: #5A1F69; 
+  font-family: 'Alegreya', serif; 
+  font-size: 2rem;
+  border-radius: 5px;
+
+}
+
+.nav-style:hover {
+  color: #5A1F69; 
+  text-decoration: none;
+  background-color: #A5ABBC;
+}
+
+.nav-style:active {
+  color: #351F69; 
+  text-decoration: none;
+  background-color: #A5ABBC;
+}
+
+#border-container {
+  border-top: 2px solid #351F69;
+  width: 80%;
+  display: flex;
+  justify-self: center;
+  height: 15px;
+  background-color: white;
+}
+
+
+#header-title {
+  font-size: 3.5rem;
+}
+
+
+a {
+  font-family: 'Open Sans', sans-serif;
+  color: #5A1F69;
+}
+
+.page-title {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.page-title h1{
+  padding-bottom: 5px;
+}
+
+.book-workshop {
+  align-self: center;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  margin: 30px;
   border-radius: 10px;
-  display: inline-block;
-  background-color: #5776e9;
+  background-color: rgba($color: #ffffff, $alpha: 0.9);
+  box-shadow: 10px 9px 16px -5px rgba(0,0,0,0.63);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-img-top {
+  margin: 15px;
+  width: 80%;
+}
+
+.card-title {
+  font-family: "Open Sans", sans-serif;
+  justify-self: center;
+}
+
+.card-text {
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+}
+
+.flexible-card{
+  width: 30rem;
+  // table {
+  //   overflow-x: auto
+  // }
+  // tr {
+  //   display: flex;
+  //   flex-wrap: nowrap;
+  //   overflow-x: auto;
+  //   th, td {
+  //     flex: 0 0 auto;
+  //   }
+  // }
+//   tr{
+//     overflow:auto;
+//     // height:100px;
+//     // display:block;
+//  }
+ 
+  // table{
+  //   transform:rotate(-90deg);
+  //   th, td {
+  //     transform: rotate(90deg);
+  //   }
+  //   th {
+  //     height:200px;
+  //   }
+  // }
+  
+}
+
+.about-card {
+  width: 30rem;
+}
+
+.anmeldung-card {
+  width: 30rem;
+  select {
+    background-color: lightgrey; 
+    border: 1px solid #5A1F69
+  }
+}
+
+.btnHref {
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 10px 9px 16px -5px rgba(0,0,0,0.63);
+
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #F9F3FD;
+  border: 1px solid #351F69;
+  color: #351F69;
+}
+.btnHref:hover {
+  color: #A5ABBC;
+  text-decoration: none;
+}
+
+.btnTable {
+  text-decoration: none;
+  box-shadow: 10px 9px 16px -5px rgba(0,0,0,0.63);
+  font-size: 13px;
+  padding: 3px;
+  border-radius: 5px;
+  background-color: #F9F3FD;
+  border: 1px solid #351F69;
+  color: #351F69;
+}
+.btnTable:hover {
+  color: #A5ABBC;
+  text-decoration: none;
+}
+
+.btn1 {
+  border-radius: 5px;
+  background-color: #351F69;
+}
+
+.btn1 a {
   color: white;
 }
 
-.info.info-danger {
-  background-color: #e73f3f;
+.btn1 a:hover {
+  color: #A5ABBC;
 }
 
-// --------------------
-// Style for App component
-.App {
-  text-align: center;
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-  }
-
-  .App-header {
-    background-color: $primary;
-    padding: 20px;
-    color: white;
-
-    a {
-      color: white;
-      padding: 0 5px;
-      text-decoration: unset;
-    }
-
-    a.active {
-      font-weight: bold;
-    }
-  }
-
-  .App-title {
-    font-size: 1.5em;
-  }
-
-  .App-intro {
-    font-size: large;
-  }
-
-  @keyframes App-logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
-  }
+.btn2 {
+  border-radius: 5px;
+  background-color: #F9F3FD;
+  border: 1px solid #351F69;
 }
 
-// --------------------
-// Style for Home component
-.Home {
-  p {
-    font-size: 1.2em;
-  }
+.btn2 a {
+  color: #351F69;
 }
 
-// --------------------
-// Style for Secret component
-.Secret {
-  .result {
-    font-size: 1.2em;
-    color: $primary;
+.btn2 a:hover {
+  color: #A5ABBC;
+}
+
+.btnAll {
+  box-shadow: 10px 9px 16px -5px rgba(0,0,0,0.63);
+}
+
+.btnAll a:hover {
+  text-decoration: none;
+}
+
+#delete-btn {
+  color: #351F69;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+#class-page-button {
+  width: 150px;
+  padding: 5px;
+}
+
+#about-text {
+  text-align: left;
+}
+
+.anmelden {
+  color: white;
+  display: flex;
+  justify-self: center;
+}
+
+.anmelden:hover {
+  color: #A5ABBC;
+}
+
+input {
+  border-radius: 5px;
+  color: #351F69;
+  font-family: "Open Sans", san-serif;
+}
+textarea {
+  border-radius: 5px;
+  color: #9A9A9A;
+  font-family: "Open Sans", san-serif;
+  box-shadow: inset 0 0 5px #000000;
+}
+
+label {
+  color: #351F69;
+  font-family: "Open Sans", san-serif;
+}
+
+select {
+  color: #351F69;
+  font-family: "Open Sans", san-serif;
+}
+
+option {
+  color: red;
+}
+
+#request-title {
+  display: flex;
+  justify-content: center;
+}
+
+#alert-container {
+  color: red;
+  background-color: yellow;
+  font-size: 30px
+}
+
+.manage-container {
+  display: flex;
+  justify-content: center;
+}
+
+@media (min-width: 650px) {
+  #header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #icon {
+    display: none;
+  }
+
+  #icon2 {
+    display: flex;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+  }
+
+  #title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .nav-item {
+    margin: 5px;
+  }
+
+  .login-logout {
+    display: flex;
+    font-size: 2rem;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 20px;
+  }
+
+  #login-nav, #logout-nav {
+    display: none;
+  }
+
+  .login-logout:hover {
+    color: #5A1F69; 
+    text-decoration: none;
+    background-color: #A5ABBC;
+  }
+  
+  .login-logout:active {
+    color: #351F69; 
+    text-decoration: none;
+    background-color: #A5ABBC;
+  }
+
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card-title {
+    font-size: 2.5rem;
+  }
+
+  .card-text {
+    font-size: 1.5rem;
+    margin: 5px;
+    padding-bottom: 10px;
+    line-height: 2rem;
+    text-align: justify;
+  }
+
+  body {
+    background-image: url("./images/woman.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 225px;
+    background-position: 100% 85%;
+  }
+
+  .women-container {
+    display: none
+  }
+
+  .flexible-card{
+    width: 60rem;
+  }
+
+  .about-card {
+    width: 45rem;
+  }
+  .anmeldung-card {
+    width: 60rem
   }
 }

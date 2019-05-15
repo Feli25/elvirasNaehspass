@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+// import { api } from 'cloudinary/lib/cloudinary';
+import api from '../../api';
+
 
 export default class Home extends Component {
   constructor(props) {
@@ -17,7 +20,11 @@ export default class Home extends Component {
     })
   }
   submitContact=()=>{
-    console.log("todo")
+    api.sendKontakt(this.state)
+      .then(sth=>{
+        this.setState({errorMessage:"Success"})
+      })
+      .catch(err=>{console.log(err)})
   }
   render() {                
     return (

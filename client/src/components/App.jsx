@@ -6,7 +6,7 @@ import Posts from './pages/Posts';
 import Naehkurse from './pages/Naehkurse';
 import Workshops from './pages/Workshops';
 import Kurse from './pages/Kurse';
-import Atelier from './pages/Home';
+import Atelier from './pages/Atelier';
 import About from './pages/About';
 import Galerie from './pages/Galerie';
 import Anmeldung from './pages/Anmeldung';
@@ -28,12 +28,6 @@ import api from '../api';
 import logo from '../logo.svg';
 
 export default class App extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     countries: []
-  //   }
-  // }
 
   handleLogoutClick(e) {
     api.logout()
@@ -43,22 +37,83 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="header-container">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">MERN Boilerplate</h1>
-          <NavLink to="/" exact>Home</NavLink>
-          <NavLink to="/naehkurse" exact>Nähkurse</NavLink>
-          <NavLink to="/atelier">Atelier</NavLink>
-          <NavLink to="/about">Über uns</NavLink>
-          <NavLink to="/galerie">Galerie</NavLink>
-          <NavLink to="/anmeldung" exact>Anmeldung</NavLink>
-          <NavLink to="/kontakt">Kontakt</NavLink>
-
-          {!api.isLoggedIn() && <NavLink to="/login" className="login-logout">Login</NavLink>}
-          {api.isLoggedIn() && <NavLink to="/admin" exact>Admin Seite</NavLink>}
-          {api.isLoggedIn() && <Link to="/" className="login-logout" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
-
-          {/* {!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>} */}
+          <meta name="description" content='Willkommen bei Elviras Nähspass, Nähkurse und Workshops für jedermann. Haben sie schon immer mal davon geträumt, mal einen Rock, eine Hose oder eine Jacke nähen zu können und stolz zu sagen: "Hab ich selbst genäht!". Dann sind sie bei uns richtig.' />
+          <title>Elvira's Nähspass</title>
+          <link rel="icon" type="image/png" href="../images/icon2.png" />
+          <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+          <link rel="stylesheet" href="/stylesheets/style.css" />
+          <link href="https://fonts.googleapis.com/css?family=Alegreya|Open+Sans" rel="stylesheet"/>
+          <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+          <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+          <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         </header>
+        <body>
+        <section id="header-container">
+          {!api.isLoggedIn() &&
+          <a class="login-logout" href="/login">Login</a>
+          }
+          {api.isLoggedIn() &&
+          <a class="login-logout" href="/auth/logout">Logout</a>
+          }
+          <div id="header">
+
+
+            <img id="icon" alt="icon" src="../images/icon.png"/>
+            <div id="title-container">
+              <img id="icon2" alt="icon" src="../images/icon.png"/>
+              <h1 id="header-title">Elvira's Nähspass</h1>
+            </div>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a class="nav-style" href="/">Home <span class="sr-only">(current)</span></a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-style" href="/naehkurse">Nähkurse</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-style" href="/atelier">Das Atelier</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-style" href="/about">Über uns</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-style" href="/galerie">Galerie</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-style" href="/anmeldung">Anmeldung</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-style" href="/kontakt">Kontakt</a>
+                  </li>
+                  {!api.isLoggedIn() &&
+                  <li class="nav-item" id="login-nav">
+                    <a class="nav-style" href="/login">Login</a>
+                  </li>
+                  }
+                  {api.isLoggedIn() &&
+                  <li class="nav-item" id="logout-nav">
+                    <a class="nav-style" href="/logout">Logout</a>
+                  </li>
+                  }
+                  {api.isLoggedIn() &&
+                  <li class="nav-item">
+                    <a class="nav-style" href="/admin">Admin Page</a>
+                  </li>
+                  }
+
+                </ul>
+              </div>
+            </nav>
+            </div>
+            <div id="border-container"></div>
+          </section>
+
         <Switch>
 
 
@@ -89,6 +144,7 @@ export default class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
+        </body>
         <footer className="navbar fixed-bottom" style={{backgroundColor: "white"}}>
           <a className="navbar-brand" href="/contact">Kontakt</a>
           <p>© created by Emina and Feli</p>

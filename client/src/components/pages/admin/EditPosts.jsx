@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import api from '../../../api';
 import { runInThisContext } from 'vm';
 
-export default class Home extends Component {
+export default class EditPosts extends Component {
   constructor(props) {
     super(props)
     this.state = {
       posts:[],
       editPopupOpen:false,
       newPopupOpen:false,
-      selectedPostId:null
+      selectedPost:null,
+      header:"",
+      content:"",
+      file:null
     }
   }
   componentDidMount(){
@@ -23,13 +26,26 @@ export default class Home extends Component {
     .catch(err=>{console.log(err)})
   }
 
+  handleChange=(e)=>{
+    this.setState({
+      [e.target.name]:e.target.value
+    })
+  }
+
   displayPosts=()=>{
     return this.state.posts.map(post=>{
       return(
-        <card>{post.title}
-          <button onClick={()=>{this.editPost(post.id)}}>Bearbeiten</button>
-          <button onClick={()=>{this.deletePost(post.id)}}>Löschen</button>
-        </card>
+        <div class="card" style={{width: "30rem"}}>
+          {post.imgPath && 
+          <img src={ post.imgPath } alt={ post.imgName } class="card-img-top" />}
+          <div class="card-body">
+            <h5 class="card-title">{post.header}</h5>
+            <p class="card-text">{post.content}</p>
+            <h6 class="card-subtitle mb-2 text-muted">by {post._creator.name}</h6>
+            <button class="btnHref" onClick={()=>{this.editPost(post)}}>Bearbeiten</button>
+            <button class="btnHref" onClick={()=>{this.deletePost(post._id)}}>Löschen</button>
+          </div>
+        </div>
       )
     })
   }
@@ -43,35 +59,74 @@ export default class Home extends Component {
   }
 
   createNewPost=()=>{
-    this.setState({newPopupOpen:true})
+    this.setState({
+      header:"",
+      content:"",
+      file:null,
+      creator:"",
+      newPopupOpen:true})
   }
   renderCreateNewPostPopup=()=>{
     return(
       <dialog open={this.state.newPopupOpen}>
-        <button onClick={()=>{this.cancel()}}>Abbruch</button>
-        <button onClick={()=>{this.createNewPostConfirm()}}>Bestätigen</button>
+        <label for="header">Titel:</label>
+        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
+        <br/><br/>
+        <label for="content">Text:</label>
+        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
+        <br/><br/>
+        <button onClick={this.createNewPostConfirm}>Hinzufügen</button>
+        <button onClick={this.cancel}>Abbruch</button>
       </dialog>
     )
   }
   createNewPostConfirm=()=>{
-    this.updateView()
     this.setState({newPopupOpen:false})
+    let data ={
+      header: this.state.header,
+      content:this.state.content
+    }
+    api.addPost(data)
+      .then(response=>{
+        this.updateView()
+      })
+      .catch(er=>console.log(er))
   }
 
-  editPost=(id)=>{
-    this.setState({selectedPostId:id, editPopupOpen:true})
+  editPost=(thing)=>{
+    this.setState({
+      selectedPost:thing, 
+      editPopupOpen:true,
+      header:thing.header,
+      content:thing.content
+    })
   }
   renderEditPostPopup=()=>{
     return(
       <dialog open={this.state.editPopupOpen}>
-        <button onClick={()=>{this.cancel()}}>Abbruch</button>
-        <button onClick={()=>{this.editPostConfirm()}}>Bestätigen</button>
+      <label for="header">Titel:</label>
+        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
+        <br/><br/>
+        <label for="content">Text:</label>
+        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
+        <br/><br/>
+        <button onClick={this.editPostConfirm}>Bestätigen</button>
+        <button onClick={this.cancel}>Abbruch</button>
       </dialog>
     )
   }
   editPostConfirm=()=>{
-    this.updateView()
-    this.setState({editPopupOpen:false, selectedPostId:null})
+    let data ={
+      header: this.state.header,
+      content:this.state.content,
+
+    }
+    api.updatePost(this.state.selectedPost._id,data)
+      .then(res=>{
+        this.updateView()
+        this.setState({editPopupOpen:false, selectedPost:null})
+      })
+      .catch(err=>console.log(err))
   }
 
   cancel=()=>{
@@ -80,9 +135,21 @@ export default class Home extends Component {
   render() {                
     return (
       <div className="Home">
-        <h2>Edit Posts</h2>
-        <p>This is a sample project with the MERN stack</p>
-        {this.displayPosts()}
+        <div class="page-title">
+          <h1 class="page-title">Admin - Alle Posts</h1>
+        </div>
+        <div class="manage-container">
+          <div class="card" style={{width: "30rem"}}>
+            <div class="card-body">
+            <h2><button onClick={this.createNewPost} class="btnHref">Neuen Post erstellen</button></h2>
+            </div>
+          </div>
+        </div>
+        <p>
+          <section class="card-container">
+            {this.displayPosts()}
+          </section>
+        </p>
         {this.renderEditPostPopup()}
         {this.renderCreateNewPostPopup()}
       </div>

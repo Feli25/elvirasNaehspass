@@ -5,6 +5,7 @@ const galeriePicSchema = new Schema({
   header: String,
   imgPath: String,
   imgName: String,
+  public_id:String
 }, {
     timestamps: {
       createdAt: 'created_at',

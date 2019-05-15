@@ -6,6 +6,7 @@ const equipmentSchema = new Schema({
   content: String,
   imgPath: String,
   imgName: String,
+  public_id:String
 }, {
     timestamps: {
       createdAt: 'created_at',
