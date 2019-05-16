@@ -31,9 +31,9 @@ router.post('/new-pic', parser.single('picture'), (req,res,next)=>{
     content:content,
     imgPath:file.url,
     imgName:file.originalname,
+    public_id:file.public_id,
     _creator:req.user,
     status:"ACTIVE",
-    public_id:file.public_id
   })
   .then(post => {
     res.json({
@@ -51,6 +51,9 @@ router.post('/new', (req,res,next)=>{
     content:content,
     _creator:req.user,
     status:"ACTIVE",
+    imgPath:null,
+    imgName:null,
+    public_id:null,
   })
   .then(post => {
     res.json({
@@ -104,15 +107,25 @@ router.post('/edit/:id', (req,res,next)=>{
 
 router.get('/delete/:id', (req,res,next)=>{
   let id = req.params.id
-  Post.findByIdAndDelete(id)
-    .then(sth=>{
-      res.json({
-        success:true
-      })
+  Post.findById(id)
+    .then(post=>{
+      if(post.public_id){
+        cloudinary.v2.uploader.destroy(eq.public_id, function(result) { console.log(result) });
+      }
     })
-    .catch(err=>{
-      console.log(err)
-    })
+    .then(sth=>
+          Post.findByIdAndDelete(id)
+        .then(sth=>{
+          res.json({
+            success:true
+          })
+        })
+        .catch(err=>{
+          console.log(err)
+        })
+      )
+    .catch(err=>console.log(err))
+  
 })
 
 module.exports = router;

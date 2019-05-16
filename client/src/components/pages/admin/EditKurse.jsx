@@ -10,7 +10,8 @@ export default class Home extends Component {
       content:"",
       list:[],
       courses:[],
-      editPopupOpen:false
+      editPopupOpen:false,
+      makeNewPopupOpen:false
     }
   }
   componentDidMount=()=>{
@@ -32,9 +33,11 @@ export default class Home extends Component {
             <p class="card-text">{course.content}</p>
             {course.list.length>0 && <ol>
               {course.list.map(item=>{
-                return (
-                  <li>{item.name} {item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
-                )
+                if(item.name!==""){
+                  return (
+                    <li>{item.name} {item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
+                  )
+                }
               })}
             </ol>}
             <button class="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
@@ -43,15 +46,7 @@ export default class Home extends Component {
       )
     })
   }
-  selectEdit=(course)=>{
-    this.setState({
-      id:course._id,
-      header:course.header,
-      content:course.content,
-      list:course.list,
-      editPopupOpen:true
-    })
-  }
+
   handleChange=(e)=>{
     this.setState({
       [e.target.name]:e.target.value
@@ -75,19 +70,36 @@ export default class Home extends Component {
     array[index].belegt = !this.state.list[index].belegt
     this.setState({list:array})
   }
+
+  selectEdit=(course)=>{
+    this.setState({
+      id:course._id,
+      header:course.header,
+      content:course.content,
+      list:course.list,
+      editPopupOpen:true
+    })
+  }
   renderEditPopup=()=>{
     return (
       <dialog open={this.state.editPopupOpen}>
-        <input name="header" value={this.state.header} onChange={this.handleChange}/>
-        <input name="content" value={this.state.content} onChange={this.handleChange}/>
+        <label for="header">Titel</label>
+        <input name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
+        <br/><br/>
+        <label for="content">Inhalt</label>
+        <input name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
+        <br/><br/>
         {this.state.list.map((item,i)=>{
           return(
             <React.Fragment key={i}>
-              <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/><checkbox onChange={()=>this.changeCheckBox(i)} value={item.belegt}/>
+              <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/>
+              <input type="checkbox" onChange={()=>this.changeCheckBox(i)} checked={item.belegt}/>
+              <br/><br/>
             </React.Fragment>
           )
         })}
         <button onClick={this.addLine}>Zeile hinzufügen</button>
+        <button onClick={this.confirmEdit}>Bestätigen</button>
       </dialog>
     )
   }
@@ -105,12 +117,63 @@ export default class Home extends Component {
       })
       .catch(err=>console.log(err))
   }
+
+  selectMakeNew=()=>{
+    this.setState({
+      id:"",
+      header:"",
+      content:"",
+      list:[],
+      makeNewPopupOpen:true
+    })
+  }
+  renderMakeNewPopup=()=>{
+    return (
+      <dialog open={this.state.makeNewPopupOpen}>
+        <label for="header">Titel</label>
+        <input name="header" value={this.state.header} onChange={this.handleChange}/>
+        <br/><br/>
+        <label for="content">Inhalt</label>
+        <input name="content" value={this.state.content} onChange={this.handleChange}/>
+        <br/><br/>
+        {this.state.list.map((item,i)=>{
+          return(
+            <React.Fragment key={i}>
+              <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/>
+              <input type="checkbox" onChange={()=>this.changeCheckBox(i)} value={item.belegt}/>
+              <br/><br/>
+            </React.Fragment>
+          )
+        })}
+        <button onClick={this.addLine}>Zeile hinzufügen</button>
+        <button onClick={this.confirmNew}>Bestätigen</button>
+      </dialog>
+    )
+  }
+  confirmNew=()=>{
+    let data ={
+      header:this.state.header,
+      content:this.state.content,
+      list:this.state.list,
+      category:"KURSE"
+    }
+    api.addInfo(data)
+      .then(res=>{
+        this.setState({makeNewPopupOpen:false})
+        this.updateView()
+      })
+      .catch(err=>console.log(err))
+  }
+
   render() {                
     return (
       <div className="Home">
         <h2>Edit Kurse</h2>
         <p>This is a sample project with the MERN stack</p>
+        <button onClick={this.selectMakeNew}>Neu</button>
+        {this.renderCards()}
         {this.renderEditPopup()}
+        {this.renderMakeNewPopup()}
       </div>
     );
   }

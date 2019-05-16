@@ -36,7 +36,10 @@ router.post('/new', (req,res,next)=>{
   let { header, content } = req.body
   Equipment.create({
     header:header,
-    content:content
+    content:content,
+    imgPath:null,
+    imgName:null,
+    public_id:null,
   })
   .then(eq => {
     res.json({
@@ -86,15 +89,24 @@ router.post('/edit/:id', (req,res,next)=>{
 
 router.get('/delete/:id', (req,res,next)=>{
   let id = req.params.id
-  Equipment.findByIdAndDelete(id)
-    .then(sth=>{
-      res.json({
-        success:true
+  Equipment.findById(id)
+    .then(eq=>{
+      if(eq.public_id){
+        cloudinary.v2.uploader.destroy(eq.public_id, function(result) { console.log(result) });
+      }
+    })
+    .then(sth=>
+      Equipment.findByIdAndDelete(id)
+      .then(sth=>{
+        res.json({
+          success:true
+        })
       })
-    })
-    .catch(err=>{
-      console.log(err)
-    })
+      .catch(err=>{
+        console.log(err)
+      })
+    )
+    .catch(err=>console.log(err))
 })
 
 module.exports = router;

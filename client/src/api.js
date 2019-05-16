@@ -127,17 +127,20 @@ export default {
 
   addPost(data) {
     if(data.picture){
-
+      const formData = new FormData()
+      for (const key in data) {
+      formData.append(key, data[key])
+      }
+      return service
+      .post('/post/new-pic', formData)
+      .then(res => res.data)
+      .catch(errHandler)
     } else {
       return service
       .post('/post/new', data)
       .then(res => res.data)
       .catch(errHandler)
     }
-    // const formData = new FormData()
-    // for (const key in data) {
-    //   formData.append(key, data[key])
-    // }
   },
 
   deletePost(id){
@@ -149,7 +152,14 @@ export default {
 
   updatePost(id,data){
     if(data.picture){
-
+      const formData = new FormData()
+      for (const key in data) {
+      formData.append(key, data[key])
+      }
+      return service
+      .post("/post/edit-pic/"+id, formData)
+      .then(res=>res.data)
+      .catch(errHandler)
     } else {
       return service
       .post("/post/edit/"+id, data)
@@ -160,7 +170,7 @@ export default {
 
   getInfo(page){
     return service
-      .get('/'+page)
+      .get('/info/'+page)
       .then(res => res.data)
       .catch(errHandler)
   },
@@ -188,7 +198,14 @@ export default {
 
   addEquipment(data){
     if(data.picture){
-
+      const formData = new FormData()
+      for (const key in data) {
+      formData.append(key, data[key])
+      }
+      return service
+        .post('/equipment/new-pic', formData)
+        .then(res => res.data)
+        .catch(errHandler)
     } else {
       return service
       .post('/equipment/new', data)
@@ -206,7 +223,14 @@ export default {
 
   updateEquipment(id,data){
     if(data.picture){
-
+      const formData = new FormData()
+      for (const key in data) {
+      formData.append(key, data[key])
+      }
+      return service
+      .post("/equipment/edit-pic/"+id, formData)
+      .then(res=>res.data)
+      .catch(errHandler)
     } else {
       return service
       .post("/equipment/edit/"+id, data)
@@ -223,8 +247,12 @@ export default {
   },
 
   addGaleriePicture(data){
+    const formData = new FormData()
+      for (const key in data) {
+      formData.append(key, data[key])
+      }
     return service
-      .post('/galerie/new', data)
+      .post('/galerie/new', formData)
       .then(res => res.data)
       .catch(errHandler)
   },

@@ -9,8 +9,12 @@ export default class Home extends Component {
       makeNew:false,
       editOld:false,
       selectedOld:"",
+
       header:"",
       content:"",
+      pictureUrl:"",
+      pictureName:"",
+      public_id:"",
       file:null
     }
   }
@@ -30,90 +34,19 @@ export default class Home extends Component {
       [e.target.name]:e.target.value
     })
   }
-
   cancel=()=>{
     this.setState({
       makeNew:false,
       editOld:false,
       selectedOld:""})
   }
-
-  selectMakeNew=()=>{
+  handleFileChange=(e)=>{
+    e.preventDefault();
+    const file = e.target.files[0];
     this.setState({
-      selectedOld:"",
-      header:"",
-      content:"",
-      makeNew:true
+      file: file,
+      pictureUrl: null,
     })
-  }
-  renderCreateNewPopup=()=>{
-    return (
-      <dialog open={this.state.makeNew}>
-        <label for="header">Titel:</label>
-        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
-        <br/><br/>
-        <label for="content">Text:</label>
-        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
-        <br/><br/>
-        <button onClick={this.confirmNew}>Hinzufügen</button>
-      </dialog>
-    )
-  }
-  confirmNew=()=>{
-    this.setState({makeNew:false})
-    let data ={
-      header: this.state.header,
-      content:this.state.content
-    }
-    api.addEquipment(data)
-      .then(response=>{
-        console.log(response)
-        this.updateData()
-      })
-      .catch(err=>{console.log(err)})
-  }
-
-  selectEditOld=(thing)=>{
-    this.setState({editOld:true, 
-      selectedOld:thing,
-      header:thing.header,
-      content:thing.content
-    })
-  }
-  renderEditOldPopup=()=>{
-    return (
-      <dialog open={this.state.editOld}>      
-        <label for="header">Titel:</label>
-        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
-        <br/><br/>
-        <label for="content">Text:</label>
-        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
-        <br/><br/>
-        <button onClick={this.confirmEdit}>Aktualisieren</button>
-      </dialog>
-    )
-  }
-  confirmEdit=()=>{
-    this.setState({editOld:false})
-    let data={
-      header:this.state.header,
-      content:this.state.content
-    }
-    api.updateEquipment(this.state.selectedOld._id, data)
-      .then(response=>{
-        console.log(response)
-        this.updateData()
-      })
-      .catch(err=>{console.log(err)})
-  }
-
-  onDelete=(id)=>{
-    api.deleteEquipment(id)
-      .then(response=>{
-        console.log(response)
-        this.updateData()
-      })
-      .catch(err=>{console.log(err)})
   }
 
   createDisplay=()=>{
@@ -131,6 +64,99 @@ export default class Home extends Component {
           </div>
       )
     })
+  }
+
+  onDelete=(id)=>{
+    api.deleteEquipment(id)
+      .then(response=>{
+        console.log(response)
+        this.updateData()
+      })
+      .catch(err=>{console.log(err)})
+  }
+
+  selectMakeNew=()=>{
+    this.setState({
+      selectedOld:"",
+      header:"",
+      content:"",
+      file:null,
+      makeNew:true
+    })
+  }
+  renderCreateNewPopup=()=>{
+    return (
+      <dialog open={this.state.makeNew}>
+        <label for="pictureUrl" xl={3}>Add a picture</label>
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+        <label for="header">Titel:</label>
+        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
+        <br/><br/>
+        <label for="content">Text:</label>
+        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
+        <br/><br/>
+        <button onClick={this.confirmNew}>Hinzufügen</button>
+      </dialog>
+    )
+  }
+  confirmNew=()=>{
+    this.setState({makeNew:false})
+    let data ={
+      header: this.state.header,
+      content:this.state.content,
+      picture : this.state.file
+    }
+    api.addEquipment(data)
+      .then(response=>{
+        console.log(response)
+        this.updateData()
+      })
+      .catch(err=>{console.log(err)})
+  }
+
+  selectEditOld=(thing)=>{
+    this.setState({
+      editOld:true, 
+      selectedOld:thing,
+      header:thing.header,
+      content:thing.content,
+      pictureUrl:thing.imgPath,
+      pictureName:thing.imgName,
+      public_id:thing.public_id
+    })
+  }
+  renderEditOldPopup=()=>{
+    return (
+      <dialog open={this.state.editOld}>     
+        {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName}/>} 
+        <label for="pictureUrl" xl={3}>Add a picture</label>
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+        <label for="header">Titel:</label>
+        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
+        <br/><br/>
+        <label for="content">Text:</label>
+        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
+        <br/><br/>
+        <button onClick={this.confirmEdit}>Aktualisieren</button>
+      </dialog>
+    )
+  }
+  confirmEdit=()=>{
+    this.setState({editOld:false})
+    let data={
+      header:this.state.header,
+      content:this.state.content,
+      pictureUrl:this.state.pictureUrl,
+      pictureName:this.state.pictureName,
+      public_id:this.state.public_id,
+      picture : this.state.file
+    }
+    api.updateEquipment(this.state.selectedOld._id, data)
+      .then(response=>{
+        console.log(response)
+        this.updateData()
+      })
+      .catch(err=>{console.log(err)})
   }
 
   render() {                

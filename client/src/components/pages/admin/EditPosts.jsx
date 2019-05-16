@@ -10,8 +10,12 @@ export default class EditPosts extends Component {
       editPopupOpen:false,
       newPopupOpen:false,
       selectedPost:null,
+
       header:"",
       content:"",
+      pictureUrl:"",
+      pictureName:"",
+      public_id:"",
       file:null
     }
   }
@@ -30,6 +34,17 @@ export default class EditPosts extends Component {
     this.setState({
       [e.target.name]:e.target.value
     })
+  }
+  handleFileChange=(e)=>{
+    e.preventDefault();
+    const file = e.target.files[0];
+    this.setState({
+      file: file,
+      pictureUrl: null,
+    })
+  }
+  cancel=()=>{
+    this.setState({editPopupOpen:false, newPopupOpen:false})
   }
 
   displayPosts=()=>{
@@ -60,6 +75,7 @@ export default class EditPosts extends Component {
 
   createNewPost=()=>{
     this.setState({
+      selectedPost:null,
       header:"",
       content:"",
       file:null,
@@ -69,6 +85,8 @@ export default class EditPosts extends Component {
   renderCreateNewPostPopup=()=>{
     return(
       <dialog open={this.state.newPopupOpen}>
+        <label for="pictureUrl" xl={3}>Add a picture</label>
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
         <label for="header">Titel:</label>
         <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
         <br/><br/>
@@ -84,7 +102,8 @@ export default class EditPosts extends Component {
     this.setState({newPopupOpen:false})
     let data ={
       header: this.state.header,
-      content:this.state.content
+      content:this.state.content,
+      picture : this.state.file
     }
     api.addPost(data)
       .then(response=>{
@@ -95,16 +114,22 @@ export default class EditPosts extends Component {
 
   editPost=(thing)=>{
     this.setState({
-      selectedPost:thing, 
       editPopupOpen:true,
+      selectedPost:thing, 
       header:thing.header,
-      content:thing.content
+      content:thing.content,
+      pictureUrl:thing.imgPath,
+      pictureName:thing.imgName,
+      public_id:thing.public_id
     })
   }
   renderEditPostPopup=()=>{
     return(
       <dialog open={this.state.editPopupOpen}>
-      <label for="header">Titel:</label>
+        {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName}/>} 
+        <label for="pictureUrl" xl={3}>Add a picture</label>
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+        <label for="header">Titel:</label>
         <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
         <br/><br/>
         <label for="content">Text:</label>
@@ -119,7 +144,10 @@ export default class EditPosts extends Component {
     let data ={
       header: this.state.header,
       content:this.state.content,
-
+      pictureUrl:this.state.pictureUrl,
+      pictureName:this.state.pictureName,
+      public_id:this.state.public_id,
+      picture : this.state.file
     }
     api.updatePost(this.state.selectedPost._id,data)
       .then(res=>{
@@ -129,9 +157,6 @@ export default class EditPosts extends Component {
       .catch(err=>console.log(err))
   }
 
-  cancel=()=>{
-    this.setState({editPopupOpen:false, newPopupOpen:false})
-  }
   render() {                
     return (
       <div className="Home">

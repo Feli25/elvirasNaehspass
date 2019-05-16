@@ -8,7 +8,8 @@ export default class Home extends Component {
       pictures:[],
       makeNew:false,
       editOld:false,
-      selectedOld:""
+      file:null,
+      header:""
     }
   }
   componentDidMount=()=>{
@@ -28,50 +29,67 @@ export default class Home extends Component {
       editOld:false,
       selectedOld:""})
   }
+  handleFileChange=(e)=>{
+    e.preventDefault();
+    const file = e.target.files[0];
+    this.setState({
+      file: file,
+      pictureUrl: null,
+    })
+  }
+  handleChange=(e)=>{
+    this.setState({
+      [e.target.name]:e.target.value
+    })
+  }
 
   selectMakeNew=()=>{
-    this.setState({makeNew:true})
+    this.setState({makeNew:true, header:"", file:null})
   }
   renderCreateNewPopup=()=>{
     return (
       <dialog open={this.state.makeNew}>
-
+        <label for="pictureUrl" xl={3}>Add a picture</label>
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+        <br/><br/>
+        <label for="header">Titel:</label>
+        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
+        <br/><br/>
+        <button onClick={this.confirmNew}>Hinzufügen</button>
       </dialog>
     )
   }
   confirmNew=()=>{
     this.setState({makeNew:false})
-    //the creating new thing
-    this.updateData()
-  }
-
-  selectEditOld=(thing)=>{
-    this.setState({editOld:true, selectedOld:thing})
-  }
-  renderEditOldPopup=()=>{
-    return (
-      <dialog open={this.state.editOld}>
-
-      </dialog>
-    )
-  }
-  confirmEdit=()=>{
-    this.setState({editOld:false})
-    //edit the old thing
-    this.updateData()
+    let data = {
+      header: this.state.header,
+      picture : this.state.file
+    }
+    api.addGaleriePicture(data)
+      .then(response=>{
+        this.updateData()
+      })
+      .catch(er=>console.log(er))
   }
 
   onDelete=(id)=>{
     //delete in Backend
-    this.updateData()
+    api.deleteGaleriePicture(id)
+      .then(sth=>
+        this.updateData()
+      )
+      .catch(err=>console.log(err))
   }
 
   createDisplay=()=>{
     return this.state.pictures.map(pic=>{
       return(
         <React.Fragment>
-          <button onClick={()=>this.selectEditOld(pic)}>Edit</button>
-          <button onClick={()=>this.onDelete(pic.id)}>Delete</button>
+          <img src={pic.imgPath} alt={pic.header}/>
+          <br/><br/>
+          Name: {pic.header}
+          <br/><br/>
+          <button onClick={()=>this.onDelete(pic._id)}>Delete</button>
         </React.Fragment>
       )
     })
@@ -85,7 +103,6 @@ export default class Home extends Component {
         <button onClick={this.selectMakeNew}>Neu</button>
         {this.createDisplay()}
         {this.renderCreateNewPopup()}
-        {this.renderEditOldPopup()}
       </div>
     );
   }

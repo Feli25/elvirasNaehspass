@@ -17,7 +17,7 @@ export default class Home extends Component {
     this.updateView()
   }
   updateView=()=>{
-    api.getInfo("workshop")
+    api.getInfo("workshops")
       .then(kurse=>{
         this.setState({courses:kurse})
       })
@@ -43,15 +43,7 @@ export default class Home extends Component {
       )
     })
   }
-  selectEdit=(course)=>{
-    this.setState({
-      id:course._id,
-      header:course.header,
-      content:course.content,
-      list:course.list,
-      editPopupOpen:true
-    })
-  }
+  
   handleChange=(e)=>{
     this.setState({
       [e.target.name]:e.target.value
@@ -75,19 +67,36 @@ export default class Home extends Component {
     array[index].belegt = !this.state.list[index].belegt
     this.setState({list:array})
   }
+
+  selectEdit=(course)=>{
+    this.setState({
+      id:course._id,
+      header:course.header,
+      content:course.content,
+      list:course.list,
+      editPopupOpen:true
+    })
+  }
   renderEditPopup=()=>{
     return (
       <dialog open={this.state.editPopupOpen}>
+        <label for="header">Titel</label>
         <input name="header" value={this.state.header} onChange={this.handleChange}/>
+        <br/><br/>
+        <label for="content">Inhalt</label>
         <input name="content" value={this.state.content} onChange={this.handleChange}/>
+        <br/><br/>
         {this.state.list.map((item,i)=>{
           return(
             <React.Fragment key={i}>
-              <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/><checkbox onChange={()=>this.changeCheckBox(i)} value={item.belegt}/>
+              <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/>
+              <input type="checkbox" onChange={()=>this.changeCheckBox(i)} value={item.belegt}/>
+              <br/><br/>
             </React.Fragment>
           )
         })}
         <button onClick={this.addLine}>Zeile hinzufügen</button>
+        <button onClick={this.confirmEdit}>Bestätigen</button>
       </dialog>
     )
   }
@@ -96,20 +105,22 @@ export default class Home extends Component {
       header:this.state.header,
       content:this.state.content,
       list:this.state.list,
-      category:"KURSE"
+      category:"WORKSHOPS"
     }
-    api.updateInfo(data)
+    api.updateInfo(this.state.id,data)
       .then(res=>{
+        this.setState({editPopupOpen:false, id:null})
         this.updateView()
-        // this.setState({editPopupOpen:false, selectedPost:null})
       })
       .catch(err=>console.log(err))
   }
+
   render() {                
     return (
       <div className="Home">
         <h2>Edit Workshops</h2>
         <p>This is a sample project with the MERN stack</p>
+        {this.renderCards()}
         {this.renderEditPopup()}
       </div>
     );

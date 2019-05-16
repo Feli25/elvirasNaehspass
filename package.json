@@ -12,10 +12,15 @@
     "node": "8.9.4"
   },
   "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
     "bootstrap": "^4.3.1",
     "cloudinary": "^1.14.0",
     "multer": "^1.4.1",
     "multer-storage-cloudinary": "^2.2.1",
-    "nodemailer": "^6.1.1"
+    "nodemailer": "^6.1.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-swipeable-views": "^0.13.3"
   }
 }

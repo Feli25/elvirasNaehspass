@@ -15,13 +15,18 @@ router.get('/', (req,res,next)=>{
 
 router.get('/delete/:id', (req,res,next)=>{
   let id = req.params.id
-  GaleriePic.findByIdAndDelete(id)
-    .then(sth=>{
-      res.json({
-        success:true
+  GaleriePic.findById(id)
+    .then(pic=>cloudinary.v2.uploader.destroy(pic.public_id, function(result) { console.log(result) }))
+    .then(sth=>
+      GaleriePic.findByIdAndDelete(id)
+      .then(sth=>{
+        res.json({
+          success:true
+        })
       })
-    })
-    .catch(err=>{console.log(err)})
+      .catch(err=>{console.log(err)})
+      )
+    .catch(err=>console.log(err))
 })
 
 router.post('/new', parser.single('picture'), (req,res,next)=>{
