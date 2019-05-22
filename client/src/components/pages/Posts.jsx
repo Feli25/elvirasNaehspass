@@ -15,7 +15,7 @@ export default class Home extends Component {
       })
   }
   createCardsPosts=()=>{
-    this.state.allPosts.map(post=>{
+    return this.state.allPosts.map(post=>{
       return (<div class="card" style={{width: "30rem"}}>
         {post.imgPath &&<img class="card-img-top" src={ post.imgPath } alt="not available"/> }
             <div class="card-body">
