@@ -45,7 +45,7 @@ export default class App extends Component {
           <a class="login-logout" href="/login">Login</a>
           }
           {api.isLoggedIn() &&
-          <a class="login-logout" href="/auth/logout">Logout</a>
+          <a class="login-logout" href="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</a>
           }
           <div id="header">
 
@@ -90,7 +90,7 @@ export default class App extends Component {
                   }
                   {api.isLoggedIn() &&
                   <li class="nav-item" id="logout-nav">
-                    <a class="nav-style" href="/logout">Logout</a>
+                    <a class="nav-item" href="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</a>
                   </li>
                   }
                   {api.isLoggedIn() &&
