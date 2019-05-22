@@ -21,7 +21,7 @@ export default class Home extends Component {
             <div class="card-body">
               <h5 class="card-title">{post.header}</h5>
               <p class="card-text">{post.content}</p>
-              <h6 class="card-subtitle mb-2 text-muted"> by {post._creator.name}</h6>
+              <h6 class="card-subtitle mb-2 text-muted"> by {post._creator.username}</h6>
             </div>
           </div>)
     })
