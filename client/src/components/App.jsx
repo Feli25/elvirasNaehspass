@@ -136,17 +136,14 @@ export default class App extends Component {
           <Route path="/signup" component={Signup} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-        </body>
+        <br/><br/>
         <footer className="navbar fixed-bottom" style={{backgroundColor: "white"}}>
           <a className="navbar-brand" href="/kontakt">Kontakt</a>
           <p>© created by Emina and Feli</p>
         </footer>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-          crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-          crossorigin="anonymous"></script>
-        <script src="/javascripts/script.js"></script>
-        <script src="/javascripts/enrollment.js"></script>
+        </body>
+        
+        
       </div>
     );
   }

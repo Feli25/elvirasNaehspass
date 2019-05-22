@@ -14,7 +14,7 @@ export default class Home extends Component {
         </div>
 
         <section class="card-container">
-          <p>
+          <div style={{display:"flex"}}>
             <div class="card about-card">
               <img src="../images/Elvira.jpg" alt="Elvira Deutges" class="card-img-top"/>
               <div class="card-body">
@@ -52,7 +52,7 @@ export default class Home extends Component {
                 </p>
               </div>
             </div>
-          </p>
+          </div>
         </section>
       </React.Fragment>
     );
