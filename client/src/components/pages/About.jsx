@@ -16,7 +16,7 @@ export default class Home extends Component {
         <section class="card-container">
           <div style={{display:"flex"}}>
             <div class="card about-card">
-              <img src="../images/Elvira.jpg" alt="Elvira Deutges" class="card-img-top"/>
+              <img src="../images/Elvira.jpg" alt="Elvira Deutges" class="card-img-top img-fluid"/>
               <div class="card-body">
                 <h5 class="card-title">Elvira Deutges</h5>
                 <p class="card-text about-text">
@@ -35,7 +35,7 @@ export default class Home extends Component {
               </div>
             </div>
             <div class="card about-card">
-              <img src="../images/barbara.jpg" alt="Barbara Beckmann" class="card-img-top"/>
+              <img src="../images/barbara.jpg" alt="Barbara Beckmann" class="card-img-top img-fluid"/>
               <div class="card-body">
                 <h5 class="card-title">Barbara Beckmann</h5>
                 <p class="card-text about-text">

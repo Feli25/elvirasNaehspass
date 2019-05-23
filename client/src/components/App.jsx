@@ -55,7 +55,9 @@ export default class App extends Component {
               <img id="icon2" alt="icon" src="../images/icon.png"/>
               <h1 id="header-title">Elvira's Nähspass</h1>
             </div>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            </div>
+            <div>
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -98,7 +100,6 @@ export default class App extends Component {
                     <a class="nav-style" href="/admin">Admin Page</a>
                   </li>
                   }
-
                 </ul>
               </div>
             </nav>

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import { withStyles } from '@material-ui/core/styles';
-// import MobileStepper from '@material-ui/core/MobileStepper';
+import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
-// import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-// import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-// import SwipeableViews from 'react-swipeable-views';
-// import { autoPlay } from 'react-swipeable-views-utils';
+import Button from '@material-ui/core/Button';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import SwipeableViews from 'react-swipeable-views';
+import { autoPlay } from 'react-swipeable-views-utils';
 
-// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const styles = theme => ({
   root: {
@@ -86,7 +86,7 @@ class Galerie extends Component {
           <section class="card-container">
             <div class="card about-card">
               <div class="card-body">
-                {/* <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                   <div class="carousel-inner">
                   {this.state.pictures[0] && 
                   <div class="carousel-item active">
@@ -104,13 +104,13 @@ class Galerie extends Component {
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                   </a>
-                </div> */}
+                </div>
                 {pictures.length>0&&
                 <div className={classes.root}>
                   <Paper square elevation={0} className={classes.header}>
                     <Typography>{pictures[activeStep].header}</Typography>
                   </Paper>
-                  {/* <AutoPlaySwipeableViews
+                  <AutoPlaySwipeableViews
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     index={activeStep}
                     onChangeIndex={this.handleStepChange}
@@ -141,7 +141,7 @@ class Galerie extends Component {
                         Back
                       </Button>
                     }
-                    /> */}
+                    />
                 </div>
                   }
               </div>
