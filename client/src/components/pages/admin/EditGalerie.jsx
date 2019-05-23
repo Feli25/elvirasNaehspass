@@ -85,13 +85,14 @@ export default class Home extends Component {
   createDisplay=()=>{
     return this.state.pictures.map(pic=>{
       return(
-        <React.Fragment>
-          <img src={pic.imgPath} alt={pic.header}/>
-          <br/><br/>
-          Name: {pic.header}
-          <br/><br/>
-          <button onClick={()=>this.onDelete(pic._id)}>Delete</button>
-        </React.Fragment>
+        <div class="card" style={{width: "30rem"}}>
+          <img src={pic.imgPath} alt={pic.header} class="card-img-top"/>
+          <div class="card-body">
+              <p class="card-text">Name: {pic.header}</p>
+            
+            <button onClick={()=>this.onDelete(pic._id)} class="btnHref">Delete</button>
+          </div>
+        </div>
       )
     })
   }
@@ -99,10 +100,21 @@ export default class Home extends Component {
   render() {                
     return (
       <div className="Home">
-        <h2>Edit galerie</h2>
-        <p>This is a sample project with the MERN stack</p>
-        <button onClick={this.selectMakeNew}>Neu</button>
-        {this.createDisplay()}
+        <div class="page-title">
+          <h1 class="page-title">Admin - Galerie</h1>
+        </div>
+        <div class="manage-container">
+          <div class="card" style={{width: "30rem"}}>
+            <div class="card-body">
+            <h2><button onClick={this.selectMakeNew} class="btnHref">Neues Bild hinzufügen</button></h2>
+            </div>
+          </div>
+        </div>
+        <section class="card-container">
+          <p>
+            {this.createDisplay()}
+          </p>
+        </section>
         {this.renderCreateNewPopup()}
       </div>
     );
