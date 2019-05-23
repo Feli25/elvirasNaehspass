@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../../api';
 import { runInThisContext } from 'vm';
+import {Dialog} from '@material-ui/core'
 
 export default class EditPosts extends Component {
   constructor(props) {
@@ -56,7 +57,7 @@ export default class EditPosts extends Component {
           <div class="card-body">
             <h5 class="card-title">{post.header}</h5>
             <p class="card-text">{post.content}</p>
-            <h6 class="card-subtitle mb-2 text-muted">by {post._creator.name}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">by {post._creator.username}</h6>
             <button class="btnHref" onClick={()=>{this.editPost(post)}}>Bearbeiten</button>
             <button class="btnHref" onClick={()=>{this.deletePost(post._id)}}>Löschen</button>
           </div>
@@ -84,7 +85,7 @@ export default class EditPosts extends Component {
   }
   renderCreateNewPostPopup=()=>{
     return(
-      <dialog open={this.state.newPopupOpen}>
+      <Dialog open={this.state.newPopupOpen}>
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
         <label for="header">Titel:</label>
@@ -95,7 +96,7 @@ export default class EditPosts extends Component {
         <br/><br/>
         <button onClick={this.createNewPostConfirm}>Hinzufügen</button>
         <button onClick={this.cancel}>Abbruch</button>
-      </dialog>
+      </Dialog>
     )
   }
   createNewPostConfirm=()=>{
@@ -125,7 +126,7 @@ export default class EditPosts extends Component {
   }
   renderEditPostPopup=()=>{
     return(
-      <dialog open={this.state.editPopupOpen}>
+      <Dialog open={this.state.editPopupOpen}>
         {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName}/>} 
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
@@ -137,7 +138,7 @@ export default class EditPosts extends Component {
         <br/><br/>
         <button onClick={this.editPostConfirm}>Bestätigen</button>
         <button onClick={this.cancel}>Abbruch</button>
-      </dialog>
+      </Dialog>
     )
   }
   editPostConfirm=()=>{

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../api';
+import {Dialog} from '@material-ui/core'
 
 export default class Home extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export default class Home extends Component {
   }
   renderCreateNewPopup=()=>{
     return (
-      <dialog open={this.state.makeNew}>
+      <Dialog open={this.state.makeNew}>
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
         <br/><br/>
@@ -56,7 +57,7 @@ export default class Home extends Component {
         <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
         <br/><br/>
         <button onClick={this.confirmNew}>Hinzufügen</button>
-      </dialog>
+      </Dialog>
     )
   }
   confirmNew=()=>{

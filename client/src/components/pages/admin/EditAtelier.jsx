@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../api';
+import {Dialog} from '@material-ui/core'
 
 export default class Home extends Component {
   constructor(props) {
@@ -86,7 +87,7 @@ export default class Home extends Component {
   }
   renderCreateNewPopup=()=>{
     return (
-      <dialog open={this.state.makeNew}>
+      <Dialog open={this.state.makeNew}>
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
         <label for="header">Titel:</label>
@@ -96,7 +97,7 @@ export default class Home extends Component {
         <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
         <br/><br/>
         <button onClick={this.confirmNew}>Hinzufügen</button>
-      </dialog>
+      </Dialog>
     )
   }
   confirmNew=()=>{
@@ -127,7 +128,7 @@ export default class Home extends Component {
   }
   renderEditOldPopup=()=>{
     return (
-      <dialog open={this.state.editOld}>     
+      <Dialog open={this.state.editOld}>     
         {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName}/>} 
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
@@ -138,7 +139,7 @@ export default class Home extends Component {
         <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
         <br/><br/>
         <button onClick={this.confirmEdit}>Aktualisieren</button>
-      </dialog>
+      </Dialog>
     )
   }
   confirmEdit=()=>{

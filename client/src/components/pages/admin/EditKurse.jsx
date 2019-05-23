@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../api';
+import {Dialog} from '@material-ui/core'
 
 export default class Home extends Component {
   constructor(props) {
@@ -82,7 +83,7 @@ export default class Home extends Component {
   }
   renderEditPopup=()=>{
     return (
-      <dialog open={this.state.editPopupOpen}>
+      <Dialog open={this.state.editPopupOpen}>
         <label for="header">Titel</label>
         <input name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
         <br/><br/>
@@ -100,7 +101,7 @@ export default class Home extends Component {
         })}
         <button onClick={this.addLine}>Zeile hinzufügen</button>
         <button onClick={this.confirmEdit}>Bestätigen</button>
-      </dialog>
+      </Dialog>
     )
   }
   confirmEdit=()=>{
@@ -129,7 +130,7 @@ export default class Home extends Component {
   }
   renderMakeNewPopup=()=>{
     return (
-      <dialog open={this.state.makeNewPopupOpen}>
+      <Dialog open={this.state.makeNewPopupOpen}>
         <label for="header">Titel</label>
         <input name="header" value={this.state.header} onChange={this.handleChange}/>
         <br/><br/>
@@ -147,7 +148,7 @@ export default class Home extends Component {
         })}
         <button onClick={this.addLine}>Zeile hinzufügen</button>
         <button onClick={this.confirmNew}>Bestätigen</button>
-      </dialog>
+      </Dialog>
     )
   }
   confirmNew=()=>{
