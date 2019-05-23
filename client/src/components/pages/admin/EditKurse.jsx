@@ -6,13 +6,19 @@ export default class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      courses:[],
+      editPopupOpen:false,
+      makeNewPopupOpen:false,
       id:null,
+      
       header:"",
       content:"",
       list:[],
-      courses:[],
-      editPopupOpen:false,
-      makeNewPopupOpen:false
+      teacher:""
+      // pictureUrl:"",
+      // pictureName:"",
+      // public_id:"",
+      // file:null
     }
   }
   componentDidMount=()=>{
@@ -29,11 +35,13 @@ export default class Home extends Component {
     return this.state.courses.map(course=>{
       return (
         <div class="card" style={{width: "30rem"}}>
+        {/* {course.imgPath && 
+          <img src={ course.imgPath } alt={ course.imgName } class="card-img-top" />} */}
           <div class="card-body">
             <h5 class="card-title">{course.header}</h5>
             <p class="card-text">{course.content}</p>
-            {course.list.length>0 && <ol>
-              {course.list.map(item=>{
+            {course.list.length>0 && course.list[0].name!=="" &&<ol>
+              {course.list.map((item)=>{
                 if(item.name!==""){
                   return (
                     <li>{item.name} {item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
@@ -41,10 +49,18 @@ export default class Home extends Component {
                 }
               })}
             </ol>}
+            <p class="card-text">by {course.teacher}</p>
             <button class="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
           </div>
         </div>
       )
+    })
+  }
+
+  cancel=()=>{
+    this.setState({
+      editPopupOpen:false,
+      makeNewPopupOpen:false
     })
   }
 
@@ -53,6 +69,14 @@ export default class Home extends Component {
       [e.target.name]:e.target.value
     })
   }
+  // handleFileChange=(e)=>{
+  //   e.preventDefault();
+  //   const file = e.target.files[0];
+  //   this.setState({
+  //     file: file,
+  //     pictureUrl: null,
+  //   })
+  // }
   addLine=()=>{
     var array = this.state.list
     array.push({
@@ -71,6 +95,11 @@ export default class Home extends Component {
     array[index].belegt = !this.state.list[index].belegt
     this.setState({list:array})
   }
+  removeOneLine=(index)=>{
+    var array = this.state.list
+    array.splice(index,1)
+    this.setState({list:array})
+  }
 
   selectEdit=(course)=>{
     this.setState({
@@ -78,12 +107,18 @@ export default class Home extends Component {
       header:course.header,
       content:course.content,
       list:course.list,
-      editPopupOpen:true
+      editPopupOpen:true,
+      teacher:course.teacher
+      // pictureUrl:course.imgPath,
+      // pictureName:course.imgName,
+      // public_id:course.public_id
     })
   }
   renderEditPopup=()=>{
     return (
       <Dialog open={this.state.editPopupOpen}>
+        {/* <label for="pictureUrl" xl={3}>Add a picture</label>
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} /> */}
         <label for="header">Titel</label>
         <input name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
         <br/><br/>
@@ -95,12 +130,17 @@ export default class Home extends Component {
             <React.Fragment key={i}>
               <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/>
               <input type="checkbox" onChange={()=>this.changeCheckBox(i)} checked={item.belegt}/>
+              <button onClick={()=>this.removeOneLine(i)}>X</button>
               <br/><br/>
             </React.Fragment>
           )
         })}
+        <label for="teacher">Teacher</label>
+        <input name="teacher" id="teacher" value={this.state.teacher} onChange={this.handleChange}/>
+        <br/><br/>
         <button onClick={this.addLine}>Zeile hinzufügen</button>
         <button onClick={this.confirmEdit}>Bestätigen</button>
+        <button onClick={this.cancel}>Abbrechen</button>
       </Dialog>
     )
   }
@@ -108,8 +148,12 @@ export default class Home extends Component {
     let data ={
       header:this.state.header,
       content:this.state.content,
-      list:this.state.list,
-      category:"KURSE"
+      list:this.state.list.length!==0 ? this.state.list:[{name:"",belegt:false}],
+      category:"KURSE",
+      // picture:this.state.file,
+      // pictureUrl:this.state.pictureUrl,
+      // pictureName:this.state.pictureName,
+      // public_id:this.state.public_id,
     }
     api.updateInfo(this.state.id,data)
       .then(res=>{
@@ -125,12 +169,15 @@ export default class Home extends Component {
       header:"",
       content:"",
       list:[],
-      makeNewPopupOpen:true
+      makeNewPopupOpen:true,
+      teacher:""
     })
   }
   renderMakeNewPopup=()=>{
     return (
       <Dialog open={this.state.makeNewPopupOpen}>
+        {/* <label for="pictureUrl" xl={3}>Add a picture</label>
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} /> */}
         <label for="header">Titel</label>
         <input name="header" value={this.state.header} onChange={this.handleChange}/>
         <br/><br/>
@@ -142,10 +189,14 @@ export default class Home extends Component {
             <React.Fragment key={i}>
               <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/>
               <input type="checkbox" onChange={()=>this.changeCheckBox(i)} value={item.belegt}/>
+              <button onClick={()=>this.removeOneLine(i)}>X</button>
               <br/><br/>
             </React.Fragment>
           )
         })}
+        <label for="teacher">Teacher</label>
+        <input name="teacher" value={this.state.teacher} onChange={this.handleChange}/>
+        <br/><br/>
         <button onClick={this.addLine}>Zeile hinzufügen</button>
         <button onClick={this.confirmNew}>Bestätigen</button>
       </Dialog>
@@ -155,8 +206,10 @@ export default class Home extends Component {
     let data ={
       header:this.state.header,
       content:this.state.content,
-      list:this.state.list,
-      category:"KURSE"
+      list:this.state.list.length !== 0 ? this.state.list:[{name:"",belegt:false}],
+      category:"KURSE",
+      teacher:this.state.teacher
+      // picture:this.state.file
     }
     api.addInfo(data)
       .then(res=>{
@@ -166,7 +219,7 @@ export default class Home extends Component {
       .catch(err=>console.log(err))
   }
 
-  render() {                
+  render() {     
     return (
       <div className="Home">
         <div class="page-title">

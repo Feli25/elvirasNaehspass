@@ -31,22 +31,6 @@ export default class EditPosts extends Component {
     .catch(err=>{console.log(err)})
   }
 
-  handleChange=(e)=>{
-    this.setState({
-      [e.target.name]:e.target.value
-    })
-  }
-  handleFileChange=(e)=>{
-    e.preventDefault();
-    const file = e.target.files[0];
-    this.setState({
-      file: file,
-      pictureUrl: null,
-    })
-  }
-  cancel=()=>{
-    this.setState({editPopupOpen:false, newPopupOpen:false})
-  }
 
   displayPosts=()=>{
     return this.state.posts.map(post=>{
@@ -72,6 +56,24 @@ export default class EditPosts extends Component {
         this.updateView()
       })
       .catch(err=>{console.log(err)})
+  }
+
+
+  handleChange=(e)=>{
+    this.setState({
+      [e.target.name]:e.target.value
+    })
+  }
+  handleFileChange=(e)=>{
+    e.preventDefault();
+    const file = e.target.files[0];
+    this.setState({
+      file: file,
+      pictureUrl: null,
+    })
+  }
+  cancel=()=>{
+    this.setState({editPopupOpen:false, newPopupOpen:false})
   }
 
   createNewPost=()=>{
