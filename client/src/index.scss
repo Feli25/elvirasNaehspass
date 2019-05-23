@@ -70,19 +70,12 @@ body {
   font-family: 'Alegreya', serif; 
   font-size: 2rem;
   border-radius: 5px;
-
-}
-
-.nav-style:hover {
-  color: #5A1F69; 
-  text-decoration: none;
-  background-color: #A5ABBC;
-}
-
-.nav-style:active {
-  color: #351F69; 
-  text-decoration: none;
-  background-color: #A5ABBC;
+  &:hover {
+    color: #5A1F69;
+  }
+  &:active {
+    color: #351F69; 
+  }
 }
 
 #border-container {
@@ -132,7 +125,7 @@ a {
   margin: 30px;
   border-radius: 10px;
   background-color: rgba($color: #ffffff, $alpha: 0.9);
-  box-shadow: 10px 9px 16px -5px rgba(0,0,0,0.63);
+  box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.63);
 }
 
 .card-body {
@@ -202,17 +195,17 @@ a {
 .btnHref {
   text-align: center;
   text-decoration: none;
-  box-shadow: 10px 9px 16px -5px rgba(0,0,0,0.63);
-
+  box-shadow: 0px 3px 7px -5px rgba(0,0,0,0.63);
   padding: 5px;
+  margin: 7px;
   border-radius: 5px;
   background-color: #F9F3FD;
   border: 1px solid #351F69;
   color: #351F69;
-}
-.btnHref:hover {
-  color: #A5ABBC;
-  text-decoration: none;
+  &:hover {
+    color: #A5ABBC;
+    text-decoration: none;
+  }
 }
 
 .btnTable {
@@ -224,10 +217,10 @@ a {
   background-color: #F9F3FD;
   border: 1px solid #351F69;
   color: #351F69;
-}
-.btnTable:hover {
-  color: #A5ABBC;
-  text-decoration: none;
+  &:hover {
+    color: #A5ABBC;
+    text-decoration: none;
+  }
 }
 
 .btn1 {
@@ -237,10 +230,9 @@ a {
 
 .btn1 a {
   color: white;
-}
-
-.btn1 a:hover {
-  color: #A5ABBC;
+  &:hover {
+    color: #A5ABBC;
+  }
 }
 
 .btn2 {
@@ -251,10 +243,9 @@ a {
 
 .btn2 a {
   color: #351F69;
-}
-
-.btn2 a:hover {
-  color: #A5ABBC;
+  &:hover {
+    color: #A5ABBC;
+  }
 }
 
 .btnAll {
@@ -288,10 +279,9 @@ a {
   color: white;
   display: flex;
   justify-self: center;
-}
-
-.anmelden:hover {
-  color: #A5ABBC;
+  &:hover {
+    color: #A5ABBC;
+  }
 }
 
 input {
@@ -373,22 +363,17 @@ option {
     margin-left: auto;
     margin-right: 20px;
     margin-top: 20px;
+    &:hover {
+      color: #5A1F69;
+      font-size: 2.02rem;
+    }
+    &:active {
+      color: #351F69;
+    }
   }
 
   #login-nav, #logout-nav {
     display: none;
-  }
-
-  .login-logout:hover {
-    color: #5A1F69; 
-    text-decoration: none;
-    background-color: #A5ABBC;
-  }
-  
-  .login-logout:active {
-    color: #351F69; 
-    text-decoration: none;
-    background-color: #A5ABBC;
   }
 
   .card-container {
