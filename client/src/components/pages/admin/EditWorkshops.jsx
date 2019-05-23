@@ -119,9 +119,14 @@ export default class Home extends Component {
   render() {                
     return (
       <div className="Home">
-        <h2>Edit Workshops</h2>
-        <p>This is a sample project with the MERN stack</p>
-        {this.renderCards()}
+        <div class="page-title">
+          <h1 class="page-title">Admin - Workshops</h1>
+        </div>
+        <section class="card-container">
+          <p>
+            {this.renderCards()}
+          </p>
+        </section>
         {this.renderEditPopup()}
       </div>
     );

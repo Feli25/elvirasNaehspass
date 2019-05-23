@@ -166,13 +166,13 @@ export default class Home extends Component {
         <div class="page-title">
           <h1 class="page-title">Admin - Ausstattung</h1>
         </div>
-        <section class="card-container">
-          <div class="card" style={{width: "45rem"}}>
-              <div class="card-body">
-                <p><button onClick={this.selectMakeNew}>Neu</button></p>
-              </div>
+        <div class="manage-container">
+          <div class="card" style={{width: "30rem"}}>
+            <div class="card-body">
+            <h2><button onClick={this.selectMakeNew} class="btnHref">Neue Ausstattung</button></h2>
             </div>
-        </section>
+          </div>
+        </div>
         <section class="card-container">
           <p>
             {this.createDisplay()}
