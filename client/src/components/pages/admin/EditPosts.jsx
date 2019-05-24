@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import api from '../../../api';
 import { runInThisContext } from 'vm';
-import {Dialog} from '@material-ui/core'
+import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default class EditPosts extends Component {
   constructor(props) {
@@ -87,17 +90,36 @@ export default class EditPosts extends Component {
   }
   renderCreateNewPostPopup=()=>{
     return(
-      <Dialog open={this.state.newPopupOpen}>
+      <Dialog open={this.state.newPopupOpen} TransitionComponent={Transition}>
+          <DialogTitle><h5 class="card-title">Einen Post hinzufügen</h5></DialogTitle>
+          <DialogContent>
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
-        <label for="header">Titel:</label>
-        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
-        <br/><br/>
-        <label for="content">Text:</label>
-        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
-        <br/><br/>
-        <button onClick={this.createNewPostConfirm}>Hinzufügen</button>
-        <button onClick={this.cancel}>Abbruch</button>
+          <TextField
+              autoFocus
+              margin="dense"
+              name="header"
+              label="Titel"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.header}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              name="content"
+              label="Text"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.content}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button class="btnHref" onClick={this.createNewPostConfirm}>Hinzufügen</Button>
+            <Button class="btnHref" onClick={this.cancel}>Abbruch</Button>
+          </DialogActions>
       </Dialog>
     )
   }
@@ -128,18 +150,37 @@ export default class EditPosts extends Component {
   }
   renderEditPostPopup=()=>{
     return(
-      <Dialog open={this.state.editPopupOpen}>
-        {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName}/>} 
+      <Dialog open={this.state.editPopupOpen} TransitionComponent={Transition}>
+        <DialogTitle><h5 class="card-title">Einen Post bearbeiten</h5></DialogTitle>
+        <DialogContent>
+        {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName} class="card-img-top"/>} 
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
-        <label for="header">Titel:</label>
-        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
-        <br/><br/>
-        <label for="content">Text:</label>
-        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
-        <br/><br/>
-        <button onClick={this.editPostConfirm}>Bestätigen</button>
-        <button onClick={this.cancel}>Abbruch</button>
+        <TextField
+              autoFocus
+              margin="dense"
+              name="header"
+              label="Titel"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.header}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              name="content"
+              label="Text"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.content}
+            />
+        </DialogContent>
+        <DialogActions>
+          <Button class="btnHref" onClick={this.editPostConfirm}>Bestätigen</Button>
+          <Button class="btnHref" onClick={this.cancel}>Abbruch</Button>
+        </DialogActions>
       </Dialog>
     )
   }

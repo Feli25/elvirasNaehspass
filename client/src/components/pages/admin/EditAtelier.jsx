@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import api from '../../../api';
-import {Dialog} from '@material-ui/core'
+import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default class Home extends Component {
   constructor(props) {
@@ -87,16 +90,38 @@ export default class Home extends Component {
   }
   renderCreateNewPopup=()=>{
     return (
-      <Dialog open={this.state.makeNew}>
-        <label for="pictureUrl" xl={3}>Add a picture</label>
-        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
-        <label for="header">Titel:</label>
-        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
-        <br/><br/>
-        <label for="content">Text:</label>
-        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
-        <br/><br/>
-        <button onClick={this.confirmNew}>Hinzufügen</button>
+      <Dialog 
+        open={this.state.makeNew}
+        TransitionComponent={Transition}>
+          <DialogTitle><h5 class="card-title">Eine Ausstattung hinzufügen</h5></DialogTitle>
+          <DialogContent>
+            <label for="pictureUrl" xl={3}>Add a picture</label>
+            <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+            <TextField
+              autoFocus
+              margin="dense"
+              name="header"
+              label="Titel"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.header}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              name="content"
+              label="Text"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.content}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button class="btnHref" onClick={this.confirmNew}>Hinzufügen</Button>
+            <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          </DialogActions>
       </Dialog>
     )
   }
@@ -128,17 +153,38 @@ export default class Home extends Component {
   }
   renderEditOldPopup=()=>{
     return (
-      <Dialog open={this.state.editOld}>     
-        {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName}/>} 
-        <label for="pictureUrl" xl={3}>Add a picture</label>
-        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
-        <label for="header">Titel:</label>
-        <input type="text" name="header" id="header" value={this.state.header} onChange={this.handleChange}/>
-        <br/><br/>
-        <label for="content">Text:</label>
-        <input type="text" name="content" id="content" value={this.state.content} onChange={this.handleChange}/>
-        <br/><br/>
-        <button onClick={this.confirmEdit}>Aktualisieren</button>
+      <Dialog open={this.state.editOld}
+      TransitionComponent={Transition}>  
+        <DialogTitle><h5 class="card-title">Eine Ausstattung bearbeiten</h5></DialogTitle>
+        <DialogContent>
+          {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName} class="card-img-top"/>} 
+          <label for="pictureUrl" xl={3}>Add a picture</label>
+          <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+          <TextField
+              autoFocus
+              margin="dense"
+              name="header"
+              label="Titel"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.header}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              name="content"
+              label="Text"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.content}
+            />
+        </DialogContent>
+        <DialogActions>
+          <Button class="btnHref" onClick={this.confirmEdit}>Aktualisieren</Button>
+          <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+        </DialogActions>
       </Dialog>
     )
   }

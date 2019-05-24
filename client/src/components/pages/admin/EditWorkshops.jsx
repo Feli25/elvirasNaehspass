@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import api from '../../../api';
-import {Dialog} from '@material-ui/core'
+import {Dialog, Slide, Checkbox, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default class Home extends Component {
   constructor(props) {
@@ -97,28 +100,64 @@ export default class Home extends Component {
   }
   renderEditPopup=()=>{
     return (
-      <Dialog open={this.state.editPopupOpen}>
-        <label for="header">Titel</label>
-        <input name="header" value={this.state.header} onChange={this.handleChange}/>
-        <br/><br/>
-        <label for="content">Inhalt</label>
-        <input name="content" value={this.state.content} onChange={this.handleChange}/>
-        <br/><br/>
+      <Dialog open={this.state.editPopupOpen} TransitionComponent={Transition}>
+          <DialogTitle><h5 class="card-title">Einen Workshop bearbeiten</h5></DialogTitle>
+          <DialogContent>
+          <TextField
+              autoFocus
+              margin="dense"
+              name="header"
+              label="Titel"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.header}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              name="content"
+              label="Inhalt"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.content}
+            />
         {this.state.list.map((item,i)=>{
           return(
             <React.Fragment key={i}>
-              <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/>
-              <input type="checkbox" onChange={()=>this.changeCheckBox(i)} value={item.belegt}/>
-              <br/><br/>
-            </React.Fragment>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    name="Stichpunkt"
+                    label="Stichpunkt"
+                    type="text"
+                    width="200px"
+                    onChange={(e)=>this.updateList(i,e.target.value)}
+                    value={item.name}
+                  />
+                  <Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} />
+                  <Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
+                  <br/>
+                </React.Fragment>
           )
         })}
-        <label for="teacher">Teacher</label>
-        <input name="teacher" id="teacher" value={this.state.teacher} onChange={this.handleChange}/>
-        <br/><br/>
-        <button onClick={this.addLine}>Zeile hinzufügen</button>
-        <button onClick={this.confirmEdit}>Bestätigen</button>
-        <button onClick={this.cancel}>Abbrechen</button>
+          <TextField
+              autoFocus
+              margin="dense"
+              name="teacher"
+              label="Lehrer"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.teacher}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button class="btnHref" onClick={this.addLine}>Zeile hinzufügen</Button>
+            <Button class="btnHref" onClick={this.confirmEdit}>Bestätigen</Button>
+            <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          </DialogActions>
       </Dialog>
     )
   }
@@ -149,30 +188,64 @@ export default class Home extends Component {
   }
   renderMakeNewPopup=()=>{
     return (
-      <Dialog open={this.state.makeNewPopupOpen}>
-        {/* <label for="pictureUrl" xl={3}>Add a picture</label>
-        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} /> */}
-        <label for="header">Titel</label>
-        <input name="header" value={this.state.header} onChange={this.handleChange}/>
-        <br/><br/>
-        <label for="content">Inhalt</label>
-        <input name="content" value={this.state.content} onChange={this.handleChange}/>
-        <br/><br/>
+      <Dialog open={this.state.makeNewPopupOpen} TransitionComponent={Transition}>
+        <DialogTitle><h5 class="card-title">Einen Workshop erstellen</h5></DialogTitle>
+        <DialogContent>
+          <TextField
+              autoFocus
+              margin="dense"
+              name="header"
+              label="Titel"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.header}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              name="content"
+              label="Inhalt"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.content}
+            />
         {this.state.list.map((item,i)=>{
           return(
             <React.Fragment key={i}>
-              <input onChange={(e)=>this.updateList(i,e.target.value)} value={item.name}/>
-              <input type="checkbox" onChange={()=>this.changeCheckBox(i)} value={item.belegt}/>
-              <button onClick={()=>this.removeOneLine(i)}>X</button>
-              <br/><br/>
-            </React.Fragment>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    name="Stichpunkt"
+                    label="Stichpunkt"
+                    type="text"
+                    width="200px"
+                    onChange={(e)=>this.updateList(i,e.target.value)}
+                    value={item.name}
+                  />
+                  <Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} />
+                  <Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
+                  <br/>
+                </React.Fragment>
           )
         })}
-        <label for="teacher">Teacher</label>
-        <input name="teacher" value={this.state.teacher} onChange={this.handleChange}/>
-        <br/><br/>
-        <button onClick={this.addLine}>Zeile hinzufügen</button>
-        <button onClick={this.confirmNew}>Bestätigen</button>
+            <TextField
+              autoFocus
+              margin="dense"
+              name="teacher"
+              label="Lehrer"
+              type="text"
+              fullWidth
+              onChange={this.handleChange}
+              value={this.state.teacher}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button class="btnHref" onClick={this.addLine}>Zeile hinzufügen</Button>
+            <Button class="btnHref" onClick={this.confirmNew}>Bestätigen</Button>
+            <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          </DialogActions>
       </Dialog>
     )
   }
@@ -199,7 +272,13 @@ export default class Home extends Component {
         <div class="page-title">
           <h1 class="page-title">Admin - Workshops</h1>
         </div>
-        <button onClick={this.selectMakeNew}>Neu</button>
+        <div class="manage-container">
+          <div class="card" style={{width: "30rem"}}>
+            <div class="card-body">
+            <h2><button onClick={this.selectMakeNew} class="btnHref">Neuen Workshop erstellen</button></h2>
+            </div>
+          </div>
+        </div>
         <section class="card-container">
           <p>
             {this.renderCards()}
