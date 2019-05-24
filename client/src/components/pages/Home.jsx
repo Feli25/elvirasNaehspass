@@ -35,26 +35,24 @@ export default class Home extends Component {
     return (
       <React.Fragment>
         <div class="page-title">
-  <h1 class="page-title">Willkommen</h1>
-</div>
-<p>
+          <h1 class="page-title">Willkommen</h1>
+        </div>
 
-  <section class="card-container">
-      {this.createPosts()}
+          <section class="card-container">
+              {this.createPosts()}
 
-  </section>
-  <section class="button-container"> 
-    <a href="/posts" class="btnHref" id="all-posts">Alle Beiträge ansehen</a>
-  </section>
-  <section class="card-container women-container">
-    <div class="card women-card" style={{width: "20rem"}}>
-      <div class="card-body">
-        <img src="./images/woman.png" alt="Woman" class="card-img-top"/>
-      </div>
-    </div>
-  </section>
+          </section>
+          <section class="button-container"> 
+            <a href="/posts" class="btnHref" id="all-posts">Alle Beiträge ansehen</a>
+          </section>
+          <section class="card-container women-container">
+            <div class="card women-card" style={{width: "20rem"}}>
+              <div class="card-body">
+                <img src="./images/woman.png" alt="Woman" class="card-img-top"/>
+              </div>
+            </div>
+          </section>
 
-</p>
       </React.Fragment>
     );
   }

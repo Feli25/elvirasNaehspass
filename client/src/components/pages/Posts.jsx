@@ -33,9 +33,7 @@ export default class Home extends Component {
           <h1 class="page-title">Willkommen</h1>
         </div>
         <section class="card-container">
-        <p>
           {this.createCardsPosts()}
-        </p>
         </section>
       </React.Fragment>
     );

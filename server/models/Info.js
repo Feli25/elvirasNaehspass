@@ -4,8 +4,13 @@ const Schema = mongoose.Schema;
 const infoSchema = new Schema({
   header: String,
   content: String,
-  list: [Object],
-  category: { type: String, enum: ["KURSE", "WORKSHOPS"], default: "KURSE" }
+  // list: {type:Array, defaul:[]},
+  list: [{name:String,belegt:Boolean}],
+  category: { type: String, enum: ["KURSE", "WORKSHOPS"], default: "KURSE" },
+  teacher:{type:String}
+  // imgPath: String,
+  // imgName: String,
+  // public_id:String
 }, {
     timestamps: {
       createdAt: 'created_at',
