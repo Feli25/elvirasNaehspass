@@ -104,9 +104,9 @@ export default {
       .catch(errHandler)
   },
 
-  sendAnmeldung(data){
+  sendAnmeldung(data,type){
     return service
-      .post("/anmeldung", data)
+      .post("/anmeldung/"+type, data)
       .then(res => res.data)
       .catch(errHandler)
   },
@@ -173,6 +173,13 @@ export default {
       .get('/info/'+page)
       .then(res => res.data)
       .catch(errHandler)
+  },
+
+  getInfoById(id){
+    return service
+    .get('/info/byid/'+id)
+    .then(res => res.data)
+    .catch(errHandler)
   },
 
   addInfo(data){

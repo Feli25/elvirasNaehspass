@@ -15,7 +15,7 @@ let transporter = nodemailer.createTransport({
 
 router.post('/kontakt', (req,res,next)=>{
   var mailOptions = {
-    to: 'elvirasnaehspass@gmail.com',
+    to: "deutges.ironhack@gmail.com",//'elvirasnaehspass@gmail.com',
     from: '"Elviras Nähspass Website"',
     subject: 'Betreff: ' + req.body.subject,
     text: 'Jemand auf der neuen Website hat ein Kontaktformular geschickt!\n\n' +
@@ -28,22 +28,34 @@ router.post('/kontakt', (req,res,next)=>{
     .catch(err => { console.log(err) })
 })
 
-router.post("/anmeldung", (req,res,next)=>{
+router.post("/anmeldung/:type", (req,res,next)=>{
   var html = `<h1>Die Anfrage:</h1><hr>`
-  if(req.body.sharing){
-    html += `<p>${req.body.name} (${req.body.email}) und ${req.body.shareName} (${req.body.shareEmail}) möchten gemeinsam diesem Kurs betreten:<br/>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
-  } else {
-    html += `<p>${req.body.name} (${req.body.email}) möchte diesem Kurs betreten:<br>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
+  var SendTo
+  if(req.params.type==="kurs"){
+    if(req.body.sharing){
+      html += `<p>${req.body.name} (${req.body.email}) und ${req.body.shareName} (${req.body.shareEmail}) möchten gemeinsam diesem Kurs betreten:<br/>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
+      html += `<br/>Die eingetragenen Infos:<br/>Person 1:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}<br/>Person 2:<br/>Name: ${req.body.shareName}<br/>Email: ${req.body.shareEmail}`
+    } else {
+      html += `<p>${req.body.name} (${req.body.email}) möchte diesem Kurs betreten:<br>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
+      html += `<br/>Die eingetragenen Infos:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}`
+    }
+    SendTo = "deutges.ironhack@gmail.com"
+  } else if(req.params.type="workshop"){
+    html += `<p>${req.body.name} (${req.body.email}) möchte an diesem Workshop teilnehmen: ${req.body.choice}<br/>Die eingetragenen Infos:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}`
+    SendTo = "deutges.ironhack@gmail.com"//später barbara
   }
   html += `</p><p>Weitere Mitteilung: ${req.body.message}</p><br><hr><br>`
+  console.log("sending")
   transporter.sendMail({
     from: '"Elviras Naehspass Website"',
-    to: "elvirasnaehspass@gmail.com",
-    subject: "Eine neue Kurs Anmeldung",
+    to: SendTo,
+    subject: "Eine neue "+req.params.type+ " Anmeldung",
     text: req.body.message,
-    html: req.body.html
+    html: html
   })
-  .then(sth => res.json( { success: true }))
+  
+  .then(sth => {console.log("sent")
+  res.json( { success: true })})
   .catch(err => { console.log(err) })
 })
 

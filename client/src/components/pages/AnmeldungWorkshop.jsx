@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
+import api from '../../api';
+import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
 
 export default class AnmeldungWorkshop extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      courses:[],
       name:"",
       email:"",
       phone:"",
       adress:"",
       message:"",
-      choice:"",
-      errorMessage:null
+      choice:"none",
+      errorMessage:null,
+      success:false
     }
+  }
+  componentDidMount=()=>{
+    api.getInfo("workshops")
+      .then(kurse=>{
+        console.log(kurse)
+        this.setState({courses:kurse})
+      })
+      .catch(err=>console.log(err))
   }
   onChange=(event)=>{
     this.setState({
@@ -19,22 +31,64 @@ export default class AnmeldungWorkshop extends Component {
     })
   }
   submitAnmeldung=()=>{
-    console.log("todo")
+    if(this.state.name!==""
+    && this.state.email!=="" 
+    && this.state.phone!==""
+    && this.state.choice!=="none"
+    ) {
+      api.sendAnmeldung(this.state,"workshop")
+        .then(response=>{
+          console.log(response)
+          this.setState({success:true})
+        })
+        .catch(err=>{console.log(err)
+          alert("Es ist etwas schief gelaufen, bitte versuchen Sie es später nochmal oder kontaktieren uns.")})
+    } else {
+      alert("Bitte alle Pflichfelder ausfüllen")
+    }
   }
-  render() {                
+  renderSuccessPopup=()=>{
+    return (
+      <Dialog open={this.state.success}>
+        <DialogTitle>Vielen Dank!</DialogTitle>
+        <DialogContent>
+          <p>Ihre Anmeldung ist erfolgreich eingegangen, vielen Dank dafür! Wir werden uns bald bei Ihnen melden.</p>
+        </DialogContent>
+        <DialogActions>
+          <a class="btnHref" href="/">Zurück</a>
+        </DialogActions>
+      </Dialog>
+    )
+  }
+  render() {    
+    var choices =[]
+    choices.push(
+      <option value="none">None</option>
+    )        
+    this.state.courses.filter(course=>{
+      var ret = true
+      course.list.forEach(elem=>{
+          if(elem.belegt){
+            ret = false
+          }
+        }
+      )
+      return ret
+    }).forEach(course=>{
+      choices.push(
+        <option value={course.header}>{course.header}</option>
+      )
+    })              
     return (
       <React.Fragment>
         <div class="page-title">
           <h1 class="page-title">Anmeldung - Workshop</h1>
         </div>
         <p>
-          <div class="button-container">
-            <p style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 17.3.2019 um 11 Uhr statt!!</strong></p>
-          </div>
           <section class="card-container">
           <div class="card anmeldung-card">
             <div class="card-body">
-              <h1 class="card-title">Anmeldung für einen Kurs</h1>
+              <h1 class="card-title">Anmeldung für einen Workshop</h1>
               <br/>
 
                 <label for="name">Name <font color="red" size="5px">*</font></label>
@@ -53,20 +107,18 @@ export default class AnmeldungWorkshop extends Component {
                 <br/><br/>
 
                 <label for="adress">Adresse</label>
-                <input type="text" name="adress" id="adress" value={this.state.address} onChange={this.onChange}/>
+                <textarea type="text" name="adress" id="adress" value={this.state.address} onChange={this.onChange} className="adressSignup"/>
                 
                 <br/><br/>
 
-                {/*  <label for="workshop">Gewünschter Workshop <font color="red" size="5px">*</font></label>
-                  <select name="workshop" id="workshop">
-                    {{#each workshops}}
-                    <option value="{{this._id}}">{{this.name}}</option>
-                    {{/each}}
-                  </select> */}
+                 <label for="workshop">Gewünschter Workshop <font color="red" size="5px">*</font></label>
+                  <select name="choice" id="workshop" onChange={this.onChange}>
+                    {choices}
+                  </select>
                 <br/><br/>
 
                 <label for="message">Weitere Mitteilung</label>
-                <input type="text" name="message" id="message" value={this.state.message} onChange={this.onChange}/>
+                <textarea type="text" name="message" id="message" value={this.state.message} onChange={this.onChange} className="textareSignup"/>
 
                 <br/><br/>
                 {this.state.errorMessage!==null && 
@@ -84,6 +136,7 @@ export default class AnmeldungWorkshop extends Component {
           </div>
           </section>
         </p>
+        {this.renderSuccessPopup()}
       </React.Fragment>
     );
   }

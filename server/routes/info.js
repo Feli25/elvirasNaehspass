@@ -43,6 +43,15 @@ router.get('/workshops', (req,res,next)=>{
 //   .catch(err => console.log(err))
 // })
 
+router.get('/byid/:id', (req,res,next)=>{
+  let id = req.params.id
+  Info.findById(id)
+  .then(info =>{
+    res.json(info)
+  })
+  .catch(err => next(err))
+})
+
 router.post('/new', (req,res,next)=>{
   let { header, content, category, list,teacher } = req.body
   Info.create({
