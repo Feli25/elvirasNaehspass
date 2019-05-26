@@ -23,6 +23,7 @@ export default class Home extends Component {
     }
   }
   componentDidMount=()=>{
+    console.log(process, process.env)
     this.setState({
       specialInfo: process ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
     })
