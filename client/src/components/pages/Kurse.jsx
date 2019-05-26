@@ -12,7 +12,7 @@ export default class Kurse extends Component {
   }
   componentDidMount(){
     this.setState({
-      specialInfo: process.env.REACT_APP_API_URL.includes("localhost") ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
+      specialInfo: process.env!==undefined ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
     })
     api.getInfo("kurse")
       .then(kurse=>{
