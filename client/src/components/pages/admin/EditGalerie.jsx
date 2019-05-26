@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import api from '../../../api';
 import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const styles = theme => ({
+  resize:{
+    fontSize:20
+  },
+});
 
-export default class Home extends Component {
+class EditGalerie extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -66,6 +73,11 @@ export default class Home extends Component {
                   fullWidth
                   onChange={this.handleChange}
                   value={this.state.header}
+                  InputProps={{
+                    classes: {
+                      input: this.props.classes.resize,
+                    },
+                  }}
                 />
           </DialogContent>
           <DialogActions>
@@ -126,12 +138,13 @@ export default class Home extends Component {
           </div>
         </div>
         <section class="card-container">
-          <p>
-            {this.createDisplay()}
-          </p>
+          {this.createDisplay()}
         </section>
         {this.renderCreateNewPopup()}
       </div>
     );
   }
 }
+
+export default withStyles(styles)(EditGalerie);
+

@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import api from '../../../api';
 import {Dialog, Slide, Checkbox, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const styles = theme => ({
+  resize:{
+    fontSize:20
+  },
+});
 
-export default class Home extends Component {
+class EditWorkshop extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -112,6 +119,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.header}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
             <TextField
               autoFocus
@@ -122,6 +134,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.content}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
         {this.state.list.map((item,i)=>{
           return(
@@ -135,6 +152,11 @@ export default class Home extends Component {
                     width="200px"
                     onChange={(e)=>this.updateList(i,e.target.value)}
                     value={item.name}
+                    InputProps={{
+                      classes: {
+                        input: this.props.classes.resize,
+                      },
+                    }}
                   />
                   <Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} />
                   <Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
@@ -151,6 +173,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.teacher}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
           </DialogContent>
           <DialogActions>
@@ -200,6 +227,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.header}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
             <TextField
               autoFocus
@@ -210,6 +242,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.content}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
         {this.state.list.map((item,i)=>{
           return(
@@ -223,6 +260,11 @@ export default class Home extends Component {
                     width="200px"
                     onChange={(e)=>this.updateList(i,e.target.value)}
                     value={item.name}
+                    InputProps={{
+                      classes: {
+                        input: this.props.classes.resize,
+                      },
+                    }}
                   />
                   <Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} />
                   <Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
@@ -239,6 +281,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.teacher}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
           </DialogContent>
           <DialogActions>
@@ -280,9 +327,7 @@ export default class Home extends Component {
           </div>
         </div>
         <section class="card-container">
-          <p>
             {this.renderCards()}
-          </p>
         </section>
         {this.renderEditPopup()}
         {this.renderMakeNewPopup()}
@@ -290,3 +335,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default withStyles(styles)(EditWorkshop);

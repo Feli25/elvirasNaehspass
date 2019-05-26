@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import api from '../../../api';
 import {Dialog, Slide, DialogContentText,Checkbox, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const styles = theme => ({
+  resize:{
+    fontSize:20
+  },
+});
 
-export default class Home extends Component {
+class EditKurse extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -157,6 +164,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.header}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
             <TextField
               autoFocus
@@ -167,6 +179,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.content}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
             {this.state.list.map((item,i)=>{
               return(
@@ -180,6 +197,11 @@ export default class Home extends Component {
                     width="200px"
                     onChange={(e)=>this.updateList(i,e.target.value)}
                     value={item.name}
+                    InputProps={{
+                      classes: {
+                        input: this.props.classes.resize,
+                      },
+                    }}
                   />
                   <Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} />
                   <Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
@@ -196,6 +218,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.teacher}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
           </DialogContent>
           <DialogActions>
@@ -250,6 +277,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.header}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
             <table class="table">
               <tr>
@@ -267,36 +299,51 @@ export default class Home extends Component {
                     <TextField
                       autoFocus
                       margin="dense"
-                      name="Stichpunkt"
-                      label="Stichpunkt"
+                      name="Name"
+                      label="Name"
                       type="text"
                       width="200px"
                       onChange={(e)=>this.changeInputSpecial(i,e.target.value,0)}
                       value={values[0]}
+                      InputProps={{
+                        classes: {
+                          input: this.props.classes.resize,
+                        },
+                      }}
                     />
                   </td>
                   <td>
                     <TextField
                       autoFocus
                       margin="dense"
-                      name="Stichpunkt"
-                      label="Stichpunkt"
+                      name="Terminanzahl"
+                      label="Terminanzahl"
                       type="text"
                       width="200px"
                       onChange={(e)=>this.changeInputSpecial(i,e.target.value,1)}
                       value={values[1]}
+                      InputProps={{
+                        classes: {
+                          input: this.props.classes.resize,
+                        },
+                      }}
                     />
                   </td>
                   <td>
                     <TextField
                       autoFocus
                       margin="dense"
-                      name="Stichpunkt"
-                      label="Stichpunkt"
+                      name="Beginn"
+                      label="Beginn"
                       type="text"
                       width="200px"
                       onChange={(e)=>this.changeInputSpecial(i,e.target.value,2)}
                       value={values[2]}
+                      InputProps={{
+                        classes: {
+                          input: this.props.classes.resize,
+                        },
+                      }}
                     />
                   </td>
                   <td><Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} /></td>
@@ -370,6 +417,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.header}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
             <TextField
               autoFocus
@@ -380,6 +432,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.content}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
         {this.state.list.map((item,i)=>{
           return(
@@ -393,6 +450,11 @@ export default class Home extends Component {
                     width="200px"
                     onChange={(e)=>this.updateList(i,e.target.value)}
                     value={item.name}
+                    InputProps={{
+                      classes: {
+                        input: this.props.classes.resize,
+                      },
+                    }}
                   />
                   <Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} />
                   <Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
@@ -409,6 +471,11 @@ export default class Home extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.teacher}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
           </DialogContent>
           <DialogActions>
@@ -449,8 +516,8 @@ export default class Home extends Component {
             </div>
           </div>
         </div>
-          {this.renderSpecificCard()}
         <section class="card-container">
+          {this.renderSpecificCard()}
         </section>
         <section class="card-container">
             {this.renderNormalCards()}
@@ -462,3 +529,5 @@ export default class Home extends Component {
     );
   }
 }
+
+export default withStyles(styles)(EditKurse);

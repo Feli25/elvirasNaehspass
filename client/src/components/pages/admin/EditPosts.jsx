@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import api from '../../../api';
 import { runInThisContext } from 'vm';
 import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles';
+
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const styles = theme => ({
+  resize:{
+    fontSize:20
+  },
+});
 
-export default class EditPosts extends Component {
+class EditPosts extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -104,6 +111,11 @@ export default class EditPosts extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.header}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
             <TextField
               autoFocus
@@ -114,6 +126,11 @@ export default class EditPosts extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.content}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
           </DialogContent>
           <DialogActions>
@@ -165,6 +182,11 @@ export default class EditPosts extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.header}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
             <TextField
               autoFocus
@@ -175,6 +197,11 @@ export default class EditPosts extends Component {
               fullWidth
               onChange={this.handleChange}
               value={this.state.content}
+              InputProps={{
+                classes: {
+                  input: this.props.classes.resize,
+                },
+              }}
             />
         </DialogContent>
         <DialogActions>
@@ -223,3 +250,5 @@ export default class EditPosts extends Component {
     );
   }
 }
+
+export default withStyles(styles)(EditPosts);
