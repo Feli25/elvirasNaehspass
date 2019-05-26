@@ -10,6 +10,12 @@ const styles = theme => ({
   resize:{
     fontSize:20
   },
+  textfieldResize:{
+    fontSize:17,
+    lineHeight:1.2,
+    minHeight:"auto",
+    boxShadow:"none"
+  }
 });
 
 class EditWorkshop extends Component {
@@ -111,7 +117,6 @@ class EditWorkshop extends Component {
           <DialogTitle><h5 class="card-title">Einen Workshop bearbeiten</h5></DialogTitle>
           <DialogContent>
           <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -126,7 +131,6 @@ class EditWorkshop extends Component {
               }}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="content"
               label="Inhalt"
@@ -136,15 +140,17 @@ class EditWorkshop extends Component {
               value={this.state.content}
               InputProps={{
                 classes: {
-                  input: this.props.classes.resize,
+                  input: this.props.classes.textfieldResize,
                 },
               }}
+              multiline
+              rows="5"
             />
         {this.state.list.map((item,i)=>{
           return(
             <React.Fragment key={i}>
                   <TextField
-                    autoFocus
+    
                     margin="dense"
                     name="Stichpunkt"
                     label="Stichpunkt"
@@ -165,7 +171,6 @@ class EditWorkshop extends Component {
           )
         })}
           <TextField
-              autoFocus
               margin="dense"
               name="teacher"
               label="Lehrer"
@@ -219,7 +224,6 @@ class EditWorkshop extends Component {
         <DialogTitle><h5 class="card-title">Einen Workshop erstellen</h5></DialogTitle>
         <DialogContent>
           <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -234,7 +238,6 @@ class EditWorkshop extends Component {
               }}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="content"
               label="Inhalt"
@@ -244,15 +247,17 @@ class EditWorkshop extends Component {
               value={this.state.content}
               InputProps={{
                 classes: {
-                  input: this.props.classes.resize,
+                  input: this.props.classes.textfieldResize,
                 },
               }}
+              multiline
+              rows="5"
             />
         {this.state.list.map((item,i)=>{
           return(
             <React.Fragment key={i}>
                   <TextField
-                    autoFocus
+    
                     margin="dense"
                     name="Stichpunkt"
                     label="Stichpunkt"
@@ -273,7 +278,6 @@ class EditWorkshop extends Component {
           )
         })}
             <TextField
-              autoFocus
               margin="dense"
               name="teacher"
               label="Lehrer"

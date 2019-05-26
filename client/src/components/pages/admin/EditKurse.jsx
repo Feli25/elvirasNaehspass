@@ -10,6 +10,12 @@ const styles = theme => ({
   resize:{
     fontSize:20
   },
+  textfieldResize:{
+    fontSize:17,
+    lineHeight:1.2,
+    minHeight:"auto",
+    boxShadow:"none"
+  }
 });
 
 class EditKurse extends Component {
@@ -156,7 +162,6 @@ class EditKurse extends Component {
           <DialogTitle><h5 class="card-title">Einen Kurs bearbeiten</h5></DialogTitle>
           <DialogContent>
           <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -171,7 +176,6 @@ class EditKurse extends Component {
               }}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="content"
               label="Inhalt"
@@ -181,15 +185,17 @@ class EditKurse extends Component {
               value={this.state.content}
               InputProps={{
                 classes: {
-                  input: this.props.classes.resize,
+                  input: this.props.classes.textfieldResize,
                 },
               }}
+              multiline
+              rows="8"
             />
             {this.state.list.map((item,i)=>{
               return(
                 <React.Fragment key={i}>
                   <TextField
-                    autoFocus
+    
                     margin="dense"
                     name="Stichpunkt"
                     label="Stichpunkt"
@@ -210,7 +216,6 @@ class EditKurse extends Component {
               )
             })}
             <TextField
-              autoFocus
               margin="dense"
               name="teacher"
               label="Lehrer"
@@ -269,7 +274,6 @@ class EditKurse extends Component {
           <DialogTitle><h5 class="card-title">Einen Kurs bearbeiten</h5></DialogTitle>
           <DialogContent>
           <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -297,7 +301,7 @@ class EditKurse extends Component {
                   <tr key={i}>
                   <td>
                     <TextField
-                      autoFocus
+      
                       margin="dense"
                       name="Name"
                       label="Name"
@@ -307,14 +311,16 @@ class EditKurse extends Component {
                       value={values[0]}
                       InputProps={{
                         classes: {
-                          input: this.props.classes.resize,
+                          input: this.props.classes.textfieldResize,
                         },
                       }}
+                      multiline
+                      rows="2"
                     />
                   </td>
                   <td>
                     <TextField
-                      autoFocus
+      
                       margin="dense"
                       name="Terminanzahl"
                       label="Terminanzahl"
@@ -331,7 +337,7 @@ class EditKurse extends Component {
                   </td>
                   <td>
                     <TextField
-                      autoFocus
+      
                       margin="dense"
                       name="Beginn"
                       label="Beginn"
@@ -409,7 +415,6 @@ class EditKurse extends Component {
         <DialogTitle><h5 class="card-title">Einen Kurs erstellen</h5></DialogTitle>
           <DialogContent>
           <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -424,7 +429,6 @@ class EditKurse extends Component {
               }}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="content"
               label="Inhalt"
@@ -434,15 +438,17 @@ class EditKurse extends Component {
               value={this.state.content}
               InputProps={{
                 classes: {
-                  input: this.props.classes.resize,
+                  input: this.props.classes.textfieldResize,
                 },
               }}
+              multiline
+              rows="8"
             />
         {this.state.list.map((item,i)=>{
           return(
             <React.Fragment key={i}>
                   <TextField
-                    autoFocus
+    
                     margin="dense"
                     name="Stichpunkt"
                     label="Stichpunkt"
@@ -463,7 +469,6 @@ class EditKurse extends Component {
           )
         })}
             <TextField
-              autoFocus
               margin="dense"
               name="teacher"
               label="Lehrer"

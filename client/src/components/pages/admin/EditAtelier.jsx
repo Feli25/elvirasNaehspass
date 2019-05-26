@@ -10,6 +10,12 @@ const styles = theme => ({
   resize:{
     fontSize:20
   },
+  textfieldResize:{
+    fontSize:17,
+    lineHeight:1.2,
+    minHeight:"auto",
+    boxShadow:"none"
+  }
 });
 
 class EditAtelier extends Component {
@@ -105,7 +111,6 @@ class EditAtelier extends Component {
             <label for="pictureUrl" xl={3}>Add a picture</label>
             <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
             <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -120,7 +125,6 @@ class EditAtelier extends Component {
               }}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="content"
               label="Text"
@@ -130,9 +134,11 @@ class EditAtelier extends Component {
               value={this.state.content}
               InputProps={{
                 classes: {
-                  input: this.props.classes.resize,
+                  input: this.props.classes.textfieldResize,
                 },
               }}
+              multiline
+              rows="5"
             />
           </DialogContent>
           <DialogActions>
@@ -178,7 +184,6 @@ class EditAtelier extends Component {
           <label for="pictureUrl" xl={3}>Add a picture</label>
           <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
           <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -193,7 +198,6 @@ class EditAtelier extends Component {
               }}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="content"
               label="Text"
@@ -203,9 +207,11 @@ class EditAtelier extends Component {
               value={this.state.content}
               InputProps={{
                 classes: {
-                  input: this.props.classes.resize,
+                  input: this.props.classes.textfieldResize,
                 },
               }}
+              multiline
+              rows="5"
             />
         </DialogContent>
         <DialogActions>

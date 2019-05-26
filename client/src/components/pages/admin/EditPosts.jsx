@@ -11,6 +11,12 @@ const styles = theme => ({
   resize:{
     fontSize:20
   },
+  textfieldResize:{
+    fontSize:17,
+    lineHeight:1.2,
+    minHeight:"auto",
+    boxShadow:"none"
+  }
 });
 
 class EditPosts extends Component {
@@ -41,7 +47,6 @@ class EditPosts extends Component {
     .catch(err=>{console.log(err)})
   }
 
-
   displayPosts=()=>{
     return this.state.posts.map(post=>{
       return(
@@ -67,8 +72,6 @@ class EditPosts extends Component {
       })
       .catch(err=>{console.log(err)})
   }
-
-
   handleChange=(e)=>{
     this.setState({
       [e.target.name]:e.target.value
@@ -103,7 +106,6 @@ class EditPosts extends Component {
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
           <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -118,7 +120,6 @@ class EditPosts extends Component {
               }}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="content"
               label="Text"
@@ -128,9 +129,11 @@ class EditPosts extends Component {
               value={this.state.content}
               InputProps={{
                 classes: {
-                  input: this.props.classes.resize,
+                  input: this.props.classes.textfieldResize,
                 },
               }}
+              multiline
+              rows="8"
             />
           </DialogContent>
           <DialogActions>
@@ -174,7 +177,6 @@ class EditPosts extends Component {
         <label for="pictureUrl" xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
         <TextField
-              autoFocus
               margin="dense"
               name="header"
               label="Titel"
@@ -189,7 +191,6 @@ class EditPosts extends Component {
               }}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="content"
               label="Text"
@@ -199,9 +200,11 @@ class EditPosts extends Component {
               value={this.state.content}
               InputProps={{
                 classes: {
-                  input: this.props.classes.resize,
+                  input: this.props.classes.textfieldResize,
                 },
               }}
+              multiline
+              rows="8"
             />
         </DialogContent>
         <DialogActions>
