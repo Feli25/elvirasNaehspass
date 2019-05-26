@@ -8,7 +8,6 @@ const cloudinary = require('cloudinary');
 router.get('/kurse', (req,res,next)=>{
   Info.find({ category: "KURSE" })
   .then(info =>{
-    console.log(info)
     res.json(info)
   })
   .catch(err => next(err))

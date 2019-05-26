@@ -214,11 +214,9 @@ export default class EditPosts extends Component {
             </div>
           </div>
         </div>
-        <p>
           <section class="card-container">
             {this.displayPosts()}
           </section>
-        </p>
         {this.renderEditPostPopup()}
         {this.renderCreateNewPostPopup()}
       </div>

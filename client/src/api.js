@@ -176,22 +176,10 @@ export default {
   },
 
   addInfo(data){
-    // if(data.picture){
-    //   const formData = new FormData()
-    //   for (const key in data) {
-    //     formData.append(key, data[key])
-    //   }
-    //   console.log(formData)
-    //   return service
-    //   .post('/info/new-pic', formData)
-    //   .then(res => res.data)
-    //   .catch(errHandler)
-    // }else{
       return service
       .post('/info/new', data)
       .then(res => res.data)
       .catch(errHandler)
-    // }
   },
 
   updateInfo(id,data){
