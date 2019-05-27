@@ -16,12 +16,12 @@ export default class Home extends Component {
   }
   createCardsPosts=()=>{
     return this.state.allPosts.map(post=>{
-      return (<div class="card" style={{width: "30rem"}}>
-        {post.imgPath &&<img class="card-img-top" src={ post.imgPath } alt="not available"/> }
-            <div class="card-body">
-              <h5 class="card-title">{post.header}</h5>
-              <p class="card-text">{post.content}</p>
-              <h6 class="card-subtitle mb-2 text-muted"> by {post._creator.username}</h6>
+      return (<div className="card" style={{width: "30rem"}}>
+        {post.imgPath &&<img className="card-img-top" src={ post.imgPath } alt="not available"/> }
+            <div className="card-body">
+              <h5 className="card-title">{post.header}</h5>
+              <p className="card-text">{post.content}</p>
+              <h6 className="card-subtitle mb-2 text-muted"> by {post._creator.username}</h6>
             </div>
           </div>)
     })
@@ -29,10 +29,10 @@ export default class Home extends Component {
   render() {                
     return (
       <React.Fragment>
-        <div class="page-title">
-          <h1 class="page-title">Willkommen</h1>
+        <div className="page-title">
+          <h1 className="page-title">Willkommen</h1>
         </div>
-        <section class="card-container">
+        <section className="card-container">
           {this.createCardsPosts()}
         </section>
       </React.Fragment>

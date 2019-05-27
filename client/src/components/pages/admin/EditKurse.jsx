@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../api';
-import {Dialog, Slide, DialogContentText,Checkbox, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+import {Dialog, Slide,Checkbox, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -53,21 +53,21 @@ class EditKurse extends Component {
       course => {return course._id !== this.state.specialInfo}
     ).map(course=>{
       return (
-        <div class="card" style={{width: "30rem"}}>
-          <div class="card-body">
-            <h5 class="card-title">{course.header}</h5>
-            <p class="card-text">{course.content}</p>
+        <div className="card" style={{width: "30rem"}} key={course._id}>
+          <div className="card-body">
+            <h5 className="card-title">{course.header}</h5>
+            <p className="card-text">{course.content}</p>
             {course.list.length>0 && course.list[0].name!=="" &&<ol>
               {course.list.map((item)=>{
                 if(item.name!==""){
                   return (
-                    <li>{item.name} {item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
+                    <li key={item.name}>{item.name} {item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
                   )
                 }
               })}
             </ol>}
-            <p class="card-text">by {course.teacher}</p>
-            <button class="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
+            <p className="card-text">by {course.teacher}</p>
+            <button className="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
           </div>
         </div>
       )
@@ -78,11 +78,11 @@ class EditKurse extends Component {
       course=>{return course._id===this.state.specialInfo}
     ).map(course=>{
       return (
-        <div class="card flexible-card">
-          <div class="card-body">
-            <h5 class="card-title">{course.header}</h5>
+        <div className="card flexible-card">
+          <div className="card-body">
+            <h5 className="card-title">{course.header}</h5>
             {course.list.length>0 && course.list[0].name!=="" &&
-            <table class="table">
+            <table className="table">
               <tr>
                 <th>Kurs</th>
                 <th>Terminanzahl</th>
@@ -103,7 +103,7 @@ class EditKurse extends Component {
                 }
               })}
             </table>}
-            <button class="btnHref" onClick={()=>{this.selectSpecialEdit(course)}}>Bearbeiten</button>
+            <button className="btnHref" onClick={()=>{this.selectSpecialEdit(course)}}>Bearbeiten</button>
           </div>
         </div>
       )
@@ -159,7 +159,7 @@ class EditKurse extends Component {
   renderEditPopup=()=>{
     return (
       <Dialog open={this.state.editPopupOpen} TransitionComponent={Transition}>
-          <DialogTitle><h5 class="card-title">Einen Kurs bearbeiten</h5></DialogTitle>
+          <DialogTitle><h5 className="card-title">Einen Kurs bearbeiten</h5></DialogTitle>
           <DialogContent>
           <TextField
               margin="dense"
@@ -210,7 +210,7 @@ class EditKurse extends Component {
                     }}
                   />
                   <Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} />
-                  <Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
+                  <Button className="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
                   <br/>
                 </React.Fragment>
               )
@@ -231,9 +231,9 @@ class EditKurse extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button class="btnHref" onClick={this.addLine}>Zeile hinzufügen</Button>
-            <Button class="btnHref" onClick={this.confirmEdit}>Bestätigen</Button>
-            <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" onClick={this.addLine}>Zeile hinzufügen</Button>
+            <Button className="btnHref" onClick={this.confirmEdit}>Bestätigen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -271,7 +271,7 @@ class EditKurse extends Component {
   renderSpecialEditPopup=()=>{
     return (
       <Dialog open={this.state.editSpecialPopupOpen} TransitionComponent={Transition}>
-          <DialogTitle><h5 class="card-title">Einen Kurs bearbeiten</h5></DialogTitle>
+          <DialogTitle><h5 className="card-title">Einen Kurs bearbeiten</h5></DialogTitle>
           <DialogContent>
           <TextField
               margin="dense"
@@ -287,7 +287,7 @@ class EditKurse extends Component {
                 },
               }}
             />
-            <table class="table">
+            <table className="table">
               <tr>
                 <th>Name</th>
                 <th>Anzahl</th>
@@ -353,7 +353,7 @@ class EditKurse extends Component {
                     />
                   </td>
                   <td><Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} /></td>
-                  <td><Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button></td>
+                  <td><Button className="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button></td>
                     <br/>
                   </tr>
                 )
@@ -361,9 +361,9 @@ class EditKurse extends Component {
             </table>
           </DialogContent>
           <DialogActions>
-            <Button class="btnHref" onClick={this.addSpecialLine}>Zeile hinzufügen</Button>
-            <Button class="btnHref" onClick={this.confirmSpecialEdit}>Bestätigen</Button>
-            <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" onClick={this.addSpecialLine}>Zeile hinzufügen</Button>
+            <Button className="btnHref" onClick={this.confirmSpecialEdit}>Bestätigen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -412,7 +412,7 @@ class EditKurse extends Component {
   renderMakeNewPopup=()=>{
     return (
       <Dialog open={this.state.makeNewPopupOpen} TransitionComponent={Transition}>
-        <DialogTitle><h5 class="card-title">Einen Kurs erstellen</h5></DialogTitle>
+        <DialogTitle><h5 className="card-title">Einen Kurs erstellen</h5></DialogTitle>
           <DialogContent>
           <TextField
               margin="dense"
@@ -463,7 +463,7 @@ class EditKurse extends Component {
                     }}
                   />
                   <Checkbox checked={item.belegt} onChange={()=>this.changeCheckBox(i)} />
-                  <Button class="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
+                  <Button className="btnHref" onClick={()=>this.removeOneLine(i)}>X</Button>
                   <br/>
                 </React.Fragment>
           )
@@ -484,9 +484,9 @@ class EditKurse extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button class="btnHref" onClick={this.addLine}>Zeile hinzufügen</Button>
-            <Button class="btnHref" onClick={this.confirmNew}>Bestätigen</Button>
-            <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" onClick={this.addLine}>Zeile hinzufügen</Button>
+            <Button className="btnHref" onClick={this.confirmNew}>Bestätigen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -511,20 +511,20 @@ class EditKurse extends Component {
   render() {     
     return (
       <div className="Home">
-        <div class="page-title">
-          <h1 class="page-title">Admin - Kurse</h1>
+        <div className="page-title">
+          <h1 className="page-title">Admin - Kurse</h1>
         </div>
-        <div class="manage-container">
-          <div class="card" style={{width: "30rem"}}>
-            <div class="card-body">
-            <h2><button onClick={this.selectMakeNew} class="btnHref">Neuen Kurs erstellen</button></h2>
+        <div className="manage-container">
+          <div className="card" style={{width: "30rem"}}>
+            <div className="card-body">
+            <h2><button onClick={this.selectMakeNew} className="btnHref">Neuen Kurs erstellen</button></h2>
             </div>
           </div>
         </div>
-        <section class="card-container">
+        <section className="card-container">
           {this.renderSpecificCard()}
         </section>
-        <section class="card-container">
+        <section className="card-container">
             {this.renderNormalCards()}
         </section>
         {this.renderEditPopup()}

@@ -20,12 +20,12 @@ export default class Home extends Component {
   createPosts=()=>{
     return this.state.posts.map(post=>{
       return (
-        <div class="card" style={{width: "30rem"}}>
-          {post.imgPath && <img src={ post.imgPath } alt={ post.imgName } class="card-img-top" />}
-          <div class="card-body">
-            <h5 class="card-title">{post.header}</h5>
-            <p class="card-text">{post.content}</p>
-            <h6 class="card-subtitle mb-2 text-muted">by {post._creator.username}</h6>
+        <div className="card" style={{width: "30rem"}} key={post._id}>
+          {post.imgPath && <img src={ post.imgPath } alt={ post.imgName } className="card-img-top" />}
+          <div className="card-body">
+            <h5 className="card-title">{post.header}</h5>
+            <p className="card-text">{post.content}</p>
+            <h6 className="card-subtitle mb-2 text-muted">by {post._creator.username}</h6>
           </div>
         </div>
       )
@@ -34,21 +34,21 @@ export default class Home extends Component {
   render() {                
     return (
       <React.Fragment>
-        <div class="page-title">
-          <h1 class="page-title">Willkommen</h1>
+        <div className="page-title">
+          <h1 className="page-title">Willkommen</h1>
         </div>
 
-          <section class="card-container">
+          <section className="card-container">
               {this.createPosts()}
 
           </section>
-          <section class="button-container"> 
-            <a href="/posts" class="btnHref" id="all-posts">Alle Beiträge ansehen</a>
+          <section className="button-container"> 
+            <a href="/posts" className="btnHref" id="all-posts">Alle Beiträge ansehen</a>
           </section>
-          <section class="card-container women-container">
-            <div class="card women-card" style={{width: "20rem"}}>
-              <div class="card-body">
-                <img src="./images/woman.png" alt="Woman" class="card-img-top"/>
+          <section className="card-container women-container">
+            <div className="card women-card" style={{width: "20rem"}}>
+              <div className="card-body">
+                <img src="./images/woman.png" alt="Woman" className="card-img-top"/>
               </div>
             </div>
           </section>

@@ -11,7 +11,6 @@ export default class Atelier extends Component {
   componentDidMount=()=>{
     api.getEquipment()
       .then(equ=>{
-        console.log(equ)
         this.setState({equipment:equ})
       })
       .catch(err=>{console.log(err)})
@@ -19,11 +18,11 @@ export default class Atelier extends Component {
   createEquipmentCards=()=>{
     return this.state.equipment.map(eq=>{
       return(
-            <div class="card" style={{width: "30rem"}} key={eq.name}>
-            {eq.imgPath && <img src={ eq.imgPath } alt={ eq.imgName } class="card-img-top" />}
-              <div class="card-body">
-                <h5 class="card-title">{eq.header}</h5>
-                <p class="card-text">{eq.content}</p>
+            <div className="card" style={{width: "30rem"}} key={eq._id}>
+            {eq.imgPath && <img src={ eq.imgPath } alt={ eq.imgName } className="card-img-top" />}
+              <div className="card-body">
+                <h5 className="card-title">{eq.header}</h5>
+                <p className="card-text">{eq.content}</p>
               </div>
             </div>
       )
@@ -32,22 +31,20 @@ export default class Atelier extends Component {
   render() {                
     return (
       <React.Fragment>
-        <div class="page-title">
-          <h1 class="page-title">Das Atelier</h1>
+        <div className="page-title">
+          <h1 className="page-title">Das Atelier</h1>
         </div>
         <div>
-          <section class="card-container">
-            <div class="card" style={{width: "30rem"}}>
-              <div class="card-body">
+          <section className="card-container">
+            <div className="card" style={{width: "30rem"}}>
+              <div className="card-body">
                 <h2>Unsere Ausstattung:</h2>
               </div>
             </div>
           </section>
         </div>
-        <section class="card-container">
-          <p>
+        <section className="card-container">
             {this.createEquipmentCards()}
-          </p>
         </section>
       </React.Fragment>
     )

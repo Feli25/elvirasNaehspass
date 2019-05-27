@@ -9,17 +9,16 @@ export default class Home extends Component {
   render() {                
     return (
       <React.Fragment>
-        <div class="page-title">
-          <h1 class="page-title">Über uns</h1>
+        <div className="page-title">
+          <h1 className="page-title">Über uns</h1>
         </div>
 
-        <section class="card-container">
-          <div style={{display:"flex"}}>
-            <div class="card about-card">
-              <img src="../images/Elvira.jpg" alt="Elvira Deutges" class="card-img-top img-fluid"/>
-              <div class="card-body">
-                <h5 class="card-title">Elvira Deutges</h5>
-                <p class="card-text about-text">
+        <section className="card-container">
+            <div className="card about-card">
+              <img src="../images/Elvira.jpg" alt="Elvira Deutges" className="card-img-top img-fluid"/>
+              <div className="card-body">
+                <h5 className="card-title">Elvira Deutges</h5>
+                <p className="card-text about-text">
                   geboren: 03.08.1965<br/>
                   Ausbildung:<br/>
                   1982 – 1984 Fachoberschule mit Fachabitur Bekleidung<br/>
@@ -34,11 +33,11 @@ export default class Home extends Component {
                 </p>
               </div>
             </div>
-            <div class="card about-card">
-              <img src="../images/barbara.jpg" alt="Barbara Beckmann" class="card-img-top img-fluid"/>
-              <div class="card-body">
-                <h5 class="card-title">Barbara Beckmann</h5>
-                <p class="card-text about-text">
+            <div className="card about-card">
+              <img src="../images/barbara.jpg" alt="Barbara Beckmann" className="card-img-top img-fluid"/>
+              <div className="card-body">
+                <h5 className="card-title">Barbara Beckmann</h5>
+                <p className="card-text about-text">
                   geboren 12.07.1967<br/>
                   Ausbildung:<br/>
                   1983 – 1985 Ausbildung zur Bekleidungsfertigerin<br/>
@@ -51,7 +50,6 @@ export default class Home extends Component {
                   1992 Ausbildung zur Schnittdirectrice
                 </p>
               </div>
-            </div>
           </div>
         </section>
       </React.Fragment>

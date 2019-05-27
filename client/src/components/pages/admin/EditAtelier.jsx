@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../api';
-import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+import {Dialog, Slide,  DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -69,14 +69,14 @@ class EditAtelier extends Component {
   createDisplay=()=>{
     return this.state.equipment.map(eq=>{
       return(
-          <div class="card" style={{width: "30rem"}}>
+          <div className="card" style={{width: "30rem"}} key={eq._id}>
             {eq.imgPath && 
-            <img src={ eq.imgPath } alt={ eq.imgName } class="card-img-top" />}
-            <div class="card-body">
-              <h5 class="card-title">{eq.header}</h5>
-              <p class="card-text">{eq.content}</p>
-              <button class="btnHref" onClick={()=>this.selectEditOld(eq)}>Bearbeiten</button>
-              <button class="btnHref" onClick={()=>this.onDelete(eq._id)}>Löschen</button>
+            <img src={ eq.imgPath } alt={ eq.imgName } className="card-img-top" />}
+            <div className="card-body">
+              <h5 className="card-title">{eq.header}</h5>
+              <p className="card-text">{eq.content}</p>
+              <button className="btnHref" onClick={()=>this.selectEditOld(eq)}>Bearbeiten</button>
+              <button className="btnHref" onClick={()=>this.onDelete(eq._id)}>Löschen</button>
             </div>
           </div>
       )
@@ -106,9 +106,9 @@ class EditAtelier extends Component {
       <Dialog 
         open={this.state.makeNew}
         TransitionComponent={Transition}>
-          <DialogTitle><h5 class="card-title">Eine Ausstattung hinzufügen</h5></DialogTitle>
+          <DialogTitle><h5 className="card-title">Eine Ausstattung hinzufügen</h5></DialogTitle>
           <DialogContent>
-            <label for="pictureUrl" xl={3}>Add a picture</label>
+            <label xl={3}>Add a picture</label>
             <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
             <TextField
               margin="dense"
@@ -142,8 +142,8 @@ class EditAtelier extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button class="btnHref" onClick={this.confirmNew}>Hinzufügen</Button>
-            <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" onClick={this.confirmNew}>Hinzufügen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -178,10 +178,10 @@ class EditAtelier extends Component {
     return (
       <Dialog open={this.state.editOld}
       TransitionComponent={Transition}>  
-        <DialogTitle><h5 class="card-title">Eine Ausstattung bearbeiten</h5></DialogTitle>
+        <DialogTitle><h5 className="card-title">Eine Ausstattung bearbeiten</h5></DialogTitle>
         <DialogContent>
-          {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName} class="card-img-top"/>} 
-          <label for="pictureUrl" xl={3}>Add a picture</label>
+          {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName} className="card-img-top"/>} 
+          <label xl={3}>Add a picture</label>
           <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
           <TextField
               margin="dense"
@@ -215,8 +215,8 @@ class EditAtelier extends Component {
             />
         </DialogContent>
         <DialogActions>
-          <Button class="btnHref" onClick={this.confirmEdit}>Aktualisieren</Button>
-          <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          <Button className="btnHref" onClick={this.confirmEdit}>Aktualisieren</Button>
+          <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
         </DialogActions>
       </Dialog>
     )
@@ -242,17 +242,17 @@ class EditAtelier extends Component {
   render() {                
     return (
       <div className="Home">
-        <div class="page-title">
-          <h1 class="page-title">Admin - Ausstattung</h1>
+        <div className="page-title">
+          <h1 className="page-title">Admin - Ausstattung</h1>
         </div>
-        <div class="manage-container">
-          <div class="card" style={{width: "30rem"}}>
-            <div class="card-body">
-            <h2><button onClick={this.selectMakeNew} class="btnHref">Neue Ausstattung</button></h2>
+        <div className="manage-container">
+          <div className="card" style={{width: "30rem"}}>
+            <div className="card-body">
+            <h2><button onClick={this.selectMakeNew} className="btnHref">Neue Ausstattung</button></h2>
             </div>
           </div>
         </div>
-        <section class="card-container">
+        <section className="card-container">
             {this.createDisplay()}
         </section>
         {this.renderCreateNewPopup()}

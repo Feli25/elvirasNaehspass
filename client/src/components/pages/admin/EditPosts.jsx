@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../api';
-import { runInThisContext } from 'vm';
-import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+import {Dialog, Slide, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -50,15 +49,15 @@ class EditPosts extends Component {
   displayPosts=()=>{
     return this.state.posts.map(post=>{
       return(
-        <div class="card" style={{width: "30rem"}}>
+        <div className="card" style={{width: "30rem"}} key={post._id}>
           {post.imgPath && 
-          <img src={ post.imgPath } alt={ post.imgName } class="card-img-top" />}
-          <div class="card-body">
-            <h5 class="card-title">{post.header}</h5>
-            <p class="card-text">{post.content}</p>
-            <h6 class="card-subtitle mb-2 text-muted">by {post._creator.username}</h6>
-            <button class="btnHref" onClick={()=>{this.editPost(post)}}>Bearbeiten</button>
-            <button class="btnHref" onClick={()=>{this.deletePost(post._id)}}>Löschen</button>
+          <img src={ post.imgPath } alt={ post.imgName } className="card-img-top" />}
+          <div className="card-body">
+            <h5 className="card-title">{post.header}</h5>
+            <p className="card-text">{post.content}</p>
+            <h6 className="card-subtitle mb-2 text-muted">by {post._creator.username}</h6>
+            <button className="btnHref" onClick={()=>{this.editPost(post)}}>Bearbeiten</button>
+            <button className="btnHref" onClick={()=>{this.deletePost(post._id)}}>Löschen</button>
           </div>
         </div>
       )
@@ -101,9 +100,9 @@ class EditPosts extends Component {
   renderCreateNewPostPopup=()=>{
     return(
       <Dialog open={this.state.newPopupOpen} TransitionComponent={Transition}>
-          <DialogTitle><h5 class="card-title">Einen Post hinzufügen</h5></DialogTitle>
+          <DialogTitle><h5 className="card-title">Einen Post hinzufügen</h5></DialogTitle>
           <DialogContent>
-        <label for="pictureUrl" xl={3}>Add a picture</label>
+        <label xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
           <TextField
               margin="dense"
@@ -137,8 +136,8 @@ class EditPosts extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button class="btnHref" onClick={this.createNewPostConfirm}>Hinzufügen</Button>
-            <Button class="btnHref" onClick={this.cancel}>Abbruch</Button>
+            <Button className="btnHref" onClick={this.createNewPostConfirm}>Hinzufügen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbruch</Button>
           </DialogActions>
       </Dialog>
     )
@@ -171,10 +170,10 @@ class EditPosts extends Component {
   renderEditPostPopup=()=>{
     return(
       <Dialog open={this.state.editPopupOpen} TransitionComponent={Transition}>
-        <DialogTitle><h5 class="card-title">Einen Post bearbeiten</h5></DialogTitle>
+        <DialogTitle><h5 className="card-title">Einen Post bearbeiten</h5></DialogTitle>
         <DialogContent>
-        {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName} class="card-img-top"/>} 
-        <label for="pictureUrl" xl={3}>Add a picture</label>
+        {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName} className="card-img-top"/>} 
+        <label xl={3}>Add a picture</label>
         <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
         <TextField
               margin="dense"
@@ -208,8 +207,8 @@ class EditPosts extends Component {
             />
         </DialogContent>
         <DialogActions>
-          <Button class="btnHref" onClick={this.editPostConfirm}>Bestätigen</Button>
-          <Button class="btnHref" onClick={this.cancel}>Abbruch</Button>
+          <Button className="btnHref" onClick={this.editPostConfirm}>Bestätigen</Button>
+          <Button className="btnHref" onClick={this.cancel}>Abbruch</Button>
         </DialogActions>
       </Dialog>
     )
@@ -234,17 +233,17 @@ class EditPosts extends Component {
   render() {                
     return (
       <div className="Home">
-        <div class="page-title">
-          <h1 class="page-title">Admin - Alle Posts</h1>
+        <div className="page-title">
+          <h1 className="page-title">Admin - Alle Posts</h1>
         </div>
-        <div class="manage-container">
-          <div class="card" style={{width: "30rem"}}>
-            <div class="card-body">
-            <h2><button onClick={this.createNewPost} class="btnHref">Neuen Post erstellen</button></h2>
+        <div className="manage-container">
+          <div className="card" style={{width: "30rem"}}>
+            <div className="card-body">
+            <h2><button onClick={this.createNewPost} className="btnHref">Neuen Post erstellen</button></h2>
             </div>
           </div>
         </div>
-          <section class="card-container">
+          <section className="card-container">
             {this.displayPosts()}
           </section>
         {this.renderEditPostPopup()}

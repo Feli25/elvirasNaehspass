@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../../api';
-import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
+import {Dialog, Slide, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -60,9 +60,9 @@ class EditGalerie extends Component {
   renderCreateNewPopup=()=>{
     return (
       <Dialog open={this.state.makeNew} TransitionComponent={Transition}>
-          <DialogTitle><h5 class="card-title">Ein Galeriebild hinzufügen</h5></DialogTitle>
+          <DialogTitle><h5 className="card-title">Ein Galeriebild hinzufügen</h5></DialogTitle>
           <DialogContent>
-            <label for="pictureUrl" xl={3}>Add a picture</label>
+            <label xl={3}>Add a picture</label>
             <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
               <TextField
                   autoFocus
@@ -81,8 +81,8 @@ class EditGalerie extends Component {
                 />
           </DialogContent>
           <DialogActions>
-            <Button class="btnHref" onClick={this.confirmNew}>Hinzufügen</Button>
-            <Button class="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" onClick={this.confirmNew}>Hinzufügen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -112,12 +112,12 @@ class EditGalerie extends Component {
   createDisplay=()=>{
     return this.state.pictures.map(pic=>{
       return(
-        <div class="card" style={{width: "30rem"}}>
-          <img src={pic.imgPath} alt={pic.header} class="card-img-top"/>
-          <div class="card-body">
-              <p class="card-text">Name: {pic.header}</p>
+        <div className="card" style={{width: "30rem"}} key={pic._id}>
+          <img src={pic.imgPath} alt={pic.header} className="card-img-top"/>
+          <div className="card-body">
+              <p className="card-text">Name: {pic.header}</p>
             
-            <button onClick={()=>this.onDelete(pic._id)} class="btnHref">Delete</button>
+            <button onClick={()=>this.onDelete(pic._id)} className="btnHref">Delete</button>
           </div>
         </div>
       )
@@ -127,17 +127,17 @@ class EditGalerie extends Component {
   render() {                
     return (
       <div className="Home">
-        <div class="page-title">
-          <h1 class="page-title">Admin - Galerie</h1>
+        <div className="page-title">
+          <h1 className="page-title">Admin - Galerie</h1>
         </div>
-        <div class="manage-container">
-          <div class="card" style={{width: "30rem"}}>
-            <div class="card-body">
-            <h2><button onClick={this.selectMakeNew} class="btnHref">Neues Bild hinzufügen</button></h2>
+        <div className="manage-container">
+          <div className="card" style={{width: "30rem"}}>
+            <div className="card-body">
+            <h2><button onClick={this.selectMakeNew} className="btnHref">Neues Bild hinzufügen</button></h2>
             </div>
           </div>
         </div>
-        <section class="card-container">
+        <section className="card-container">
           {this.createDisplay()}
         </section>
         {this.renderCreateNewPopup()}

@@ -22,15 +22,15 @@ export default class Kurse extends Component {
   }
   renderSpecificFlexibleContent=()=>{
     return (
-      <section class="card-container">
+      <section className="card-container">
         {this.state.infoBoxes.filter(course=>{return course._id===this.state.specialInfo}
         ).map(course=>{
           return (
-            <div class="card flexible-card">
-              <div class="card-body">
-                <h5 class="card-title">{course.header}</h5>
+            <div className="card flexible-card">
+              <div className="card-body">
+                <h5 className="card-title">{course.header}</h5>
                 {course.list.length>0 && course.list[0].name!=="" &&
-                <table class="table">
+                <table className="table">
                   <tr>
                     <th>Kurs</th>
                     <th>Terminanzahl</th>
@@ -61,26 +61,26 @@ export default class Kurse extends Component {
   }
   renderNormalFlexibleContent=()=>{
     return (
-      <section class="card-container">
+      <section className="card-container">
         {this.state.infoBoxes.filter(
           course => {return course._id !== this.state.specialInfo}
         ).map(course=>{
           return (
-            <div class="card" style={{width: "30rem"}}>
-              <div class="card-body">
-                <h5 class="card-title">{course.header}</h5>
-                <p class="card-text">{course.content}</p>
+            <div className="card" style={{width: "30rem"}}>
+              <div className="card-body">
+                <h5 className="card-title">{course.header}</h5>
+                <p className="card-text">{course.content}</p>
                 {course.list.length>0 && course.list[0].name!=="" &&<ol>
                   {course.list.map((item)=>{
                     if(item.name!==""){
                       return (
-                        <li>{item.name} {item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
+                        <li key={item.name}>{item.name}{item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
                       )
                     }
                   })}
                 </ol>}
-                <p class="card-text">by {course.teacher}</p>
-                <button class="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
+                <p className="card-text">by {course.teacher}</p>
+                <button className="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
               </div>
             </div>
           )
@@ -91,21 +91,19 @@ export default class Kurse extends Component {
   render() {                
     return (
       <div className="Home">
-        <div class="page-title">
-          <h1 class="page-title">Kurse</h1>
+        <div className="page-title">
+          <h1 className="page-title">Kurse</h1>
         </div>
-        <p>
           <br/>
-          <div class="button-container">
+          <div className="button-container">
             <p style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 17.3.2019 um 11 Uhr statt!!</strong></p>
           </div>
-          <div class="button-container">
-            <a id="class-page-button" class="btnHref" href="/anmeldung/kurse">Buchen</a>
+          <div className="button-container">
+            <a id="class-page-button" className="btnHref" href="/anmeldung/kurse">Buchen</a>
           </div>
             <StaticContentKurse/>
             {this.renderSpecificFlexibleContent()}
             {this.renderNormalFlexibleContent()}
-        </p>
       </div>
     );
   }

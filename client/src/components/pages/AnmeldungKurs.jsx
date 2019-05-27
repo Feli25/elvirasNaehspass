@@ -1,22 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
-import { withStyles } from '@material-ui/core/styles';
-import {FormControl,InputLabel,Select,MenuItem,OutlinedInput} from '@material-ui/core'
-import {Dialog, Slide, DialogContentText, DialogContent, DialogActions, Button, DialogTitle, TextField} from '@material-ui/core'
-
-const styles = theme => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-  },
-  formControl: {
-    margin: theme.spacing.unit,
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing.unit * 2,
-  },
-});
+import {FormControl,InputLabel,Select,OutlinedInput} from '@material-ui/core'
+import {Dialog, DialogContent, DialogActions,  DialogTitle} from '@material-ui/core'
 
 export default class AnmeldungKurs extends Component {
   constructor(props) {
@@ -46,7 +31,6 @@ export default class AnmeldungKurs extends Component {
     var specialInfo = process.env.REACT_APP_API_URL ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
     api.getInfoById(specialInfo)
       .then(result=>{
-        console.log(result)
         var choices = []
         result.list.filter(obj=>{
           return obj.belegt===false
@@ -122,53 +106,52 @@ export default class AnmeldungKurs extends Component {
           <p>Ihre Anmeldung ist erfolgreich eingegangen, vielen Dank dafür! Wir werden uns bald bei Ihnen melden.</p>
         </DialogContent>
         <DialogActions>
-          <a class="btnHref" href="/">Zurück</a>
+          <a className="btnHref" href="/">Zurück</a>
         </DialogActions>
       </Dialog>
     )
   }
   render() {    
-    console.log(this.state.courses)
     var choices =[]
     choices.push(
-      <option value="none">None</option>
+      <option value="none" key="none">None</option>
     )        
     this.state.courses.forEach(course=>{
       choices.push(
-        <option value={course}>{course}</option>
+        <option key={course} value={course}>{course}</option>
       )
     })    
     return (
       <React.Fragment>
-        <div class="page-title">
-          <h1 class="page-title">Anmeldung - Kurs</h1>
+        <div className="page-title">
+          <h1 className="page-title">Anmeldung - Kurs</h1>
         </div>
-        <p>
-          <div class="button-container">
-            <p style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 17.3.2019 um 11 Uhr statt!!</strong></p>
+        <div>
+          <div className="button-container">
+            <span style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 17.3.2019 um 11 Uhr statt!!</strong></span>
           </div>
-          <section class="card-container">
-          <div class="card anmeldung-card">
-            <div class="card-body">
-              <h1 class="card-title">Anmeldung für einen Kurs</h1>
+          <section className="card-container">
+          <div className="card anmeldung-card">
+            <div className="card-body">
+              <h1 className="card-title">Anmeldung für einen Kurs</h1>
               <br/>
 
-                <label for="name">Name <font color="red" size="5px">*</font></label>
+                <label>Name <font color="red" size="5px">*</font></label>
                 <input type="text" name="name" id="name" value={this.state.name} onChange={this.onChange}/>
 
                 <br/><br/>
 
-                <label for="email">E-mail <font color="red" size="5px">*</font></label>
+                <label>E-mail <font color="red" size="5px">*</font></label>
                 <input type="text" name="email" id="email"  value={this.state.email} onChange={this.onChange}/>
 
                 <br/><br/>
 
-                <label for="phone">Telefonnummer <font color="red" size="5px">*</font></label>
+                <label>Telefonnummer <font color="red" size="5px">*</font></label>
                 <input type="text" name="phone" id="phone" value={this.state.phone} onChange={this.onChange}/>
 
                 <br/><br/>
 
-                <label for="adress">Adresse</label>
+                <label>Adresse</label>
                 <textarea type="text" name="adress" id="adress" value={this.state.address} onChange={this.onChange} className="adressSignup"/>
                 
                 <br/><br/>
@@ -176,25 +159,25 @@ export default class AnmeldungKurs extends Component {
                 <input type="checkbox" value={this.state.sharing} name="sharingBox" onClick={this.onCheckBoxChange}/> Ich teile mir den Kurs mit:
                 {this.state.sharing && <React.Fragment>
                 <br/>
-                <label for="shareName">Name <font color="red" size="5px">*</font></label>
+                <label>Name <font color="red" size="5px">*</font></label>
                 <input type="text" name="shareName" id="shareName" value={this.state.shareName} onChange={this.onChange}/>
                 <br/>
-                <label for="shareEmail">E-mail <font color="red" size="5px">*</font></label>
+                <label>E-mail <font color="red" size="5px">*</font></label>
                 <input type="text" name="shareEmail" id="shareEmail" value={this.state.shareEmail} onChange={this.onChange}/>
                 </React.Fragment>}
                 <br/><br/>
 
-                <label for="choice1">Erste Wahl <font color="red" size="5px">*</font></label>
+                <label>Erste Wahl <font color="red" size="5px">*</font></label>
                 <select name="choice1" id="choice1" onChange={this.onChange}>
                   {choices}
                 </select>
                 <br/>
-                <label for="choice2">Zweite Wahl (optional)</label>
+                <label >Zweite Wahl (optional)</label>
                 <select name="choice2" id="choice2" onChange={this.onChange}>
                   {choices}
                 </select>
                 <br/>
-                <label for="choice3">Dritte Wahl (optional)</label>
+                <label>Dritte Wahl (optional)</label>
                 <select name="choice3" id="choice3" onChange={this.onChange}>
                   {choices}
                 </select>
@@ -202,29 +185,27 @@ export default class AnmeldungKurs extends Component {
 
                 <br/><br/>
 
-                <label for="message">Weitere Mitteilung</label>
+                <label>Weitere Mitteilung</label>
                 <textarea type="text" name="message" id="message" value={this.state.message} onChange={this.onChange} className="textareSignup"/>
 
                 <br/><br/>
                 {this.state.errorMessage!==null && 
-                <div class="error-message">{ this.state.errorMessage }</div>}
+                <div className="error-message">{ this.state.errorMessage }</div>}
 
-                <button class="btnAll btn1 anmelden" onClick={this.submitAnmeldung}>Anmelden</button>
+                <button className="btnAll btn1 anmelden" onClick={this.submitAnmeldung}>Anmelden</button>
                 <br/>
             </div>
           </div>
-          <div class="card" style={{width: "20rem"}}>
-            <div class="card-body">
+          <div className="card" style={{width: "20rem"}}>
+            <div className="card-body">
               <img src="https://static.wixstatic.com/media/591c392b8ecd50d325e1041d0411bc94.jpg/v1/fill/w_166,h_164,al_c,q_80,usm_0.66_1.00_0.01/591c392b8ecd50d325e1041d0411bc94.webp"
-                alt="Nähkurs" class="card-img-top"/>
+                alt="Nähkurs" className="card-img-top"/>
             </div>
           </div>
           </section>
-        </p>
+        </div>
         {this.renderSuccessPopup()}
       </React.Fragment>
     );
   }
 }
-
-// export default withStyles(styles)(AnmeldungKurs);

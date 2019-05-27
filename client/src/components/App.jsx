@@ -25,7 +25,6 @@ import EditGalerie from './pages/admin/EditGalerie';
 import Signup from './pages/auth/Signup';
 
 import api from '../api';
-import logo from '../logo.svg';
 
 export default class App extends Component {
 
@@ -36,16 +35,12 @@ export default class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="header-container">
-          
-        </header>
-        <body>
         <section id="header-container">
           {!api.isLoggedIn() &&
-          <a class="login-logout" href="/login">Login</a>
+          <a className="login-logout" href="/login">Login</a>
           }
           {api.isLoggedIn() &&
-          <a class="login-logout" href="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</a>
+          <a className="login-logout" href="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</a>
           }
           <div id="header">
 
@@ -57,47 +52,47 @@ export default class App extends Component {
             </div>
             </div>
             <div>
-            <nav class="navbar navbar-expand-md navbar-light bg-light">
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+            <nav className="navbar navbar-expand-md navbar-light bg-light">
+              <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
                 aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span className="navbar-toggler-icon"></span>
               </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item active">
-                    <a class="nav-style" href="/">Home <span class="sr-only">(current)</span></a>
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                  <li className="nav-item active">
+                    <a className="nav-style" href="/">Home <span className="sr-only">(current)</span></a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-style" href="/naehkurse">Nähkurse</a>
+                  <li className="nav-item">
+                    <a className="nav-style" href="/naehkurse">Nähkurse</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-style" href="/atelier">Das Atelier</a>
+                  <li className="nav-item">
+                    <a className="nav-style" href="/atelier">Das Atelier</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-style" href="/about">Über uns</a>
+                  <li className="nav-item">
+                    <a className="nav-style" href="/about">Über uns</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-style" href="/galerie">Galerie</a>
+                  <li className="nav-item">
+                    <a className="nav-style" href="/galerie">Galerie</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-style" href="/anmeldung">Anmeldung</a>
+                  <li className="nav-item">
+                    <a className="nav-style" href="/anmeldung">Anmeldung</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-style" href="/kontakt">Kontakt</a>
+                  <li className="nav-item">
+                    <a className="nav-style" href="/kontakt">Kontakt</a>
                   </li>
                   {!api.isLoggedIn() &&
-                  <li class="nav-item" id="login-nav">
-                    <a class="nav-style" href="/login">Login</a>
+                  <li className="nav-item" id="login-nav">
+                    <a className="nav-style" href="/login">Login</a>
                   </li>
                   }
                   {api.isLoggedIn() &&
-                  <li class="nav-item" id="logout-nav">
-                    <a class="nav-item" href="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</a>
+                  <li className="nav-item" id="logout-nav">
+                    <a className="nav-item" href="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</a>
                   </li>
                   }
                   {api.isLoggedIn() &&
-                  <li class="nav-item">
-                    <a class="nav-style" href="/admin">Admin Page</a>
+                  <li className="nav-item">
+                    <a className="nav-style" href="/admin">Admin Page</a>
                   </li>
                   }
                 </ul>
@@ -142,9 +137,6 @@ export default class App extends Component {
           <a className="navbar-brand" href="/kontakt">Kontakt</a>
           <p>© created by Emina and Feli</p>
         </footer>
-        </body>
-        
-        
       </div>
     );
   }
