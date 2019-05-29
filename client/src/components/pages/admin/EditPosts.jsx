@@ -26,6 +26,8 @@ class EditPosts extends Component {
       editPopupOpen:false,
       newPopupOpen:false,
       selectedPost:null,
+      deleteConfirm:false,
+      deleteId:"",
 
       header:"",
       content:"",
@@ -57,19 +59,42 @@ class EditPosts extends Component {
             <p className="card-text">{post.content}</p>
             <h6 className="card-subtitle mb-2 text-muted">by {post._creator.username}</h6>
             <button className="btnHref" onClick={()=>{this.editPost(post)}}>Bearbeiten</button>
-            <button className="btnHref" onClick={()=>{this.deletePost(post._id)}}>Löschen</button>
+            <button className="btnHref" onClick={()=>{this.deleteConfirm(post._id)}}>Löschen</button>
           </div>
         </div>
       )
     })
   }
-
-  deletePost=(id)=>{
-    api.deletePost(id)
-      .then(post=>{
+  deleteConfirm=(id)=>{
+    this.setState({
+      deleteConfirm:true,
+      deleteId:id,
+    })
+  }
+  onDelete=()=>{
+    api.deletePost(this.state.deleteId)
+      .then(response=>{
+        console.log(response)
+        this.cancel()
         this.updateView()
       })
       .catch(err=>{console.log(err)})
+  }
+  confirmDeletePopup=()=>{
+    return(
+      <Dialog 
+        open={this.state.deleteConfirm}
+        TransitionComponent={Transition}>
+          <DialogTitle><h5 className="card-title">Sicher?</h5></DialogTitle>
+          <DialogContent>
+            <p>Dass du diesen Post löschen möchtest?</p>
+          </DialogContent>
+          <DialogActions>
+            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          </DialogActions>
+      </Dialog>
+    )
   }
   handleChange=(e)=>{
     this.setState({
@@ -85,7 +110,9 @@ class EditPosts extends Component {
     })
   }
   cancel=()=>{
-    this.setState({editPopupOpen:false, newPopupOpen:false})
+    this.setState({editPopupOpen:false, newPopupOpen:false,
+      deleteConfirm:false,
+      deleteId:""})
   }
 
   createNewPost=()=>{
@@ -248,6 +275,7 @@ class EditPosts extends Component {
           </section>
         {this.renderEditPostPopup()}
         {this.renderCreateNewPostPopup()}
+        {this.confirmDeletePopup()}
       </div>
     );
   }

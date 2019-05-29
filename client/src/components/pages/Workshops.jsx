@@ -56,7 +56,7 @@ export default class Home extends Component {
           <div className="card-container">
             <div className="card book-workshop" style={{width: "30rem"}}>
               <div className="card-body">
-                <a href="/anmeldung/workshops">Einen Workshop buchen</a>
+                <a href="/anmeldung/workshop">Einen Workshop buchen</a>
               </div>
             </div>
           </div>

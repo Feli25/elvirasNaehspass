@@ -206,6 +206,12 @@ export default {
       .catch(errHandler)
     }
   },
+  deleteInfo(id){
+    return service 
+      .get("/info/delete/"+id)
+      .then(res=>res.data)
+      .catch(errHandler)
+  },
 
   getEquipment(){
     return service

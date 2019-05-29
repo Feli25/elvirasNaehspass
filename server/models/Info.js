@@ -6,7 +6,7 @@ const infoSchema = new Schema({
   content: String,
   // list: {type:Array, defaul:[]},
   list: [{name:String,belegt:Boolean}],
-  category: { type: String, enum: ["KURSE", "WORKSHOPS"], default: "KURSE" },
+  category: { type: String, enum: ["KURSE", "WORKSHOPS","TABLE"], default: "KURSE" },
   teacher:{type:String}
   // imgPath: String,
   // imgName: String,

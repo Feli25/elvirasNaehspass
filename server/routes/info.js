@@ -21,6 +21,14 @@ router.get('/workshops', (req,res,next)=>{
   .catch(err => next(err))
 })
 
+router.get('/table', (req,res,next)=>{
+  Info.find({ category: "TABLE" })
+  .then(info =>{
+    res.json(info)
+  })
+  .catch(err => next(err))
+})
+
 // router.post('/new-pic',  parser.single('picture'),(req,res,next)=>{
 //   let { header, content, category, list } = req.body
 //   let file = req.file
@@ -113,6 +121,19 @@ router.post('/edit/:id', (req,res,next)=>{
       })
     })
     .catch(err=>{console.log(err)})
+})
+
+router.get('/delete/:id', (req,res,next)=>{
+  let id = req.params.id
+      Info.findByIdAndDelete(id)
+      .then(sth=>{
+        res.json({
+          success:true
+        })
+      })
+      .catch(err=>{
+        console.log(err)
+      })
 })
 
 

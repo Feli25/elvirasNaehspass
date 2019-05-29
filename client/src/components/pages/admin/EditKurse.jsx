@@ -26,32 +26,37 @@ class EditKurse extends Component {
       editPopupOpen:false,
       editSpecialPopupOpen:false,
       makeNewPopupOpen:false,
+      deleteConfirm:false,
+      deleteId:"",
       id:null,
       
       header:"",
       content:"",
       list:[],
       teacher:"",
-      specialInfo:""
+      specialInfo:[]
     }
   }
   componentDidMount=()=>{
-    this.setState({
-      specialInfo: process.env.REACT_APP_API_URL ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
-    })
+    // this.setState({
+    //   specialInfo: process.env.REACT_APP_API_URL ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
+    // })
     this.updateView()
   }
   updateView=()=>{
     api.getInfo("kurse")
       .then(kurse=>{
         this.setState({courses:kurse})
-      })
+        api.getInfo("table")
+          .then(table=>{
+            this.setState({specialInfo:table})
+          })
+          .catch(err=>console.log(err))
+    })
       .catch(err=>console.log(err))
   }
   renderNormalCards=()=>{
-    return this.state.courses.filter(
-      course => {return course._id !== this.state.specialInfo}
-    ).map(course=>{
+    return this.state.courses.map(course=>{
       return (
         <div className="card" style={{width: "30rem"}} key={course._id}>
           <div className="card-body">
@@ -68,15 +73,45 @@ class EditKurse extends Component {
             </ol>}
             <p className="card-text">by {course.teacher}</p>
             <button className="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
+            <button className="btnHref" onClick={()=>{this.deleteConfirm(course._id)}}>Löschen</button>
           </div>
         </div>
       )
     })
   }
+  deleteConfirm=(id)=>{
+    this.setState({
+      deleteConfirm:true,
+      deleteId:id,
+    })
+  }
+  confirmDeletePopup=()=>{
+    return(
+      <Dialog 
+        open={this.state.deleteConfirm}
+        TransitionComponent={Transition}>
+          <DialogTitle><h5 className="card-title">Sicher?</h5></DialogTitle>
+          <DialogContent>
+            <p>Dass du diesen Kurs löschen möchtest?</p>
+          </DialogContent>
+          <DialogActions>
+            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          </DialogActions>
+      </Dialog>
+    )
+  }
+  onDelete=()=>{
+    api.deleteInfo(this.state.deleteId)
+      .then(response=>{
+        console.log(response)
+        this.cancel()
+        this.updateView()
+      })
+      .catch(err=>{console.log(err)})
+  }
   renderSpecificCard=()=>{
-    return this.state.courses.filter(
-      course=>{return course._id===this.state.specialInfo}
-    ).map(course=>{
+    return this.state.specialInfo.map(course=>{
       return (
         <div className="card flexible-card">
           <div className="card-body">
@@ -113,7 +148,9 @@ class EditKurse extends Component {
     this.setState({
       editPopupOpen:false,
       makeNewPopupOpen:false,
-      editSpecialPopupOpen:false
+      editSpecialPopupOpen:false,
+      deleteConfirm:false,
+      deleteId:""
     })
   }
 
@@ -388,7 +425,7 @@ class EditKurse extends Component {
       header:this.state.header,
       content:"platzhalter",
       list:this.state.list.length!==0 ? this.state.list:[{name:"$$",belegt:false}],
-      category:"KURSE",
+      category:"TABLE",
       teacher:"platzhalter"
     }
     api.updateInfo(this.state.id,data)
@@ -530,6 +567,7 @@ class EditKurse extends Component {
         {this.renderEditPopup()}
         {this.renderSpecialEditPopup()}
         {this.renderMakeNewPopup()}
+        {this.confirmDeletePopup()}
       </div>
     );
   }

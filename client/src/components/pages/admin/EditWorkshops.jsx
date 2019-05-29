@@ -26,6 +26,8 @@ class EditWorkshop extends Component {
       editPopupOpen:false,
       makeNewPopupOpen:false,
       id:null,
+      deleteConfirm:false,
+      deleteId:"",
 
       header:"",
       content:"",
@@ -59,16 +61,50 @@ class EditWorkshop extends Component {
             </ol>}
             <p className="card-text">by {course.teacher}</p>
             <button className="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
+            <button className="btnHref" onClick={()=>{this.deleteConfirm(course._id)}}>Löschen</button>
           </div>
         </div>
       )
     })
   }
-  
+  deleteConfirm=(id)=>{
+    this.setState({
+      deleteConfirm:true,
+      deleteId:id,
+    })
+  }
+  confirmDeletePopup=()=>{
+    return(
+      <Dialog 
+        open={this.state.deleteConfirm}
+        TransitionComponent={Transition}>
+          <DialogTitle><h5 className="card-title">Sicher?</h5></DialogTitle>
+          <DialogContent>
+            <p>Dass du diesen Workshop löschen möchtest?</p>
+          </DialogContent>
+          <DialogActions>
+            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          </DialogActions>
+      </Dialog>
+    )
+  }
+  onDelete=()=>{
+    api.deleteInfo(this.state.deleteId)
+      .then(response=>{
+        console.log(response)
+        this.cancel()
+        this.updateView()
+      })
+      .catch(err=>{console.log(err)})
+  }
+
   cancel=()=>{
     this.setState({
       editPopupOpen:false,
-      makeNewPopupOpen:false
+      makeNewPopupOpen:false,
+      deleteConfirm:false,
+      deleteId:""
     })
   }
 
@@ -335,6 +371,7 @@ class EditWorkshop extends Component {
         </section>
         {this.renderEditPopup()}
         {this.renderMakeNewPopup()}
+        {this.confirmDeletePopup()}
       </div>
     );
   }

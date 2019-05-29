@@ -25,6 +25,8 @@ class EditAtelier extends Component {
       equipment:[],
       makeNew:false,
       editOld:false,
+      deleteConfirm:false,
+      deleteId:"",
       selectedOld:"",
 
       header:"",
@@ -55,6 +57,8 @@ class EditAtelier extends Component {
     this.setState({
       makeNew:false,
       editOld:false,
+      deleteConfirm:false,
+      deleteId:"",
       selectedOld:""})
   }
   handleFileChange=(e)=>{
@@ -76,20 +80,44 @@ class EditAtelier extends Component {
               <h5 className="card-title">{eq.header}</h5>
               <p className="card-text">{eq.content}</p>
               <button className="btnHref" onClick={()=>this.selectEditOld(eq)}>Bearbeiten</button>
-              <button className="btnHref" onClick={()=>this.onDelete(eq._id)}>Löschen</button>
+              <button className="btnHref" onClick={()=>this.deleteConfirm(eq._id)}>Löschen</button>
             </div>
           </div>
       )
     })
   }
 
-  onDelete=(id)=>{
-    api.deleteEquipment(id)
+  deleteConfirm=(id)=>{
+    this.setState({
+      deleteConfirm:true,
+      deleteId:id,
+    })
+  }
+  onDelete=()=>{
+    api.deleteEquipment(this.state.deleteId)
       .then(response=>{
         console.log(response)
+        this.cancel()
         this.updateData()
       })
       .catch(err=>{console.log(err)})
+  }
+
+  confirmDeletePopup=()=>{
+    return(
+      <Dialog 
+        open={this.state.deleteConfirm}
+        TransitionComponent={Transition}>
+          <DialogTitle><h5 className="card-title">Sicher?</h5></DialogTitle>
+          <DialogContent>
+            <p>Dass du diese Ausstattung löschen möchtest?</p>
+          </DialogContent>
+          <DialogActions>
+            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          </DialogActions>
+      </Dialog>
+    )
   }
 
   selectMakeNew=()=>{
@@ -257,6 +285,7 @@ class EditAtelier extends Component {
         </section>
         {this.renderCreateNewPopup()}
         {this.renderEditOldPopup()}
+        {this.confirmDeletePopup()}
       </div>
     );
   }

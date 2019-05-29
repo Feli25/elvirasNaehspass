@@ -7,24 +7,28 @@ export default class Kurse extends Component {
     super(props)
     this.state = {
       infoBoxes:[],
-      specialInfo:""
+      specialInfo:[]
     }
   }
   componentDidMount(){
-    this.setState({
-      specialInfo: process.env.REACT_APP_API_URL ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
-    })
+    // this.setState({
+    //   specialInfo: process.env.REACT_APP_API_URL ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
+    // })
     api.getInfo("kurse")
       .then(kurse=>{
         this.setState({infoBoxes:kurse})
+        api.getInfo("table")
+          .then(table=>{
+            this.setState({specialInfo:table})
+          })
+          .catch(err=>console.log(err))
       })
       .catch(err=>console.log(err))
   }
   renderSpecificFlexibleContent=()=>{
     return (
       <section className="card-container">
-        {this.state.infoBoxes.filter(course=>{return course._id===this.state.specialInfo}
-        ).map(course=>{
+        {this.state.specialInfo.map(course=>{
           return (
             <div className="card flexible-card">
               <div className="card-body">
@@ -62,9 +66,7 @@ export default class Kurse extends Component {
   renderNormalFlexibleContent=()=>{
     return (
       <section className="card-container">
-        {this.state.infoBoxes.filter(
-          course => {return course._id !== this.state.specialInfo}
-        ).map(course=>{
+        {this.state.infoBoxes.map(course=>{
           return (
             <div className="card" style={{width: "30rem"}}>
               <div className="card-body">
@@ -80,7 +82,6 @@ export default class Kurse extends Component {
                   })}
                 </ol>}
                 <p className="card-text">by {course.teacher}</p>
-                <button className="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
               </div>
             </div>
           )
@@ -95,11 +96,11 @@ export default class Kurse extends Component {
           <h1 className="page-title">Kurse</h1>
         </div>
           <br/>
-          <div className="button-container">
+          {/* <div className="button-container">
             <p style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 17.3.2019 um 11 Uhr statt!!</strong></p>
-          </div>
+          </div> */}
           <div className="button-container">
-            <a id="class-page-button" className="btnHref" href="/anmeldung/kurse">Buchen</a>
+            <a id="class-page-button" className="btnHref" href="/anmeldung/kurse">Einen Kurs buchen</a>
           </div>
             <StaticContentKurse/>
             {this.renderSpecificFlexibleContent()}

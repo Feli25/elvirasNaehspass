@@ -32,11 +32,12 @@ export default class AnmeldungKurs extends Component {
     }
   }
   componentDidMount=()=>{
-    var specialInfo = process.env.REACT_APP_API_URL ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
-    api.getInfoById(specialInfo)
+    // var specialInfo = process.env.REACT_APP_API_URL ? "5cea38ad0990e07b27e88019": "5cea38bb84c7e20021f3b247"
+    api.getInfo("table")
+        // api.getInfoById(specialInfo)
       .then(result=>{
         var choices = []
-        result.list.filter(obj=>{
+        result[0].list.filter(obj=>{
           return obj.belegt===false
         }).forEach(obj=>{
           if(obj.name!==""){

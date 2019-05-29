@@ -19,6 +19,8 @@ class EditGalerie extends Component {
       pictures:[],
       makeNew:false,
       editOld:false,
+      deleteConfirm:false,
+      deleteId:"",
       file:null,
       header:""
     }
@@ -38,6 +40,8 @@ class EditGalerie extends Component {
     this.setState({
       makeNew:false,
       editOld:false,
+      deleteConfirm:false,
+      deleteId:"",
       selectedOld:""})
   }
   handleFileChange=(e)=>{
@@ -100,13 +104,37 @@ class EditGalerie extends Component {
       .catch(er=>console.log(er))
   }
 
-  onDelete=(id)=>{
+  deleteConfirm=(id)=>{
+    console.log("confirm")
+    this.setState({
+      deleteConfirm:true,
+      deleteId:id,
+    })
+  }
+  onDelete=()=>{
     //delete in Backend
-    api.deleteGaleriePicture(id)
+    api.deleteGaleriePicture(this.state.deleteId)
       .then(sth=>
-        this.updateData()
+        {this.cancel()
+        this.updateData()}
       )
       .catch(err=>console.log(err))
+  }
+  confirmDeletePopup=()=>{
+    return(
+      <Dialog 
+        open={this.state.deleteConfirm}
+        TransitionComponent={Transition}>
+          <DialogTitle><h5 className="card-title">Sicher?</h5></DialogTitle>
+          <DialogContent>
+            <p>Dass du dieses Bild löschen möchtest?</p>
+          </DialogContent>
+          <DialogActions>
+            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          </DialogActions>
+      </Dialog>
+    )
   }
 
   createDisplay=()=>{
@@ -117,7 +145,7 @@ class EditGalerie extends Component {
           <div className="card-body">
               <p className="card-text">Name: {pic.header}</p>
             
-            <button onClick={()=>this.onDelete(pic._id)} className="btnHref">Delete</button>
+            <button onClick={()=>this.deleteConfirm(pic._id)} className="btnHref">Delete</button>
           </div>
         </div>
       )
@@ -141,6 +169,7 @@ class EditGalerie extends Component {
           {this.createDisplay()}
         </section>
         {this.renderCreateNewPopup()}
+        {this.confirmDeletePopup()}
       </div>
     );
   }
