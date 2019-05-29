@@ -234,7 +234,8 @@ class EditWorkshop extends Component {
       header:this.state.header,
       content:this.state.content,
       list:this.state.list,
-      category:"WORKSHOPS"
+      category:"WORKSHOPS",
+      teacher:this.state.teacher
     }
     api.updateInfo(this.state.id,data)
       .then(res=>{
