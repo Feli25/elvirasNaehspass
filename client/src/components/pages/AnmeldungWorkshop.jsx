@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import api from '../../api';
-import {Dialog,  DialogContent, DialogActions, DialogTitle} from '@material-ui/core'
+import {Dialog,  DialogContent, DialogActions, DialogTitle,Slide,Button} from '@material-ui/core'
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default class AnmeldungWorkshop extends Component {
   constructor(props) {
@@ -14,7 +17,8 @@ export default class AnmeldungWorkshop extends Component {
       message:"",
       choice:"none",
       errorMessage:null,
-      success:false
+      success:false,
+      error:false
     }
   }
   componentDidMount=()=>{
@@ -40,14 +44,14 @@ export default class AnmeldungWorkshop extends Component {
           this.setState({success:true})
         })
         .catch(err=>{console.log(err)
-          alert("Es ist etwas schief gelaufen, bitte versuchen Sie es später nochmal oder kontaktieren uns.")})
+            this.setState({error:true})})
     } else {
       alert("Bitte alle Pflichfelder ausfüllen")
     }
   }
   renderSuccessPopup=()=>{
     return (
-      <Dialog open={this.state.success}>
+      <Dialog open={this.state.success} TransitionComponent={Transition}>
         <DialogTitle>Vielen Dank!</DialogTitle>
         <DialogContent>
           <p>Ihre Anmeldung ist erfolgreich eingegangen, vielen Dank dafür! Wir werden uns bald bei Ihnen melden.</p>
@@ -57,6 +61,28 @@ export default class AnmeldungWorkshop extends Component {
         </DialogActions>
       </Dialog>
     )
+  }
+  renderErrorPopup=()=>{
+    return(
+    <Dialog open={this.state.error} TransitionComponent={Transition}>
+        <DialogTitle><h5 className="card-title">Ohje!</h5></DialogTitle>
+        <DialogContent>
+          {/* <DialogContentText> */}
+            <p>Da ist wohl was schief gelaufen! Überprüfen Sie doch bitte Ihre Internetverbindung und probieren es später nochmal.<br/>
+            Sollte es trotzdem nicht gehen kontaktieren Sie uns doch bitte direkt.</p>
+          {/* </DialogContentText> */}
+        </DialogContent>
+        <DialogActions>
+          <Button className="btnHref" onCLick={this.cancel}>Zurück</Button>
+        </DialogActions>  
+    </Dialog>)
+  }
+  cancel=()=>{
+    this.setState({
+      errorMessage:null,
+      success:false,
+      error:false
+    })
   }
   render() {    
     var choices =[]
@@ -133,6 +159,7 @@ export default class AnmeldungWorkshop extends Component {
           </div>
           </section>
         {this.renderSuccessPopup()}
+        {this.renderErrorPopup()}
       </React.Fragment>
     );
   }

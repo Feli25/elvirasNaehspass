@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import {FormControl,InputLabel,Select,OutlinedInput} from '@material-ui/core'
-import {Dialog, DialogContent, DialogActions,  DialogTitle} from '@material-ui/core'
+import {Dialog, DialogContent, DialogActions,  DialogTitle,Slide,Button} from '@material-ui/core'
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default class AnmeldungKurs extends Component {
   constructor(props) {
@@ -24,7 +27,8 @@ export default class AnmeldungKurs extends Component {
       choice3:"none",
 
       errorMessage:null,
-      success:false
+      success:false,
+      error:false
     }
   }
   componentDidMount=()=>{
@@ -93,7 +97,7 @@ export default class AnmeldungKurs extends Component {
           this.setState({success:true})
         })
         .catch(err=>{console.log(err)
-          alert("Es ist etwas schief gelaufen, bitte versuchen Sie es später nochmal oder kontaktieren uns.")})
+          this.setState({error:true})})
     } else {
       alert("Bitte alle Pflichfelder ausfüllen")
     }
@@ -110,6 +114,28 @@ export default class AnmeldungKurs extends Component {
         </DialogActions>
       </Dialog>
     )
+  }
+  renderErrorPopup=()=>{
+    return(
+    <Dialog open={this.state.error} TransitionComponent={Transition}>
+        <DialogTitle><h5 className="card-title">Ohje!</h5></DialogTitle>
+        <DialogContent>
+          {/* <DialogContentText> */}
+            <p>Da ist wohl was schief gelaufen! Überprüfen Sie doch bitte Ihre Internetverbindung und probieren es später nochmal.<br/>
+            Sollte es trotzdem nicht gehen kontaktieren Sie uns doch bitte direkt.</p>
+          {/* </DialogContentText> */}
+        </DialogContent>
+        <DialogActions>
+          <Button className="btnHref" onCLick={this.cancel}>Zurück</Button>
+        </DialogActions>  
+    </Dialog>)
+  }
+  cancel=()=>{
+    this.setState({
+      errorMessage:null,
+      success:false,
+      error:false
+    })
   }
   render() {    
     var choices =[]
@@ -205,6 +231,7 @@ export default class AnmeldungKurs extends Component {
           </section>
         </div>
         {this.renderSuccessPopup()}
+        {this.renderErrorPopup()}
       </React.Fragment>
     );
   }

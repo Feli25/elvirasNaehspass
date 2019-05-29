@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 // import { api } from 'cloudinary/lib/cloudinary';
 import api from '../../api';
-
+import {Dialog, Slide, DialogContent, DialogActions, Button, DialogTitle, TextField, DialogContentText} from '@material-ui/core'
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default class Home extends Component {
   constructor(props) {
@@ -11,6 +14,8 @@ export default class Home extends Component {
       email:"",
       subject:"",
       message:"",
+      success:false,
+      error:false,
       errorMessage:null
     }
   }
@@ -20,11 +25,54 @@ export default class Home extends Component {
     })
   }
   submitContact=()=>{
-    api.sendKontakt(this.state)
+    if(this.state.name!==""
+    &&this.state.email!==""
+    &&this.state.message!==""
+    &&this.state.subject!==""){
+      api.sendKontakt(this.state)
       .then(sth=>{
-        this.setState({errorMessage:"Success"})
+        this.setState({success:true,errorMessage:"Success"})
       })
-      .catch(err=>{console.log(err)})
+      .catch(err=>{console.log(err)
+        this.setState({error:true})})
+    }
+    else {
+      alert("Bitte alle Felder ausfüllen!")
+    }
+  }
+  cancel=()=>{
+      this.setState({success:false,
+        error:false,
+        errorMessage:null})
+  }
+  renderSuccessPopup=()=>{
+    return(
+    <Dialog open={this.state.success} TransitionComponent={Transition}>
+        <DialogTitle><h5 className="card-title">Vielen Dank!</h5></DialogTitle>
+        <DialogContent>
+          {/* <DialogContentText> */}
+            <p>Wir haben Ihre Anfrage erhalten und setzen uns möglichst bald mit Ihnen in Verbindung!!</p>
+          {/* </DialogContentText> */}
+        </DialogContent>
+        <DialogActions>
+          <a className="btnHref" href="/">Zurück</a>  
+        </DialogActions> 
+    </Dialog>)
+  }
+  renderErrorPopup=()=>{
+    return(
+    <Dialog open={this.state.error} TransitionComponent={Transition}>
+        <DialogTitle><h5 className="card-title">Ohje!</h5></DialogTitle>
+        <DialogContent>
+          {/* <DialogContentText> */}
+            <p>Da ist wohl was schief gelaufen! Überprüfen Sie doch bitte Ihre Internetverbindung und probieren es später nochmal.<br/>
+            Sollte es trotzdem nicht gehen kontaktieren Sie uns doch bitte direkt.</p>
+          {/* </DialogContentText> */}
+        </DialogContent>
+        <DialogActions>
+          <Button className="btnHref" onCLick={this.cancel}>Zurück</Button>
+        </DialogActions>  
+    </Dialog>)
   }
   render() {                
     return (
@@ -50,7 +98,7 @@ export default class Home extends Component {
               <div className="card-body">
                 <h1>Kontaktformular:</h1>
                 <br/>
-                {this.state.errorMessage!==null && <div className="error-message">{ this.state.errorMessage }</div>}
+                {/* {this.state.errorMessage!==null && <div className="error-message">{ this.state.errorMessage }</div>} */}
                   <input type="text" name="name" id="name" placeholder="Name*" size="30" value={this.state.name} onChange={(e)=>this.onChange(e)}/><br/>
                   <input type="text" name="email" id="email" placeholder="Email*" size="30" value={this.state.email} onChange={(e)=>this.onChange(e)}/><br/>
                   <input type="text" name="subject" id="subject" placeholder="Betreff" size="30" value={this.state.subject} onChange={(e)=>this.onChange(e)}/><br/>
@@ -60,6 +108,8 @@ export default class Home extends Component {
               </div>
             </div>
           </section>
+          {this.renderErrorPopup()}
+          {this.renderSuccessPopup()}
       </React.Fragment>
     );
   }
