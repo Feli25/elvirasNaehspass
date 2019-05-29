@@ -15,7 +15,7 @@ let transporter = nodemailer.createTransport({
 
 router.post('/kontakt', (req,res,next)=>{
   var mailOptions = {
-    to: "deutges.ironhack@gmail.com",//'elvirasnaehspass@gmail.com',
+    to: "elvirasnaehspass@gmail.com",
     from: '"Elviras Nähspass Website"',
     subject: 'Betreff: ' + req.body.subject,
     text: 'Jemand auf der neuen Website hat ein Kontaktformular geschickt!\n\n' +
