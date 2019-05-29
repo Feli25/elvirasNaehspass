@@ -39,6 +39,7 @@ export default class AnmeldungWorkshop extends Component {
     && this.state.phone!==""
     && this.state.choice!=="none"
     ) {
+      console.log(this.state)
       api.sendAnmeldung(this.state,"workshop")
         .then(response=>{
           this.setState({success:true})
@@ -85,6 +86,7 @@ export default class AnmeldungWorkshop extends Component {
     })
   }
   render() {    
+    console.log(this.state.courses)
     var choices =[]
     choices.push(
       <option value="none" key="none">None</option>
@@ -100,7 +102,7 @@ export default class AnmeldungWorkshop extends Component {
       return ret
     }).forEach(course=>{
       choices.push(
-        <option key={course.header} value={course.header}>{course.header}</option>
+        <option key={course.header} value={course._id}>{course.header}</option>
       )
     })              
     return (

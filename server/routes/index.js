@@ -2,7 +2,7 @@ const express = require('express');
 const { isLoggedIn } = require('../middlewares')
 const router = express.Router();
 const nodemailer = require('nodemailer');
-
+const Info = require('../models/Info')
 
 
 let transporter = nodemailer.createTransport({
@@ -30,7 +30,7 @@ router.post('/kontakt', (req,res,next)=>{
 
 router.post("/anmeldung/:type", (req,res,next)=>{
   var html = `<h1>Die Anfrage:</h1><hr>`
-  var SendTo
+  var SendTo = "elvirasnaehspass@gmail.com"
   if(req.params.type==="kurs"){
     if(req.body.sharing){
       html += `<p>${req.body.name} (${req.body.email}) und ${req.body.shareName} (${req.body.shareEmail}) möchten gemeinsam diesem Kurs betreten:<br/>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
@@ -39,24 +39,41 @@ router.post("/anmeldung/:type", (req,res,next)=>{
       html += `<p>${req.body.name} (${req.body.email}) möchte diesem Kurs betreten:<br>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
       html += `<br/>Die eingetragenen Infos:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}`
     }
-    SendTo = "deutges.ironhack@gmail.com"
+    html += `</p><p>Weitere Mitteilung: ${req.body.message}</p><br><hr><br>`
+    transporter.sendMail({
+      from: '"Elviras Naehspass Website"',
+      to: SendTo,
+      subject: "Eine neue "+req.params.type+ " Anmeldung",
+      text: req.body.message,
+      html: html
+    })
+    
+    .then(sth => {console.log("sent")
+    res.json( { success: true })})
+    .catch(err => { console.log(err) })
   } else if(req.params.type="workshop"){
-    html += `<p>${req.body.name} (${req.body.email}) möchte an diesem Workshop teilnehmen: ${req.body.choice}<br/>Die eingetragenen Infos:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}`
-    SendTo = "deutges.ironhack@gmail.com"//später barbara
+    Info.findById(req.body.choice)
+      .then(course=>{
+        html += `<p>${req.body.name} (${req.body.email}) möchte an diesem Workshop teilnehmen: ${course.header}<br/>Die eingetragenen Infos:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}`
+        if(course.teacher==="Barbara"||course.teacher==="barbara"){
+          SendTo += ", beckmannbarbara@web.de"
+        }
+        html += `</p><p>Weitere Mitteilung: ${req.body.message}</p><br><hr><br>`
+        transporter.sendMail({
+          from: '"Elviras Naehspass Website"',
+          to: SendTo,
+          subject: "Eine neue "+req.params.type+ " Anmeldung",
+          text: req.body.message,
+          html: html
+        })
+        
+        .then(sth => {console.log("sent")
+        res.json( { success: true })})
+        .catch(err => { console.log(err) })
+      })
+      .catch(err=>console.log(err))
   }
-  html += `</p><p>Weitere Mitteilung: ${req.body.message}</p><br><hr><br>`
-  console.log("sending")
-  transporter.sendMail({
-    from: '"Elviras Naehspass Website"',
-    to: SendTo,
-    subject: "Eine neue "+req.params.type+ " Anmeldung",
-    text: req.body.message,
-    html: html
-  })
-  
-  .then(sth => {console.log("sent")
-  res.json( { success: true })})
-  .catch(err => { console.log(err) })
+ 
 })
 
 

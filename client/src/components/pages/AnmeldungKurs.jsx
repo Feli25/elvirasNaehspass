@@ -183,17 +183,6 @@ export default class AnmeldungKurs extends Component {
                 
                 <br/><br/>
 
-                <input type="checkbox" value={this.state.sharing} name="sharingBox" onClick={this.onCheckBoxChange}/> Ich teile mir den Kurs mit:
-                {this.state.sharing && <React.Fragment>
-                <br/>
-                <label>Name <font color="red" size="5px">*</font></label>
-                <input type="text" name="shareName" id="shareName" value={this.state.shareName} onChange={this.onChange}/>
-                <br/>
-                <label>E-mail <font color="red" size="5px">*</font></label>
-                <input type="text" name="shareEmail" id="shareEmail" value={this.state.shareEmail} onChange={this.onChange}/>
-                </React.Fragment>}
-                <br/><br/>
-
                 <label>Erste Wahl <font color="red" size="5px">*</font></label>
                 <select name="choice1" id="choice1" onChange={this.onChange}>
                   {choices}
@@ -210,6 +199,17 @@ export default class AnmeldungKurs extends Component {
                 </select>
                 {/* {this.createSelect(choices,"Erste Wahl",this.state.choice1,this.onChange,)} */}
 
+                <br/><br/>
+
+                <input type="checkbox" value={this.state.sharing} name="sharingBox" onClick={this.onCheckBoxChange}/> Ich teile mir den Kurs mit:
+                {this.state.sharing && <React.Fragment>
+                <br/>
+                <label>Name <font color="red" size="5px">*</font></label>
+                <input type="text" name="shareName" id="shareName" value={this.state.shareName} onChange={this.onChange}/>
+                <br/>
+                <label>E-mail <font color="red" size="5px">*</font></label>
+                <input type="text" name="shareEmail" id="shareEmail" value={this.state.shareEmail} onChange={this.onChange}/>
+                </React.Fragment>}
                 <br/><br/>
 
                 <label>Weitere Mitteilung</label>

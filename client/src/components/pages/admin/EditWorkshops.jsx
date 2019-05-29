@@ -59,7 +59,7 @@ class EditWorkshop extends Component {
                 )
               })}
             </ol>}
-            <p className="card-text">by {course.teacher}</p>
+            <p className="card-text">Dieser Workshop wird von {course.teacher} durchgeführt.</p>
             <button className="btnHref" onClick={()=>{this.selectEdit(course)}}>Bearbeiten</button>
             <button className="btnHref" onClick={()=>{this.deleteConfirm(course._id)}}>Löschen</button>
           </div>
