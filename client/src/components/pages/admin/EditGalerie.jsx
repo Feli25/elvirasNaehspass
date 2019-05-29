@@ -145,7 +145,7 @@ class EditGalerie extends Component {
           <div className="card-body">
               <p className="card-text">Name: {pic.header}</p>
             
-            <button onClick={()=>this.deleteConfirm(pic._id)} className="btnHref">Delete</button>
+            <button onClick={()=>this.deleteConfirm(pic._id)} className="btnHref">Löschen</button>
           </div>
         </div>
       )
