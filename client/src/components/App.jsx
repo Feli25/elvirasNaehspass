@@ -6,6 +6,7 @@ import Posts from './pages/Posts';
 import Naehkurse from './pages/Naehkurse';
 import Workshops from './pages/Workshops';
 import Kurse from './pages/Kurse';
+import Dessous from './pages/Dessous';
 import Atelier from './pages/Atelier';
 import About from './pages/About';
 import Galerie from './pages/Galerie';
@@ -111,6 +112,7 @@ export default class App extends Component {
           <Route path="/naehkurse" exact component={Naehkurse} />
           <Route path="/naehkurse/workshop" component={Workshops} />
           <Route path="/naehkurse/kurse" component={Kurse} />
+          <Route path="/naehkurse/dessous" component={Dessous} />
           <Route path="/atelier"  component={Atelier} />
           <Route path="/about"  component={About} />
           <Route path="/galerie"  component={Galerie} />

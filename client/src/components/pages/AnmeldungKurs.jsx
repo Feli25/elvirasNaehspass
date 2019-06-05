@@ -223,10 +223,10 @@ export default class AnmeldungKurs extends Component {
                 <br/>
             </div>
           </div>
-          <div className="card" style={{width: "20rem"}}>
+          <div className="card" style={{width: "30rem"}}>
             <div className="card-body">
-              <img src="https://static.wixstatic.com/media/591c392b8ecd50d325e1041d0411bc94.jpg/v1/fill/w_166,h_164,al_c,q_80,usm_0.66_1.00_0.01/591c392b8ecd50d325e1041d0411bc94.webp"
-                alt="Nähkurs" className="card-img-top"/>
+            <img src="./../../images/IMG_6010.JPG"
+              alt="Nähkurs" className="card-img-top"/>
             </div>
           </div>
           </section>

@@ -3,8 +3,9 @@ import React, { Component } from 'react'
 export default class StaticContentWorkshop extends Component {
   render() {
     return (
+      <React.Fragment>
       <section className="card-container">
-        <div className="card" style={{width: "65rem"}}>
+        {/* <div className="card" style={{width: "65rem"}}>
           <div className="card-body">
             <h5 className="card-title">Dessous-Workshops</h5>
             <p className="card-text">
@@ -26,8 +27,8 @@ export default class StaticContentWorkshop extends Component {
             Kurszeiten: Freitags von 18-22 Uhr, samstags von 10-17 Uhr an ausgewählten Terminen<br/>
             Unten sehen Sie ob es schon neue Termine gibt!</p>
           </div>
-        </div>
-        <div className="card" style={{width: "35rem"}}>
+        </div> */}
+        <div className="card" style={{width: "50rem"}}>
           <div className="card-body">
             <h5 className="card-title">Workshop in Freckenhorst</h5>
             <p className="card-text">
@@ -45,16 +46,16 @@ export default class StaticContentWorkshop extends Component {
           </div>
         </div>
         
-        <div className="card" style={{width: "30rem"}}>
+        <div className="card" style={{width: "40rem"}}>
           <div className="card-body">
 
             <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
               <div className="carousel-inner">
-                <div className="carousel-item active">
+                {/* <div className="carousel-item active">
                   <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_09cf22f60555479f8da55d1c6e388f03~mv2_d_2032_2873_s_2.jpg/v1/fill/w_305,h_279,al_c,q_80,usm_0.66_1.00_0.01/4da4ea_09cf22f60555479f8da55d1c6e388f03~mv2_d_2032_2873_s_2.webp"
                     alt="First slide"/>
-                </div>
-                <div className="carousel-item">
+                </div> */}
+                <div className="carousel-item active">
                   <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_dfb2cc37312848f093d78fe69c2acc5c~mv2_d_3264_1836_s_2.jpg/v1/fill/w_1008,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_dfb2cc37312848f093d78fe69c2acc5c~mv2_d_3264_1836_s_2.webp"
                     alt="First slide"/>
                 </div>
@@ -62,10 +63,6 @@ export default class StaticContentWorkshop extends Component {
                   <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_f1d13483b01c4e5d8bed3c38ad71dee1~mv2_d_3264_1836_s_2.jpg/v1/fill/w_1008,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_f1d13483b01c4e5d8bed3c38ad71dee1~mv2_d_3264_1836_s_2.webp"
                     alt="Second slide"/>
                 </div>
-                {/* <div className="carousel-item">
-                  <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_2b2da2a6a425495f8b49ec5e2edb5ff9~mv2_d_1836_3264_s_2.jpg/v1/fill/w_319,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_2b2da2a6a425495f8b49ec5e2edb5ff9~mv2_d_1836_3264_s_2.webp"
-                    alt="Third slide">
-                </div> */}
                 <div className="carousel-item">
                   <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_d7187c3dc4e04e01bb4ca06182557154~mv2_d_2560_1920_s_2.jpg/v1/fill/w_756,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_d7187c3dc4e04e01bb4ca06182557154~mv2_d_2560_1920_s_2.webp"
                     alt="Third slide"/>
@@ -74,10 +71,6 @@ export default class StaticContentWorkshop extends Component {
                   <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_ec789e70e09b4d918f887f58b5688ed0~mv2_d_3264_1836_s_2.jpg/v1/fill/w_1008,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_ec789e70e09b4d918f887f58b5688ed0~mv2_d_3264_1836_s_2.webp"
                     alt="Third slide"/>
                 </div>
-                {/* <div className="carousel-item">
-                  <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_c86d4e378b8644a5bcce82de4d3c42a4~mv2_d_1836_3264_s_2.jpg/v1/fill/w_319,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_c86d4e378b8644a5bcce82de4d3c42a4~mv2_d_1836_3264_s_2.webp"
-                    alt="Third slide"/>
-                </div> */}
                 <div className="carousel-item">
                   <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_c81f1fd398d94db99558f124984db194~mv2_d_3264_1836_s_2.jpg/v1/fill/w_1008,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_c81f1fd398d94db99558f124984db194~mv2_d_3264_1836_s_2.webp"
                     alt="Third slide"/>
@@ -98,10 +91,6 @@ export default class StaticContentWorkshop extends Component {
                   <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_01bd9077aeb64b13bbef12e6ad3602ad.jpg/v1/fill/w_756,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_01bd9077aeb64b13bbef12e6ad3602ad.webp"
                     alt="Third slide"/>
                 </div>
-                {/* <div className="carousel-item">
-                  <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_a6e52dca3b88493992c888ab73495422.jpg/v1/fill/w_425,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_a6e52dca3b88493992c888ab73495422.webp"
-                    alt="Third slide"/>
-                </div> */}
                 <div className="carousel-item">
                   <img className="d-block w-100" src="https://static.wixstatic.com/media/4da4ea_e4bc1dcbf4e84e87b439d4e9841b3714.jpg/v1/fill/w_1008,h_567,al_c,q_90,usm_0.66_1.00_0.01/4da4ea_e4bc1dcbf4e84e87b439d4e9841b3714.webp"
                     alt="Third slide"/>
@@ -120,6 +109,8 @@ export default class StaticContentWorkshop extends Component {
 
           </div>
         </div>
+        </section>    
+      <section className="card-container">
 
         <div className="card" style={{width: "30rem"}}>
           <div className="card-body">
@@ -142,6 +133,7 @@ export default class StaticContentWorkshop extends Component {
           </div>
         </div>
       </section>    
+      </React.Fragment>
     )
   }
 }

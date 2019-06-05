@@ -21,6 +21,14 @@ router.get('/workshops', (req,res,next)=>{
   .catch(err => next(err))
 })
 
+router.get('/dessous', (req,res,next)=>{
+  Info.find({ category: "DESSOUS" })
+  .then(info =>{
+    res.json(info)
+  })
+  .catch(err => next(err))
+})
+
 router.get('/table', (req,res,next)=>{
   Info.find({ category: "TABLE" })
   .then(info =>{

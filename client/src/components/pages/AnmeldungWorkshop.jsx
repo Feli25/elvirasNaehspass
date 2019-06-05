@@ -153,9 +153,9 @@ export default class AnmeldungWorkshop extends Component {
                 <br/>
             </div>
           </div>
-          <div className="card" style={{width: "20rem"}}>
+          <div className="card" style={{width: "30rem"}}>
           <div className="card-body">
-            <img src="https://static.wixstatic.com/media/4da4ea_1c862f13c53e049ac73a024c6ee7dd6a.jpg/v1/fill/w_167,h_141,al_c,q_80,usm_0.66_1.00_0.01/4da4ea_1c862f13c53e049ac73a024c6ee7dd6a.webp"
+            <img src="./../../images/IMG_6010.JPG"
               alt="Nähkurs" className="card-img-top"/>
           </div>
           </div>
