@@ -20,6 +20,7 @@ import Admin from './pages/admin/Admin';
 import EditPosts from './pages/admin/EditPosts';
 import EditKurse from './pages/admin/EditKurse';
 import EditWorkshops from './pages/admin/EditWorkshops';
+import EditDessous from './pages/admin/EditDessous';
 import EditAtelier from './pages/admin/EditAtelier';
 import EditGalerie from './pages/admin/EditGalerie';
 
@@ -127,6 +128,7 @@ export default class App extends Component {
           <Route path="/admin/posts" component={EditPosts} />
           <Route path="/admin/kurse" component={EditKurse} />
           <Route path="/admin/workshops" component={EditWorkshops} />
+          <Route path="/admin/dessous" component={EditDessous} />
           <Route path="/admin/atelier" component={EditAtelier} />
           <Route path="/admin/galerie" component={EditGalerie} />
 

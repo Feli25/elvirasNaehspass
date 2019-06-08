@@ -118,7 +118,7 @@ export default class StaticContentWorkshop extends Component {
             <p className="card-text">Workshops für Jung und Alt; Anfänger und Fortgeschrittene; Eltern und Kind; Oma und Enkel; einfach alle die Spass am Nähen haben.<br/>
               Ferienworkshops - gut geeignet als Ferienprogramm für Schulkinder<br/>
               Es können jeweils 6 - 7 Personen teilnehmen.<br/>
-              In den Sommerferien finden die nächsten Ferienworkshops statt, bald kommen die neuen Termine dafür!</p>
+              In den Sommerferien finden die nächsten Ferienworkshops statt, unten seht ihr die neuen Termine!</p>
           </div>
         </div>
 

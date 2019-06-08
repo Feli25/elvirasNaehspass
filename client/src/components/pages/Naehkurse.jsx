@@ -11,7 +11,7 @@ export default class Naehkurse extends Component {
           <section className="card-container">
 
             <div className="card" style={{width: "30rem"}}>
-              <img src="../images/kursePage/kurse.jpg" alt="Nähkurs" className="card-img-top" />
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1560006430/project2React/kurse.jpg" alt="Nähkurs" className="card-img-top" />
               <div className="card-body">
                 {/* <p className="card-text">Die nächste Anmeldung findet am 17.3.2019 um 11 Uhr statt!</p> */}
                 <h5 className="card-title">Unsere Kurse</h5>

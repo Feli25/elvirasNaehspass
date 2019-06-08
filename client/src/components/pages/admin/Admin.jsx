@@ -14,6 +14,7 @@ export default class Home extends Component {
               <a className="btnHref"href="/admin/posts">Posts verwalten</a><br/>
               <a className="btnHref"href="/admin/kurse">Kurse Seite bearbeiten</a><br/>
               <a className="btnHref"href="/admin/workshops">Workshop Seite bearbeiten</a><br/>
+              <a className="btnHref"href="/admin/dessous">Dessous Seite bearbeiten</a><br/>
               <a className="btnHref"href="/admin/atelier">Ausstattung</a><br/>
               <a className="btnHref"href="/admin/galerie">Galerie</a><br/>
             </div>
