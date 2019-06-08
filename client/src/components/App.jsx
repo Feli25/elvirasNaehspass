@@ -133,7 +133,7 @@ export default class App extends Component {
           <Route path="/admin/galerie" component={EditGalerie} />
 
 
-          {/* <Route path="/signup" component={Signup} /> */}
+          <Route path="/signup" component={Signup} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
         <br/><br/>
