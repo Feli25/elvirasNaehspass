@@ -13,7 +13,7 @@ export default class Naehkurse extends Component {
             <div className="card" style={{width: "30rem"}}>
               <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1560006430/project2React/kurse.jpg" alt="Nähkurs" className="card-img-top" />
               <div className="card-body">
-                {/* <p className="card-text">Die nächste Anmeldung findet am 17.3.2019 um 11 Uhr statt!</p> */}
+                <p className="card-text">Die nächste Anmeldung findet am 30.6.2019 um 11 Uhr statt!</p>
                 <h5 className="card-title">Unsere Kurse</h5>
                 <p className="card-text">Jede Woche finden bei uns Kurse zu verschiedenen Uhrzeiten statt. Die Kurse finden
                   wöchentlich statt, immer zum gleichen Zeitpunkt, und gehen über 10-14 Termine. Bevor Sie sich für einen Kurs

@@ -96,9 +96,9 @@ export default class Kurse extends Component {
           <h1 className="page-title">Kurse</h1>
         </div>
           <br/>
-          {/* <div className="button-container">
-            <p style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 17.3.2019 um 11 Uhr statt!!</strong></p>
-          </div> */}
+          <div className="button-container">
+            <p style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 30.6.2019 um 11 Uhr statt!!</strong></p>
+          </div>
           <div className="button-container">
             <a id="class-page-button" className="btnHref" href="/anmeldung/kurse">Einen Kurs buchen</a>
           </div>
