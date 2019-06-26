@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import { withStyles } from '@material-ui/core/styles';
 import {Dialog,  DialogContent, DialogActions, DialogTitle,Slide,Button} from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default class AnmeldungWorkshop extends Component {
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
+});
+
+class AnmeldungWorkshop extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -18,13 +26,18 @@ export default class AnmeldungWorkshop extends Component {
       choice:"none",
       errorMessage:null,
       success:false,
-      error:false
+      error:false,
+      loading:false
     }
   }
   componentDidMount=()=>{
     api.getInfo("workshops")
       .then(kurse=>{
-        this.setState({courses:kurse})
+        api.getInfo("dessous")
+          .then(dessous=>{
+            this.setState({courses:[...kurse, ...dessous]})
+          })
+          .catch(err=>console.log(err))
       })
       .catch(err=>console.log(err))
   }
@@ -34,6 +47,7 @@ export default class AnmeldungWorkshop extends Component {
     })
   }
   submitAnmeldung=()=>{
+    this.setState({loading:true})
     if(this.state.name!==""
     && this.state.email!=="" 
     && this.state.phone!==""
@@ -42,12 +56,13 @@ export default class AnmeldungWorkshop extends Component {
       console.log(this.state)
       api.sendAnmeldung(this.state,"workshop")
         .then(response=>{
-          this.setState({success:true})
+          this.setState({success:true,loading:false})
         })
         .catch(err=>{console.log(err)
-            this.setState({error:true})})
+            this.setState({error:true, loading:false})})
     } else {
       alert("Bitte alle Pflichfelder ausfüllen")
+      this.setState({loading:false})
     }
   }
   renderSuccessPopup=()=>{
@@ -84,6 +99,14 @@ export default class AnmeldungWorkshop extends Component {
       success:false,
       error:false
     })
+  }
+  renderLoadingPopup=()=>{
+    return (
+      <Dialog open={this.state.loading} TransitionComponent={Transition} style={{display:"flex",justifyContent:"center"}}>
+        <DialogTitle><h5 className="card-title">Loading...</h5></DialogTitle>
+        <CircularProgress className={this.props.classes.progress} color="secondary" />
+    </Dialog>
+    )
   }
   render() {    
     console.log(this.state.courses)
@@ -162,7 +185,10 @@ export default class AnmeldungWorkshop extends Component {
           </section>
         {this.renderSuccessPopup()}
         {this.renderErrorPopup()}
+        {this.renderLoadingPopup()}
       </React.Fragment>
     );
   }
 }
+
+export default withStyles(styles)(AnmeldungWorkshop);

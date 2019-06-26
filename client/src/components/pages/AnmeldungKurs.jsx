@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import { withStyles } from '@material-ui/core/styles';
 import {FormControl,InputLabel,Select,OutlinedInput} from '@material-ui/core'
 import {Dialog, DialogContent, DialogActions,  DialogTitle,Slide,Button} from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-
-export default class AnmeldungKurs extends Component {
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
+});
+class AnmeldungKurs extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -28,7 +34,8 @@ export default class AnmeldungKurs extends Component {
 
       errorMessage:null,
       success:false,
-      error:false
+      error:false,
+      loading:false
     }
   }
   componentDidMount=()=>{
@@ -86,6 +93,7 @@ export default class AnmeldungKurs extends Component {
     )
   }
   submitAnmeldung=()=>{
+    this.setState({loading:true})
     if(this.state.name!==""
     && this.state.email!=="" 
     && this.state.phone!==""
@@ -95,10 +103,10 @@ export default class AnmeldungKurs extends Component {
       api.sendAnmeldung(this.state,"kurs")
         .then(response=>{
           console.log(response)
-          this.setState({success:true})
+          this.setState({success:true, loading:false})
         })
         .catch(err=>{console.log(err)
-          this.setState({error:true})})
+          this.setState({error:true, loading:false})})
     } else {
       alert("Bitte alle Pflichfelder ausfüllen")
     }
@@ -137,6 +145,14 @@ export default class AnmeldungKurs extends Component {
       success:false,
       error:false
     })
+  }
+  renderLoadingPopup=()=>{
+    return (
+      <Dialog open={this.state.loading} TransitionComponent={Transition} style={{display:"flex",justifyContent:"center"}}>
+        <DialogTitle><h5 className="card-title">Loading...</h5></DialogTitle>
+        <CircularProgress className={this.props.classes.progress} color="secondary" />
+    </Dialog>
+    )
   }
   render() {    
     var choices =[]
@@ -233,7 +249,10 @@ export default class AnmeldungKurs extends Component {
         </div>
         {this.renderSuccessPopup()}
         {this.renderErrorPopup()}
+        {this.renderLoadingPopup()}
       </React.Fragment>
     );
   }
 }
+
+export default withStyles(styles)(AnmeldungKurs);
