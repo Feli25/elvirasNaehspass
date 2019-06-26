@@ -30,8 +30,8 @@ router.post('/kontakt', (req,res,next)=>{
 
 router.post("/anmeldung/:type", (req,res,next)=>{
   var html = `<h1>Die Anfrage:</h1><hr>`
-  // var SendTo = "elvirasnaehspass@gmail.com"
-  var SendToTeacher = "fee2599@gmail.com"
+  var SendToTeacher = "elvirasnaehspass@gmail.com"
+  // var SendToTeacher = "fee2599@gmail.com"
 
   if(req.params.type==="kurs"){
     //choice object is the course name string
@@ -114,9 +114,9 @@ router.post("/anmeldung/:type", (req,res,next)=>{
     Info.findById(req.body.choice)
       .then(course=>{
         html += `<p>${req.body.name} (${req.body.email}) möchte an diesem Workshop teilnehmen: ${course.header}<br/>Die eingetragenen Infos:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}`
-        // if(course.category==="DESSOUS"){
-        //   SendToTeacher += ", beckmannbarbara@web.de"
-        // }
+        if(course.category==="DESSOUS"){
+          SendToTeacher += ", beckmannbarbara@web.de"
+        }
         html += `</p><p>Weitere Mitteilung: ${req.body.message}</p><br><hr><br>`
         transporter.sendMail({
           from: '"Elviras Naehspass Website"',
