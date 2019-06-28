@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Link, NavLink, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Posts from './pages/Posts';
@@ -24,7 +24,7 @@ import EditDessous from './pages/admin/EditDessous';
 import EditAtelier from './pages/admin/EditAtelier';
 import EditGalerie from './pages/admin/EditGalerie';
 
-import Signup from './pages/auth/Signup';
+// import Signup from './pages/auth/Signup';
 
 import api from '../api';
 import CountDownClock from './CountDownClock';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { api } from 'cloudinary/lib/cloudinary';
 import api from '../../api';
-import {Dialog, Slide, DialogContent, DialogActions, Button, DialogTitle, TextField, DialogContentText} from '@material-ui/core'
+import {Dialog, Slide, DialogContent, DialogActions, Button, DialogTitle} from '@material-ui/core'
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });

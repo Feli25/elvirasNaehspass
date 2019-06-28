@@ -51,7 +51,7 @@ body {
   border-radius: 10px;
   background-color: rgba($color: #ffffff, $alpha: 0.9);
   box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.63);
-  width: 100rem;
+  width: 30rem;
   min-height: 100px;
 }
 .countDownTextBox{
@@ -62,9 +62,10 @@ body {
   margin: 20px;
 }
 .countDownTimeHome {
+  width:70%;
   display:flex;
   flex-direction: row;
-  font-size: 25px;
+  font-size: 15px;
 }
 .spaceBetween{
   display:flex;
@@ -78,12 +79,14 @@ body {
 }
 
 .countDownTextHome{
+  width:60%;
   margin:0px;
-  font-size: 30px;
+  font-size: 20px;
 }
 .countDownText2Home{
+  width:60%;
   margin:0px;
-  font-size: 15px;
+  font-size: 10px;
 }
 
 #icon {
@@ -384,6 +387,54 @@ option {
   justify-content: center;
 }
 
+@media (min-width: 520px) {
+  .countDownHome {
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    margin: 30px;
+    border-radius: 10px;
+    background-color: rgba($color: #ffffff, $alpha: 0.9);
+    box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.63);
+    width: 50rem;
+    min-height: 100px;
+  }
+  .countDownTextBox{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+    margin: 20px;
+  }
+  .countDownTimeHome {
+    width:auto;
+    display:flex;
+    flex-direction: row;
+    font-size: 25px;
+  }
+  .spaceBetween{
+    display:flex;
+    justify-content: center;
+    width:5px;
+  }
+  .equalTimerBoxes{
+    display:flex;
+    justify-content: center;
+    width:100px;
+  }
+  .countDownTextHome{
+    width:auto;
+    margin:0px;
+    font-size: 30px;
+  }
+  .countDownText2Home{
+    width:auto;
+    margin:0px;
+    font-size: 15px;
+  }
+}
+
+
 @media (min-width: 650px) {
   #header {
     display: flex;
@@ -474,5 +525,49 @@ option {
   }
   .anmeldung-card {
     width: 60rem
+  }
+  .countDownHome {
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    margin: 30px;
+    border-radius: 10px;
+    background-color: rgba($color: #ffffff, $alpha: 0.9);
+    box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.63);
+    width: 100rem;
+    min-height: 100px;
+  }
+  .countDownTextBox{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+    margin: 20px;
+  }
+  .countDownTimeHome {
+    width:auto;
+    display:flex;
+    flex-direction: row;
+    font-size: 25px;
+  }
+  .spaceBetween{
+    display:flex;
+    justify-content: center;
+    width:5px;
+  }
+  .equalTimerBoxes{
+    display:flex;
+    justify-content: center;
+    width:100px;
+  }
+  .countDownTextHome{
+    width:auto;
+    margin:0px;
+    font-size: 30px;
+  }
+  .countDownText2Home{
+    width:auto;
+    margin:0px;
+    font-size: 15px;
   }
 }
