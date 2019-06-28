@@ -27,6 +27,7 @@ import EditGalerie from './pages/admin/EditGalerie';
 import Signup from './pages/auth/Signup';
 
 import api from '../api';
+import CountDownClock from './CountDownClock';
 
 export default class App extends Component {
 
@@ -131,6 +132,8 @@ export default class App extends Component {
           <Route path="/admin/dessous" component={EditDessous} />
           <Route path="/admin/atelier" component={EditAtelier} />
           <Route path="/admin/galerie" component={EditGalerie} />
+
+          <Route path="/countdown" component={CountDownClock}/>
 
 
           {/* <Route path="/signup" component={Signup} /> */}

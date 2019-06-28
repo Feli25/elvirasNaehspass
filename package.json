@@ -20,6 +20,7 @@
     "multer-storage-cloudinary": "^2.2.1",
     "nodemailer": "^6.1.1",
     "react": "^16.8.6",
+    "react-countdown-now": "^2.1.1",
     "react-dom": "^16.8.6",
     "react-swipeable-views": "^0.13.3"
   }

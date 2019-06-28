@@ -43,6 +43,49 @@ body {
   margin-bottom: 50px;
 }
 
+.countDownHome {
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  margin: 30px;
+  border-radius: 10px;
+  background-color: rgba($color: #ffffff, $alpha: 0.9);
+  box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.63);
+  width: 100rem;
+  min-height: 100px;
+}
+.countDownTextBox{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  flex-direction: column;
+  margin: 20px;
+}
+.countDownTimeHome {
+  display:flex;
+  flex-direction: row;
+  font-size: 25px;
+}
+.spaceBetween{
+  display:flex;
+  justify-content: center;
+  width:5px;
+}
+.equalTimerBoxes{
+  display:flex;
+  justify-content: center;
+  width:100px;
+}
+
+.countDownTextHome{
+  margin:0px;
+  font-size: 30px;
+}
+.countDownText2Home{
+  margin:0px;
+  font-size: 15px;
+}
+
 #icon {
   width: 50px;
   height: 50px;

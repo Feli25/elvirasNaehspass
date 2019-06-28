@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {FormControl,InputLabel,Select,OutlinedInput} from '@material-ui/core'
 import {Dialog, DialogContent, DialogActions,  DialogTitle,Slide,Button} from '@material-ui/core'
 import CircularProgress from '@material-ui/core/CircularProgress';
+import CountDownClock from '../CountDownClock'
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -170,9 +171,14 @@ class AnmeldungKurs extends Component {
           <h1 className="page-title">Anmeldung - Kurs</h1>
         </div>
         <div>
-          <div className="button-container">
+          {/* <div className="button-container">
             <span style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 30.6.2019 um 11 Uhr statt!!</strong></span>
-          </div>
+          </div> */}
+          <section className="card-container">
+            <div className="countDownHome" key="countdown">
+              <CountDownClock/>
+            </div>
+          </section>
           <section className="card-container">
           <div className="card anmeldung-card">
             <div className="card-body">
