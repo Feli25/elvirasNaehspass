@@ -75,7 +75,6 @@ router.post('/edit-pic/:id', parser.single('picture'), (req,res,next)=>{
     content:content,
     imgPath:file.url,
     imgName:file.originalname,
-    _creator: req.user,
     status:"ACTIVE",
     public_id: file.public_id
   })
@@ -94,7 +93,6 @@ router.post('/edit/:id', (req,res,next)=>{
   Post.findByIdAndUpdate(id,{
     header:header,
     content:content,
-    _creator: req.user,
     status:"ACTIVE",
   })
     .then(post => {
