@@ -174,11 +174,11 @@ class AnmeldungKurs extends Component {
           {/* <div className="button-container">
             <span style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 30.6.2019 um 11 Uhr statt!!</strong></span>
           </div> */}
-          <section className="card-container">
+          {/* <section className="card-container">
             <div className="countDownHome" key="countdown">
               <CountDownClock/>
             </div>
-          </section>
+          </section> */}
           <section className="card-container">
           <div className="card anmeldung-card">
             <div className="card-body">
