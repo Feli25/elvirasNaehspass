@@ -34,10 +34,31 @@ export default class StaticContentWorkshop extends Component {
             <p className="card-text">
               <b>Ein ganzes, langes Wochenende nähen gemeinsam mit netten Leuten in toller Umgebung und toller Verpflegung</b><br/>
               Das hört sich gut an? Dann komm doch mit! <br/>
-              Dieses Jahr über Fronleichnam(20-23.06.2019), bieten wir einen Nähworkshop in Freckenhorst(in der Nähe von Münster) an.
-              Acht Nähbegeisterte könne daran teilnehmen. Auch für absolute Anfänger geeignet!<br/>
+              Dieses Jahr am dritten Advent(13-15.12.2019), bieten wir einen Nähworkshop in Freckenhorst(in der Nähe von Münster) an.
+              Acht Nähbegeisterte können daran teilnehmen. Auch für absolute Anfänger geeignet!<br/>
               Herzlich Wilkommen sind auch die Familien der Teilnehmenden, die dann während der Nähkurs Zeiten dann ja etwas anderes in der Gegend unternehmen oder einfach nur entspannen können.<br/>
-              Wir starten Fronleichnam(Do,20.06.) um 18 Uhr in Freckenhorst mit dem Abendessen und beenden den Workshop am Sonntag nach dem Mittagessen. 
+              Wir starten Freitag(13.12.) um 16:30 Uhr in Freckenhorst und beenden den Workshop am Sonntag nach dem Mittagessen. <br/>
+              <span style={{color:"red"}}>Der Workshop ist leider schon ausgebucht!</span>
+              {/* Die Kosten sehen folgendermaßen aus: <br/>
+              Einzelzimmer 277,-€ Doppelzimmer 245,-€ incl. Vollverpflegung und Seminarkosten. (Kinder 196,-€) <br/>
+              Mitreisende Familie Einzelzimmer 174,- Doppelzimmer 150,-€ (Kinder 120,-€) mit Frühstück und Abendessen.<br/>
+              Über Anmeldungen würde ich mich freuen. Bitte direkt über das Kontaktformular melden oder anrufen.  */}
+            </p>
+          </div>
+        </div>
+        {/* <div className="card" style={{width: "50rem"}}>
+          <div className="card-body">
+            <h5 className="card-title">Mutter-Kind Workshop in Freckenhorst</h5>
+            <p className="card-text">
+              <b>
+                <strong>DEMNÄCHST:</strong><br/>
+              Ein ganzes, langes Wochenende nähen gemeinsam mit netten Leuten in toller Umgebung und toller Verpflegung</b><br/>
+              Das hört sich gut an? Dann komm doch mit! <br/>
+              Dieses Jahr am dritten Advent(13-15.12.2019), bieten wir einen Nähworkshop in Freckenhorst(in der Nähe von Münster) an.
+              Acht Nähbegeisterte können daran teilnehmen. Auch für absolute Anfänger geeignet!<br/>
+              Herzlich Wilkommen sind auch die Familien der Teilnehmenden, die dann während der Nähkurs Zeiten dann ja etwas anderes in der Gegend unternehmen oder einfach nur entspannen können.<br/>
+              Wir starten Freitag(13.12.) um 16:30 Uhr in Freckenhorst und beenden den Workshop am Sonntag nach dem Mittagessen. <br/>
+              <span style={{color:"red"}}>Der Workshop ist leider schon ausgebucht!</span>
               Die Kosten sehen folgendermaßen aus: <br/>
               Einzelzimmer 277,-€ Doppelzimmer 245,-€ incl. Vollverpflegung und Seminarkosten. (Kinder 196,-€) <br/>
               Mitreisende Familie Einzelzimmer 174,- Doppelzimmer 150,-€ (Kinder 120,-€) mit Frühstück und Abendessen.<br/>
@@ -45,7 +66,7 @@ export default class StaticContentWorkshop extends Component {
             </p>
           </div>
         </div>
-        
+         */}
         <div className="card" style={{width: "40rem"}}>
           <div className="card-body">
 
