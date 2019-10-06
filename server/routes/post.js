@@ -23,7 +23,7 @@ router.get('/all', (req, res, next) => {
     .catch(err => next(err))
 });
 
-router.post('/new-pic', parser.single('picture'), (req,res,next)=>{
+router.post('/new-pic', isLoggedIn, parser.single('picture'), (req,res,next)=>{
   let { header, content } = req.body
   let file = req.file
   Post.create({
@@ -32,7 +32,7 @@ router.post('/new-pic', parser.single('picture'), (req,res,next)=>{
     imgPath:file.url,
     imgName:file.originalname,
     public_id:file.public_id,
-    _creator:req.user,
+    _creator:req.user._id,
     status:"ACTIVE",
   })
   .then(post => {
@@ -44,12 +44,12 @@ router.post('/new-pic', parser.single('picture'), (req,res,next)=>{
   .catch(err => console.log(err))
 })
 
-router.post('/new', (req,res,next)=>{
+router.post('/new', isLoggedIn, (req,res,next)=>{
   let { header, content } = req.body
   Post.create({
     header:header,
     content:content,
-    _creator:req.user,
+    _creator:req.user._id,
     status:"ACTIVE",
     imgPath:null,
     imgName:null,
@@ -64,7 +64,7 @@ router.post('/new', (req,res,next)=>{
   .catch(err => console.log(err))
 })
 
-router.post('/edit-pic/:id', parser.single('picture'), (req,res,next)=>{
+router.post('/edit-pic/:id', isLoggedIn, parser.single('picture'), (req,res,next)=>{
   let id = req.params.id
   let { header, content, public_id } = req.body
   cloudinary.v2.uploader.destroy(public_id, function(result) { console.log(result) });
@@ -86,7 +86,7 @@ router.post('/edit-pic/:id', parser.single('picture'), (req,res,next)=>{
     .catch(err=>{console.log(err)})
 })
 
-router.post('/edit/:id', (req,res,next)=>{
+router.post('/edit/:id', isLoggedIn, (req,res,next)=>{
   let id = req.params.id
   let { header, content } = req.body
   
@@ -103,7 +103,7 @@ router.post('/edit/:id', (req,res,next)=>{
     .catch(err=>{console.log(err)})
 })
 
-router.get('/delete/:id', (req,res,next)=>{
+router.get('/delete/:id', isLoggedIn, (req,res,next)=>{
   let id = req.params.id
   Post.findById(id)
     .then(post=>{
