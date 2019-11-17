@@ -21,7 +21,9 @@ export default class StaticContentKurse extends Component {
               <div className="card-body">
                 <h1>Dauerhafte Kurstermine</h1>
                 BB = Barbara Beckmann<br/>
-                ED = Elvira Deutges
+                ED = Elvira Deutges<br/>
+                NM = Nicola Münter<br/>
+                SB = Simone Becher
                   <table className="table">
                     <tr>
                       <th>Kurs</th>
@@ -39,15 +41,20 @@ export default class StaticContentKurse extends Component {
                       <td>ED</td>
                     </tr>
                     <tr>
+                      <td>Dienstag morgen</td>
+                      <td>09:00 - 11:30</td>
+                      <td>SB</td>
+                    </tr>
+                    <tr>
                       <td>Mittwoch morgens</td>
                       <td>08:45 - 11:15</td>
                       <td>ED</td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <td>Mittwoch mittags</td>
                       <td>16:30 - 19:00</td>
                       <td>BB</td>
-                    </tr>
+                    </tr> */}
                     <tr>
                       <td>Mittwoch abends</td>
                       <td>19:30 - 22:00</td>
@@ -55,13 +62,13 @@ export default class StaticContentKurse extends Component {
                     </tr>
                     <tr>
                       <td>Donnerstag morgens</td>
-                      <td>09:00 - 11:30</td>
+                      <td>09:00 - 12:00</td>
                       <td>ED</td>
                     </tr>
                     <tr>
                       <td>Donnerstag mittags</td>
                       <td>16:30 - 19:00</td>
-                      <td>BB</td>
+                      <td>NM</td>
                     </tr>
                     <tr>
                       <td>Donnerstag abends</td>
@@ -76,7 +83,7 @@ export default class StaticContentKurse extends Component {
             <div className="card-body">
               <p>Jeder Kurs umfasst 5 oder mehr Einheiten gemäß der Tabelle.<br/>
                 (Bei Verhinderung ist, bei rechtzeitiger Online-Abmeldung , ein Nachholen in den anderen Kursen, nach
-                Platzverfügbarkeit, möglich) Die Kursgebühr von je <strong>EUR 10,--/Kurstag</strong> ist bei Anmeldung, vor Kursbeginn zu
+                Platzverfügbarkeit, möglich) Die Kursgebühr von je <strong>EUR 12,--/Kurstag</strong> ist bei Anmeldung, vor Kursbeginn zu
                 bezahlen. <br/>Aktuelle Starttermine für die nächsten Kurse entnehmen Sie bitte der Tabelle mit den zukünftigen Kursdaten.</p>
             </div>
           </div>
