@@ -38,11 +38,11 @@ export default class Home extends Component {
         <div className="page-title">
           <h1 className="page-title">Willkommen</h1>
         </div>
-        {/* <section className="card-container">
+        <section className="card-container">
           <div className="countDownHome" key="countdown">
             <CountDownClock/>
           </div>
-        </section> */}
+        </section>
           <section className="card-container">
               {this.createPosts()}
 

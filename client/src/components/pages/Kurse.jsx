@@ -100,11 +100,11 @@ export default class Kurse extends Component {
           {/* <div className="button-container">
             <p style={{fontSize:"20px"}}><strong>Die nächste Anmeldung findet am 30.6.2019 um 11 Uhr statt!!</strong></p>
           </div> */}
-          {/* <section className="card-container">
+          <section className="card-container">
             <div className="countDownHome" key="countdown">
               <CountDownClock/>
             </div>
-          </section> */}
+          </section>
           <div className="button-container">
             <a id="class-page-button" className="btnHref" href="/anmeldung/kurse">Einen Kurs buchen</a>
           </div>

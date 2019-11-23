@@ -30,7 +30,7 @@ const renderer = ({ total, days, hours, minutes, seconds, milliseconds, complete
                 <div className="spaceBetween"> </div>
                 <div className="equalTimerBoxes">{seconds===1 ? "Sekunde" : "Sekunden"}</div>
               </div>
-              <p className="countDownText2Home">(30.06.2019 11 Uhr)</p>
+              <p className="countDownText2Home">(24.11.2019 11 Uhr)</p>
               <p className="countDownText2Home">Für unsere Workshops können Sie sich jederzeit anmelden!</p>
             </div>
   }
@@ -41,7 +41,7 @@ export default class CountDownClock extends Component {
     return (
       <Countdown 
         renderer={renderer}
-        date='Sun, 30 Jun 2019 11:00:00'
+        date='Sun, 24 Nov 2019 11:00:00'
       />
     )
   }
