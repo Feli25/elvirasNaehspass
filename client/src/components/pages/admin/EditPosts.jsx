@@ -90,8 +90,8 @@ class EditPosts extends Component {
             <p>Dass du diesen Post löschen möchtest?</p>
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -130,11 +130,12 @@ class EditPosts extends Component {
           <DialogTitle><h5 className="card-title">Einen Post hinzufügen</h5></DialogTitle>
           <DialogContent>
         <label xl={3}>Add a picture</label>
-        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} /><br/>
+        Titel:
           <TextField
               margin="dense"
               name="header"
-              label="Titel"
+              // label="Titel"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -145,10 +146,11 @@ class EditPosts extends Component {
                 },
               }}
             />
+            Text:
             <TextField
               margin="dense"
               name="content"
-              label="Text"
+              // label="Text"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -163,8 +165,8 @@ class EditPosts extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.createNewPostConfirm}>Hinzufügen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbruch</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.createNewPostConfirm}>Hinzufügen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbruch</Button>
           </DialogActions>
       </Dialog>
     )
@@ -201,11 +203,12 @@ class EditPosts extends Component {
         <DialogContent>
         {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName} className="card-img-top"/>} 
         <label xl={3}>Add a picture</label>
-        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+        <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} /><br/>
+        Titel:
         <TextField
               margin="dense"
               name="header"
-              label="Titel"
+              // label="Titel"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -216,10 +219,11 @@ class EditPosts extends Component {
                 },
               }}
             />
+            Text:
             <TextField
               margin="dense"
               name="content"
-              label="Text"
+              // label="Text"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -234,8 +238,8 @@ class EditPosts extends Component {
             />
         </DialogContent>
         <DialogActions>
-          <Button className="btnHref" onClick={this.editPostConfirm}>Bestätigen</Button>
-          <Button className="btnHref" onClick={this.cancel}>Abbruch</Button>
+          <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.editPostConfirm}>Bestätigen</Button>
+          <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbruch</Button>
         </DialogActions>
       </Dialog>
     )

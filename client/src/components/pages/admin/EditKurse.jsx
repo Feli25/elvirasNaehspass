@@ -95,8 +95,8 @@ class EditKurse extends Component {
             <p>Dass du diesen Kurs löschen möchtest?</p>
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -198,10 +198,11 @@ class EditKurse extends Component {
       <Dialog open={this.state.editPopupOpen} TransitionComponent={Transition}>
           <DialogTitle><h5 className="card-title">Einen Kurs bearbeiten</h5></DialogTitle>
           <DialogContent>
+            Titel:
           <TextField
               margin="dense"
               name="header"
-              label="Titel"
+              // label="Titel"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -212,10 +213,11 @@ class EditKurse extends Component {
                 },
               }}
             />
+            Inhalt:
             <TextField
               margin="dense"
               name="content"
-              label="Inhalt"
+              // label="Inhalt"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -228,6 +230,7 @@ class EditKurse extends Component {
               multiline
               rows="8"
             />
+            Daten:<br/>
             {this.state.list.map((item,i)=>{
               return(
                 <React.Fragment key={i}>
@@ -235,7 +238,7 @@ class EditKurse extends Component {
     
                     margin="dense"
                     name="Stichpunkt"
-                    label="Stichpunkt"
+                    // label="Stichpunkt"
                     type="text"
                     width="200px"
                     onChange={(e)=>this.updateList(i,e.target.value)}
@@ -252,10 +255,12 @@ class EditKurse extends Component {
                 </React.Fragment>
               )
             })}
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.addLine}>Zeile hinzufügen</Button><br/><br/>
+            Lehrer:
             <TextField
               margin="dense"
               name="teacher"
-              label="Lehrer"
+              // label="Lehrer"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -268,9 +273,8 @@ class EditKurse extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.addLine}>Zeile hinzufügen</Button>
-            <Button className="btnHref" onClick={this.confirmEdit}>Bestätigen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.confirmEdit}>Bestätigen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -310,10 +314,11 @@ class EditKurse extends Component {
       <Dialog open={this.state.editSpecialPopupOpen} TransitionComponent={Transition}>
           <DialogTitle><h5 className="card-title">Einen Kurs bearbeiten</h5></DialogTitle>
           <DialogContent>
+            Titel:
           <TextField
               margin="dense"
               name="header"
-              label="Titel"
+              // label="Titel"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -398,9 +403,9 @@ class EditKurse extends Component {
             </table>
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.addSpecialLine}>Zeile hinzufügen</Button>
-            <Button className="btnHref" onClick={this.confirmSpecialEdit}>Bestätigen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.addSpecialLine}>Zeile hinzufügen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.confirmSpecialEdit}>Bestätigen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -451,10 +456,11 @@ class EditKurse extends Component {
       <Dialog open={this.state.makeNewPopupOpen} TransitionComponent={Transition}>
         <DialogTitle><h5 className="card-title">Einen Kurs erstellen</h5></DialogTitle>
           <DialogContent>
+            Titel:
           <TextField
               margin="dense"
               name="header"
-              label="Titel"
+              // label="Titel"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -465,10 +471,11 @@ class EditKurse extends Component {
                 },
               }}
             />
+            Inhalt:
             <TextField
               margin="dense"
               name="content"
-              label="Inhalt"
+              // label="Inhalt"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -481,6 +488,7 @@ class EditKurse extends Component {
               multiline
               rows="8"
             />
+            Daten:<br/>
         {this.state.list.map((item,i)=>{
           return(
             <React.Fragment key={i}>
@@ -488,7 +496,7 @@ class EditKurse extends Component {
     
                     margin="dense"
                     name="Stichpunkt"
-                    label="Stichpunkt"
+                    // label="Stichpunkt"
                     type="text"
                     width="200px"
                     onChange={(e)=>this.updateList(i,e.target.value)}
@@ -505,10 +513,12 @@ class EditKurse extends Component {
                 </React.Fragment>
           )
         })}
+        <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.addLine}>Zeile hinzufügen</Button><br/><br/>
+        Lehrer:
             <TextField
               margin="dense"
               name="teacher"
-              label="Lehrer"
+              // label="Lehrer"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -521,9 +531,8 @@ class EditKurse extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.addLine}>Zeile hinzufügen</Button>
-            <Button className="btnHref" onClick={this.confirmNew}>Bestätigen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.confirmNew}>Bestätigen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )

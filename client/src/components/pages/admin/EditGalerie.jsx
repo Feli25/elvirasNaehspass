@@ -67,12 +67,13 @@ class EditGalerie extends Component {
           <DialogTitle><h5 className="card-title">Ein Galeriebild hinzufügen</h5></DialogTitle>
           <DialogContent>
             <label xl={3}>Add a picture</label>
-            <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+            <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} /><br/>
+            Titel:
               <TextField
                   autoFocus
                   margin="dense"
                   name="header"
-                  label="Titel"
+                  // label="Titel"
                   type="text"
                   fullWidth
                   onChange={this.handleChange}
@@ -85,8 +86,8 @@ class EditGalerie extends Component {
                 />
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.confirmNew}>Hinzufügen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.confirmNew}>Hinzufügen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -130,8 +131,8 @@ class EditGalerie extends Component {
             <p>Dass du dieses Bild löschen möchtest?</p>
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )

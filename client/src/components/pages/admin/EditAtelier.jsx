@@ -113,8 +113,8 @@ class EditAtelier extends Component {
             <p>Dass du diese Ausstattung löschen möchtest?</p>
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.onDelete}>Löschen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.onDelete}>Löschen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -136,12 +136,13 @@ class EditAtelier extends Component {
         TransitionComponent={Transition}>
           <DialogTitle><h5 className="card-title">Eine Ausstattung hinzufügen</h5></DialogTitle>
           <DialogContent>
-            <label xl={3}>Add a picture</label>
-            <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+            <label xl={3}>Füge ein Bild hinzu</label>
+            <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} /><br/>
+            Titel:
             <TextField
               margin="dense"
               name="header"
-              label="Titel"
+              // label="Titel"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -152,10 +153,11 @@ class EditAtelier extends Component {
                 },
               }}
             />
+            Text:
             <TextField
               margin="dense"
               name="content"
-              label="Text"
+              // label="Text"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -170,8 +172,8 @@ class EditAtelier extends Component {
             />
           </DialogContent>
           <DialogActions>
-            <Button className="btnHref" onClick={this.confirmNew}>Hinzufügen</Button>
-            <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.confirmNew}>Hinzufügen</Button>
+            <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
           </DialogActions>
       </Dialog>
     )
@@ -210,11 +212,12 @@ class EditAtelier extends Component {
         <DialogContent>
           {this.state.pictureUrl&&<img src={this.state.pictureUrl} alt={this.state.pictureName} className="card-img-top"/>} 
           <label xl={3}>Add a picture</label>
-          <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} />
+          <input type="file" name="pictureUrl" cols="30" rows="5" onChange={this.handleFileChange} /><br/>
+          Titel:
           <TextField
               margin="dense"
               name="header"
-              label="Titel"
+              // label="Titel"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -225,10 +228,11 @@ class EditAtelier extends Component {
                 },
               }}
             />
+            Text:
             <TextField
               margin="dense"
               name="content"
-              label="Text"
+              // label="Text"
               type="text"
               fullWidth
               onChange={this.handleChange}
@@ -243,8 +247,8 @@ class EditAtelier extends Component {
             />
         </DialogContent>
         <DialogActions>
-          <Button className="btnHref" onClick={this.confirmEdit}>Aktualisieren</Button>
-          <Button className="btnHref" onClick={this.cancel}>Abbrechen</Button>
+          <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.confirmEdit}>Aktualisieren</Button>
+          <Button className="btnHref" style={{fontSize:"12px"}} onClick={this.cancel}>Abbrechen</Button>
         </DialogActions>
       </Dialog>
     )
