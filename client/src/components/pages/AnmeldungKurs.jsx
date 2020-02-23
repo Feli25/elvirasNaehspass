@@ -45,9 +45,11 @@ class AnmeldungKurs extends Component {
         // api.getInfoById(specialInfo)
       .then(result=>{
         var choices = []
-        result[0].list.filter(obj=>{
-          return obj.belegt===false
-        }).forEach(obj=>{
+        result[0].list
+        // .filter(obj=>{
+        //   return obj.belegt===false
+        // })
+        .forEach(obj=>{
           if(obj.name!==""){
             var array = obj.name.split("$")
             choices.push(array[0])
