@@ -113,8 +113,10 @@ export default class Kurse extends Component {
           <div className="button-container">
             <a id="class-page-button" className="btnHref" href="/anmeldung/kurse">Einen Kurs buchen</a>
           </div>
-            <StaticContentKurse/>
-            {this.renderSpecificFlexibleContent()}
+            <section className="card-container">
+              <StaticContentKurse/>
+              {this.renderSpecificFlexibleContent()}
+            </section>
             {this.renderNormalFlexibleContent()}
       </div>
     );

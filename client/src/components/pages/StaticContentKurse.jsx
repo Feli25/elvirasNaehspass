@@ -4,7 +4,6 @@ export default class StaticContentKurse extends Component {
   render() {
     return (
       <React.Fragment>
-          <section className="card-container">
 
             <div className="card image-direction" style={{width: "30rem"}}>
               <img src="../images/selberGenaeht.png" alt="Nähkurs" className="card-img-top"/>
@@ -73,7 +72,6 @@ export default class StaticContentKurse extends Component {
                   </table>
               </div>
             </div>*/}
-            </section>
           {/* <section className="card-container">
           <div className="card flexible-card">
             <div className="card-body">
