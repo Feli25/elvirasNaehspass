@@ -33,13 +33,18 @@ export default class Kurse extends Component {
           return (
             <div className="card flexible-card">
               <div className="card-body">
-                <h5 className="card-title">{course.header}</h5>
+                <h1>{course.header}</h1>
+                BB = Barbara Beckmann<br/>
+                ED = Elvira Deutges<br/>
+                NM = Nicola Münter<br/>
+                SB = Simone Becher
+                {/* <h5 className="card-title">{course.header}</h5> */}
                 {course.list.length>0 && course.list[0].name!=="" &&
                 <table className="table">
                   <tr>
                     <th>Kurs</th>
-                    <th>Terminanzahl</th>
-                    <th>Beginn</th>
+                    <th>Uhrzeit</th>
+                    <th>Lehrer</th>
                     <th>   </th>
                   </tr>
                   {course.list.map((item)=>{

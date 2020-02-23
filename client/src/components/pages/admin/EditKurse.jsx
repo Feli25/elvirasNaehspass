@@ -120,8 +120,8 @@ class EditKurse extends Component {
             <table className="table">
               <tr>
                 <th>Kurs</th>
-                <th>Terminanzahl</th>
-                <th>Beginn</th>
+                <th>Uhrzeit</th>
+                <th>Lehrer</th>
                 <th>   </th>
               </tr>
               {course.list.map((item)=>{
@@ -332,8 +332,8 @@ class EditKurse extends Component {
             <table className="table">
               <tr>
                 <th>Name</th>
-                <th>Anzahl</th>
-                <th>Startdatum</th>
+                <th>Uhrzeit</th>
+                <th>Lehrer</th>
                 <th>belegt?</th>
                 <th>Entfernen</th>
               </tr>
@@ -364,8 +364,8 @@ class EditKurse extends Component {
                     <TextField
       
                       margin="dense"
-                      name="Terminanzahl"
-                      label="Terminanzahl"
+                      name="Uhrzeit"
+                      label="Uhrzeit"
                       type="text"
                       width="200px"
                       onChange={(e)=>this.changeInputSpecial(i,e.target.value,1)}
@@ -381,8 +381,8 @@ class EditKurse extends Component {
                     <TextField
       
                       margin="dense"
-                      name="Beginn"
-                      label="Beginn"
+                      name="Lehrer"
+                      label="Lehrer"
                       type="text"
                       width="200px"
                       onChange={(e)=>this.changeInputSpecial(i,e.target.value,2)}
