@@ -14,18 +14,21 @@ let transporter = nodemailer.createTransport({
 });
 
 router.post('/kontakt', (req,res,next)=>{
-  var mailOptions = {
-    to: "elvirasnaehspass@gmail.com",
-    from: '"Elviras Nähspass Website"',
+  const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const msg = {
+    to: 'elvirasnaehspass@gmail.com',
+    from: 'elvirasnaehspass@gmail.com',
+    reply_to:req.body.email,
     subject: 'Betreff: ' + req.body.subject,
     text: 'Jemand auf der neuen Website hat ein Kontaktformular geschickt!\n\n' +
       'Das Kontaktformular wurde von ' + req.body.name + ' gesendet.\n\n' +
       'Email: ' + req.body.email + '\n\n' +
       'Die Nachricht: ' + req.body.message + '\n'
   };
-  transporter.sendMail(mailOptions)
-    .then(sth => res.json( { success: true }))
-    .catch(err => { console.log(err) })
+  sgMail.send(msg)
+    .then(response=>{ res.json( { success: true })})
+    .catch(err=>{console.log(err)})
 })
 
 router.post("/anmeldung/:type", (req,res,next)=>{

@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 // import { api } from 'cloudinary/lib/cloudinary';
 import api from '../../api';
+import { withStyles } from '@material-ui/core/styles';
 import {Dialog, Slide, DialogContent, DialogActions, Button, DialogTitle} from '@material-ui/core'
+import CircularProgress from '@material-ui/core/CircularProgress';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+const styles = theme => ({
+  progress: {
+    margin: theme.spacing.unit * 2,
+  },
+});
 
-export default class Home extends Component {
+class Kontakt extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -16,7 +23,8 @@ export default class Home extends Component {
       message:"",
       success:false,
       error:false,
-      errorMessage:null
+      errorMessage:null,
+      loading:false
     }
   }
   onChange=(event)=>{
@@ -25,20 +33,29 @@ export default class Home extends Component {
     })
   }
   submitContact=()=>{
+    this.setState({loading:true})
     if(this.state.name!==""
     &&this.state.email!==""
     &&this.state.message!==""
     &&this.state.subject!==""){
       api.sendKontakt(this.state)
       .then(sth=>{
-        this.setState({success:true,errorMessage:"Success"})
+        this.setState({success:true,errorMessage:"Success",loading:false})
       })
       .catch(err=>{console.log(err)
-        this.setState({error:true})})
+        this.setState({error:true,loading:false})})
     }
     else {
       alert("Bitte alle Felder ausfüllen!")
     }
+  }
+  renderLoadingPopup=()=>{
+    return (
+      <Dialog open={this.state.loading} TransitionComponent={Transition} style={{display:"flex",justifyContent:"center"}}>
+        <DialogTitle><h5 className="card-title">Loading...</h5></DialogTitle>
+        <CircularProgress className={this.props.classes.progress} color="secondary" />
+    </Dialog>
+    )
   }
   cancel=()=>{
       this.setState({success:false,
@@ -110,7 +127,10 @@ export default class Home extends Component {
           </section>
           {this.renderErrorPopup()}
           {this.renderSuccessPopup()}
-      </React.Fragment>
+          {this.renderLoadingPopup()}
+        </React.Fragment>
     );
   }
 }
+
+export default withStyles(styles)(Kontakt);
