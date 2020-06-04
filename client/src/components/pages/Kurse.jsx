@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import StaticContentKurse from './StaticContentKurse';
-import CountDownClock from '../CountDownClock'
+// import CountDownClock from '../CountDownClock'
 
 export default class Kurse extends Component {
   constructor(props) {
@@ -58,7 +58,7 @@ export default class Kurse extends Component {
                           <td>{item.belegt && <span style={{color:"red"}}>belegt</span>}</td>
                         </tr>
                       )
-                    }
+                    } else {return <React.Fragment></React.Fragment>}
                   })}
                 </table>}
               </div>
@@ -84,7 +84,7 @@ export default class Kurse extends Component {
                       return (
                         <li key={item.name}>{item.name}{item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
                       )
-                    }
+                    } else {return <React.Fragment></React.Fragment>}
                   })}
                 </ol>}
                 <p className="card-text">by {course.teacher}</p>

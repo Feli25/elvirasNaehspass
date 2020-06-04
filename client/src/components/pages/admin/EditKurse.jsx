@@ -68,7 +68,7 @@ class EditKurse extends Component {
                   return (
                     <li key={item.name}>{item.name} {item.belegt && <span style={{color:"red"}}>belegt</span>}</li>
                   )
-                }
+                } else {return <React.Fragment></React.Fragment>}
               })}
             </ol>}
             <p className="card-text">by {course.teacher}</p>
@@ -135,7 +135,7 @@ class EditKurse extends Component {
                       <td>{item.belegt && <span style={{color:"red"}}>belegt</span>}</td>
                     </tr>
                   )
-                }
+                } else {return <React.Fragment></React.Fragment>}
               })}
             </table>}
             <button className="btnHref" onClick={()=>{this.selectSpecialEdit(course)}}>Bearbeiten</button>

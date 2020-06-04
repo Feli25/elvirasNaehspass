@@ -33,7 +33,7 @@ export default class Home extends Component {
                           return(
                             <li  key={item.name} >{item.name}{"   "}{item.belegt&&<span color="red">Belegt</span>}</li>
                             )
-                          }
+                          } else {return <React.Fragment></React.Fragment>}
                         })}
                     </ul>
                 }

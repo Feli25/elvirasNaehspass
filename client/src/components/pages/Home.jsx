@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CountDownClock from '../CountDownClock'
+// import CountDownClock from '../CountDownClock'
 import api from '../../api';
 
 export default class Home extends Component {

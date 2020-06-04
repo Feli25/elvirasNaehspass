@@ -1,9 +1,8 @@
 const express = require('express');
-const { isLoggedIn } = require('../middlewares')
 const router = express.Router();
 const Info = require('../models/Info')
-const parser = require('../configs/cloudinary.js');
-const cloudinary = require('cloudinary');
+// const parser = require('../configs/cloudinary.js');
+// const cloudinary = require('cloudinary');
 
 router.get('/kurse', (req,res,next)=>{
   Info.find({ category: "KURSE" })

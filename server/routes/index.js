@@ -1,5 +1,4 @@
 const express = require('express');
-const { isLoggedIn } = require('../middlewares')
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const Info = require('../models/Info')
