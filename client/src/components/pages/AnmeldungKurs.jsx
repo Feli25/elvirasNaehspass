@@ -138,7 +138,7 @@ class AnmeldungKurs extends Component {
           {/* </DialogContentText> */}
         </DialogContent>
         <DialogActions>
-          <Button className="btnHref" onCLick={this.cancel}>Zurück</Button>
+          <Button className="btnHref" onClick={this.cancel}>Zurück</Button>
         </DialogActions>  
     </Dialog>)
   }

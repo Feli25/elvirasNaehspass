@@ -1,16 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const nodemailer = require('nodemailer');
 const Info = require('../models/Info')
-
-
-let transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: process.env.GMAIL_EMAIL,
-    pass: process.env.GMAIL_PASSWORD
-  }
-});
 
 router.post('/kontakt', (req,res,next)=>{
   const sgMail = require('@sendgrid/mail');
@@ -30,122 +20,137 @@ router.post('/kontakt', (req,res,next)=>{
     .catch(err=>{console.log(err)})
 })
 
-router.post("/anmeldung/:type", (req,res,next)=>{
-  var html = `<h1>Die Anfrage:</h1><hr>`
-  var SendToTeacher = "elvirasnaehspass@gmail.com"
-  // var SendToTeacher = "fee2599@gmail.com"
+function createHTML(body){
+  let html = `<h1>Die Anfrage:</h1><hr>`
+  if(body.sharing){
+    html += `<p>${body.name} (${body.email}) und ${body.shareName} (${body.shareEmail}) möchten gemeinsam diesem Kurs betreten:<br/>Wahlen: ${body.choice1}<br/>${body.choice2}<br/>${body.choice3}`
+    html += `<br/>Die eingetragenen Infos:<br/>Person 1:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.adress}<br/>Person 2:<br/>Name: ${body.shareName}<br/>Email: ${body.shareEmail}`
+  } else {
+    html += `<p>${body.name} (${body.email}) möchte diesem Kurs betreten:<br>Wahlen:<br/> ${body.choice1}<br/>${body.choice2}<br/>${body.choice3}`
+    html += `<br/>Die eingetragenen Infos:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.adress}`
+  }
+  html += `</p><p>Weitere Mitteilung: ${body.message}</p><br><hr><br>`
+  return html
+}
 
-  if(req.params.type==="kurs"){
-    //choice object is the course name string
-    if(req.body.sharing){
-      html += `<p>${req.body.name} (${req.body.email}) und ${req.body.shareName} (${req.body.shareEmail}) möchten gemeinsam diesem Kurs betreten:<br/>Wahlen: ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
-      html += `<br/>Die eingetragenen Infos:<br/>Person 1:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}<br/>Person 2:<br/>Name: ${req.body.shareName}<br/>Email: ${req.body.shareEmail}`
-    } else {
-      html += `<p>${req.body.name} (${req.body.email}) möchte diesem Kurs betreten:<br>Wahlen:<br/> ${req.body.choice1}<br/>${req.body.choice2}<br/>${req.body.choice3}`
-      html += `<br/>Die eingetragenen Infos:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}`
-    }
-    html += `</p><p>Weitere Mitteilung: ${req.body.message}</p><br><hr><br>`
-    transporter.sendMail({
-      from: '"Elviras Naehspass Website"',
-      to: SendToTeacher,
-      subject: "Eine neue "+req.params.type+ " Anmeldung",
-      text: req.body.message,
-      html: html
-    })
-    .then(sth => {console.log("sent")
-      var htmlThankYou = `Sehr geehrte/r ${req.body.name} <br/><br/>
+function createHTMLThankYou(body){
+  let htmlThankYou = `Sehr geehrte/r ${body.name} <br/><br/>
                           Wir danken vielmals für Ihre Anmeldung für folgenden Kurs(e):<br/> 
-                          1ste Wahl: ${req.body.choice1}<br/>`
-      if(req.body.choice2!=="none"){
-        htmlThankYou+="2te Wahl: "+req.body.choice2+"<br/>"
+                          1ste Wahl: ${body.choice1}<br/>`
+      if(body.choice2!=="none"){
+        htmlThankYou+="2te Wahl: "+body.choice2+"<br/>"
       }
-      if(req.body.choice3!=="none"){
-        htmlThankYou+="3te Wahl: "+req.body.choice3+"<br/>"
+      if(body.choice3!=="none"){
+        htmlThankYou+="3te Wahl: "+body.choice3+"<br/>"
       }
-      htmlThankYou+=`Folgende Person(en) wurden angemeldet: ${req.body.name}`
-      if(req.body.sharing){
-        htmlThankYou+=` und ${req.body.shareName}<br/>`
+      htmlThankYou+=`Folgende Person(en) wurden angemeldet: ${body.name}`
+      if(body.sharing){
+        htmlThankYou+=` und ${body.shareName}`
       } 
-      htmlThankYou+=`In Kürze werden Sie eine Information erhalten, ob Sie erfolgreich aufgenommen worden sind, sowie alle weiteren benötigten Informationen!<br/><br/>
+      htmlThankYou+=`<br/>In Kürze werden Sie eine Information erhalten, ob Sie erfolgreich aufgenommen worden sind, sowie alle weiteren benötigten Informationen!<br/><br/>
                           Mit lieben Grüßen<br/>
                           Ihr Team von Elviras Nähspass</p>`
-      transporter.sendMail({
-        from: '"Elviras Naehspass"',
-        to: req.body.email,
-        subject: "Vielen Dank für Ihre Anmeldung!",
-        html: htmlThankYou
-      })
-      .then(sth2=>{
-        console.log("sentstudent")
-        if(req.body.shareName){
-          var htmlThankYouShare = 
-            `Sehr geehrte/r ${req.body.shareName} <br/><br/>
+  return htmlThankYou 
+}
+
+function createHTMLThankYouShare(body){
+  let htmlThankYouShare = 
+            `Sehr geehrte/r ${body.shareName} <br/><br/>
             Wir danken vielmals für Ihre Anmeldung für folgenden Kurs(e):<br/> 
-            1ste Wahl: ${req.body.choice1}<br/>`
-            if(req.body.choice2!=="none"){
-              htmlThankYouShare+="2te Wahl: "+req.body.choice2+"<br/>"
+            1ste Wahl: ${body.choice1}<br/>`
+            if(body.choice2!=="none"){
+              htmlThankYouShare+="2te Wahl: "+body.choice2+"<br/>"
             }
-            if(req.body.choice3!=="none"){
-              htmlThankYouShare+="3te Wahl: "+req.body.choice3+"<br/>"
+            if(body.choice3!=="none"){
+              htmlThankYouShare+="3te Wahl: "+body.choice3+"<br/>"
             }
-            htmlThankYouShare+=`Sie wurden von ${req.body.name} angemeldet.<br/>
+            htmlThankYouShare+=`Sie wurden von ${body.name} angemeldet.<br/>
             In Kürze werden Sie eine Information erhalten, ob Sie erfolgreich aufgenommen worden sind, sowie alle weiteren benötigten Informationen!<br/><br/>
             Mit lieben Grüßen<br/>
             Ihr Team von Elviras Nähspass</p>`
-          transporter.sendMail({
-            from: '"Elviras Naehspass"',
-            to: req.body.shareEmail,
-            subject: "Vielen Dank für Ihre Anmeldung!",
-            html: htmlThankYouShare
-          })
-          .then(sth3=>{
-            res.json( { success: true })
+  return htmlThankYouShare
+}
+function createHTMLWorkshop(body, course){
+  let html = `<h1>Die Anfrage:</h1><hr>`
+  html += `<p>${body.name} (${body.email}) möchte an diesem Workshop teilnehmen: ${course.header}<br/>Die eingetragenen Infos:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.adress}`
+  html += `</p><p>Weitere Mitteilung: ${body.message}</p><br><hr><br>`
+  return html
+}
+function createHTMLThankYouWorkshop(body,course){
+  let htmlThankYou = 
+  `Sehr geehrte/r ${body.name} <br/><br/>
+  Wir danken vielmals für Ihre Anmeldung für folgenden Workshop:<br/> ${course.header}<br/>
+  In Kürze werden Sie eine Information erhalten, ob Sie erfolgreich aufgenommen worden sind, sowie alle weiteren benötigten Informationen!<br/><br/>
+  Mit lieben Grüßen<br/>
+  Ihr Team von Elviras Nähspass</p>`
+  return htmlThankYou
+}
+
+router.post("/anmeldung/:type", (req,res,next)=>{
+  const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  let messageToTeachers = {
+    to: "elvirasnaehspass@gmail.com",
+    from: 'elvirasnaehspass@gmail.com',
+    reply_to:req.body.email,
+    subject: "Eine neue "+req.params.type+ " Anmeldung",
+  }
+  let messageToStudents = {
+    to: req.body.email,
+    from: 'elvirasnaehspass@gmail.com',
+    subject: "Vielen Dank für Ihre Anmeldung!",
+  }
+
+  if(req.params.type==="kurs"){
+    //choice object is the course name string
+    const html = createHTML(req.body)
+    messageToTeachers.html = html
+    sgMail.send(messageToTeachers)
+      .then(sth => {
+        console.log("sent")
+        const htmlThankYou = createHTMLThankYou(req.body)
+        messageToStudents.html=htmlThankYou
+        sgMail.send(messageToStudents)
+          .then(sth2=>{
+            console.log("sentstudent")
+            if(req.body.shareName){
+              const htmlThankYouShare = createHTMLThankYouShare(req.body)
+              messageToStudents.html=htmlThankYouShare
+              messageToStudents.to = req.body.shareEmail
+              sgMail.send(messageToStudents)
+                .then(sth3=>{res.json( { success: true })})
+                .catch(err => { console.log(err) })
+            } else {
+              res.json( { success: true })
+            }
           })
           .catch(err => { console.log(err) })
-        }
-        else {
-          res.json( { success: true })
-        }
       })
       .catch(err => { console.log(err) })
-    })
-    .catch(err => { console.log(err) })
     
   } else if(req.params.type="workshop"){
     //choice object is the course id
     Info.findById(req.body.choice)
       .then(course=>{
-        html += `<p>${req.body.name} (${req.body.email}) möchte an diesem Workshop teilnehmen: ${course.header}<br/>Die eingetragenen Infos:<br/>Name: ${req.body.name}<br/>Email: ${req.body.email}<br/>Telefon: ${req.body.phone}<br/>Adresse: ${req.body.adress}`
-        if(course.category==="DESSOUS"){
-          SendToTeacher += ", beckmannbarbara@web.de"
-        }
-        html += `</p><p>Weitere Mitteilung: ${req.body.message}</p><br><hr><br>`
-        transporter.sendMail({
-          from: '"Elviras Naehspass Website"',
-          to: SendToTeacher,
-          subject: "Eine neue "+req.params.type+ " Anmeldung",
-          text: req.body.message,
-          html: html
-        })
+        const html = createHTMLWorkshop(req.body, course)
+        messageToTeachers.html = html
         
-        .then(sth => {console.log("sent")
-          var htmlThankYou = 
-            `Sehr geehrte/r ${req.body.name} <br/><br/>
-            Wir danken vielmals für Ihre Anmeldung für folgenden Workshop:<br/> ${course.header}<br/>
-            In Kürze werden Sie eine Information erhalten, ob Sie erfolgreich aufgenommen worden sind, sowie alle weiteren benötigten Informationen!<br/><br/>
-            Mit lieben Grüßen<br/>
-            Ihr Team von Elviras Nähspass</p>`
-          transporter.sendMail({
-          from: '"Elviras Naehspass"',
-          to: req.body.email,
-          subject: "Vielen Dank für Ihre Anmeldung!",
-          html: htmlThankYou
-          })
-          .then(sth2=>{
-            res.json( { success: true })})
+        sgMail.send(messageToTeachers)
+          .then(sth => {
+            if(course.category==="DESSOUS"){
+              messageToTeachers.to = "beckmannbarbara@web.de"
+              sgMail.send(messageToTeachers)
+                .then(sth=>console.log("success"))
+                .catch(err=>console.log("ERROR",err))
+            }
+            console.log("sent")
+            const htmlThankYou = createHTMLThankYouWorkshop(req.body,course)
+            messageToStudents.html = htmlThankYou
+            sgMail.send(messageToStudents)
+              .then(sth2=>{res.json( { success: true })})
+              .catch(err => { console.log(err) })
           })
           .catch(err => { console.log(err) })
-        .catch(err => { console.log(err) })
       })
       .catch(err=>console.log(err))
   }
