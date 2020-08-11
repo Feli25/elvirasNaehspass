@@ -12,7 +12,6 @@ const styles = theme => ({
     margin: theme.spacing.unit * 2,
   },
 });
-//test
 
 class Kontakt extends Component {
   constructor(props) {
