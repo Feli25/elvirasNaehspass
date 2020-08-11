@@ -4,6 +4,7 @@ const router = express.Router();
 const Equipment = require('../models/Equipment')
 const parser = require('../configs/cloudinary.js');
 const cloudinary = require('cloudinary');
+const postgreSQL = require('../configs/queries')
 
 router.get('/', (req,res,next)=>{
   Equipment.find(null, null, { sort: { created_at: -1 }})
@@ -12,6 +13,8 @@ router.get('/', (req,res,next)=>{
     })
     .catch(err => next(err))
 })
+
+router.get('/userTest', postgreSQL.getUsers)
 
 router.post('/new-pic', parser.single('picture'), (req,res,next)=>{
   let { header, content } = req.body
