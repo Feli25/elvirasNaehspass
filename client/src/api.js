@@ -213,6 +213,13 @@ export default {
       .catch(errHandler)
   },
 
+  getTestUsers(){
+    return service
+    .get('/equipment/userTest')
+    .then(res => res.data)
+    .catch(errHandler)
+  },
+
   getEquipment(){
     return service
       .get('/equipment')
