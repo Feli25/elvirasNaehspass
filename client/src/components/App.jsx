@@ -31,14 +31,14 @@ import CountDownClock from './CountDownClock';
 
 export default class App extends Component {
 
-  componentDidMount(){
-    console.log("test")
-    api.getTestUsers()
-      .then(response=>{
-        console.log("test users",response)
-      })
-      .catch(err=>{console.log("error",err)})
-  }
+  // componentDidMount(){
+  //   console.log("test")
+  //   api.getTestUsers()
+  //     .then(response=>{
+  //       console.log("test users",response)
+  //     })
+  //     .catch(err=>{console.log("error",err)})
+  // }
 
   handleLogoutClick(e) {
     api.logout()
