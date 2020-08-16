@@ -2,12 +2,11 @@ const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
-  ssl: process.env.SSL_SETTING || false,
+  ssl: false,
 });
 
-client.connect();
-
 const getUsers = (request, response) => {
+  client.connect();
   client.query('SELECT * FROM users ORDER BY id ASC;', (err, res) => {
     if (err) response.status(200).json(["hello",err])
     else response.status(200).json(res.rows)
