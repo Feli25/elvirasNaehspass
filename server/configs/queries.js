@@ -1,20 +1,18 @@
-const Pool = require('pg').Pool
-const pool = new Pool({
-  user: process.env.PGSQL_USER_INFO,
-  host: process.env.PGSQL_HOST,
-  database: process.env.DATABASE_URL,
-  password: process.env.PGSQL_PASSWORD,
-  port: 5432,
-})
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.SSL_SETTING || false,
+});
+
+client.connect();
 
 const getUsers = (request, response) => {
-  pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
-    if (error) {
-      response.status(200).json(["hello", error])
-    } else {
-      response.status(200).json(results.rows)
-    }
-  })
+  client.query('SELECT * FROM users ORDER BY id ASC;', (err, res) => {
+    if (err) response.status(200).json(["hello",err])
+    else response.status(200).json(res.rows)
+    client.end();
+  });
 }
 module.exports = {
   getUsers
