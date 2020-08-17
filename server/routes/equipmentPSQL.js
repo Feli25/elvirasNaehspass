@@ -31,7 +31,7 @@ router.get('/', async (req,res,next)=>{
   }
 })
 
-router.get('/new-pic', parser.single('picture'), (req,res,next)=>{
+router.post('/new-pic', parser.single('picture'), (req,res,next)=>{
   const client = new Client(configs);
   client.connect();
 
@@ -51,7 +51,7 @@ router.get('/new-pic', parser.single('picture'), (req,res,next)=>{
     .catch(err => next(err))
 })
 
-router.get('/new', (req,res,next)=>{
+router.post('/new', (req,res,next)=>{
   const client = new Client(configs);
   client.connect();
 
@@ -65,7 +65,7 @@ router.get('/new', (req,res,next)=>{
     .catch(err => next(err))
 })
 
-router.get('/edit-pic/:id', parser.single('picture'), (req,res,next)=>{
+router.post('/edit-pic/:id', parser.single('picture'), (req,res,next)=>{
   let id = req.params.id
   let { header, content, public_id } = req.body
   cloudinary.v2.uploader.destroy(public_id, function(result) { console.log(result) });
@@ -89,7 +89,7 @@ router.get('/edit-pic/:id', parser.single('picture'), (req,res,next)=>{
     .catch(err => next(err))
 })
 
-router.get('/edit/:id', (req,res,next)=>{
+router.post('/edit/:id', (req,res,next)=>{
   const client = new Client(configs);
   client.connect();
 
