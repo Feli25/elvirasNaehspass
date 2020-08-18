@@ -34,11 +34,11 @@ router.get('/', async (req,res,next)=>{
 router.get('/delete/:id', async (req,res,next)=>{
   try{
     let id = req.params.id
-
     const client = new Client(configs);
     client.connect();
   
-    const publicid = await client.query('SELECT publicid FROM galeriepics WHERE id=$1',[id])
+    const publicidQuery = await client.query('SELECT publicid FROM galeriepics WHERE id=$1',[id])
+    const publicid = publicidQuery && publicidQuery.rows && publicidQuery.rows[0] && publicidQuery.rows[0].publicid
     if (publicid) cloudinary.v2.uploader.destroy(publicid, function(result) { console.log(result) })
     const deletePost = await client.query('DELETE FROM galeriepics WHERE id=$1', [id])
     if(!deletePost) throw "ERROR";
@@ -51,10 +51,10 @@ router.get('/delete/:id', async (req,res,next)=>{
 
 router.post('/new', parser.single('picture'), async (req,res,next)=>{
   try{
-    const client = new Client(configs);
-    client.connect();
     let { header } = req.body
     let file = req.file
+    const client = new Client(configs);
+    client.connect();
   
     const addedPicture = await client.query('INSERT INTO galeriepics (header, imgpath, imgname, publicid) VALUES ($1, $2, $3, $4)',[
       header,
