@@ -50,11 +50,15 @@ require('./passport')(app)
 
 app.use('/api', require('./routes/index'))
 app.use('/api', require('./routes/auth'))
+// app.use('/api', require('./routes/authPSQL'))
 // app.use('/api/equipment', require('./routes/equipment'))
 app.use('/api/equipment', require('./routes/equipmentPSQL'))
-app.use('/api/galerie', require('./routes/galerie'))
+// app.use('/api/galerie', require('./routes/galerie'))
+app.use('/api/galerie', require('./routes/galeriePSQL'))
 app.use('/api/post', require('./routes/post'))
+// app.use('/api/post', require('./routes/postPSQL'))
 app.use('/api/info', require('./routes/info'))
+// app.use('/api/info', require('./routes/infoPSQL'))
 // app.use('/api/admin', require('./routes/admin'))
 
 // For any routes that starts with "/api", catch 404 and forward to error handler

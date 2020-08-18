@@ -9,7 +9,7 @@ const cloudinary = require('cloudinary');
 
 // ALWAYS export it this way though:
 // _id, header, content, imgPath, imgName, public_id
-// this is what the frotend is expecting
+// this is what the frontend is expecting
 
 const { Client } = require('pg');
 const configs = {
