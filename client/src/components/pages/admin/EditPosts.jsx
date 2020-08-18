@@ -58,6 +58,7 @@ class EditPosts extends Component {
             <h5 className="card-title">{post.header}</h5>
             <p className="card-text">{post.content}</p>
             <h6 className="card-subtitle mb-2 text-muted">by {post._creator.username}</h6>
+            {/* <h6 className="card-subtitle mb-2 text-muted">by {post.creator}</h6> */}
             <button className="btnHref" onClick={()=>{this.editPost(post)}}>Bearbeiten</button>
             <button className="btnHref" onClick={()=>{this.deleteConfirm(post._id)}}>Löschen</button>
           </div>
