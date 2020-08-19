@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Info = require('../models/Info')
-// const parser = require('../configs/cloudinary.js');
-// const cloudinary = require('cloudinary');
 
 // DB structure/model:
-// id, category, header, content, list, teacher
+// id, category, header, content, list (string), teacher
 
 // ALWAYS export it this way though:
-// _id, category, header, content, list, teacher
+// _id, category, header, content, list (object), teacher
 // this is what the frontend is expecting
 
 const { Client } = require('pg');
