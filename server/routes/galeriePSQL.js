@@ -27,6 +27,7 @@ router.get('/', async (req,res,next)=>{
     res.json(pictureArray)
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })
@@ -41,10 +42,14 @@ router.get('/delete/:id', async (req,res,next)=>{
     const publicid = publicidQuery && publicidQuery.rows && publicidQuery.rows[0] && publicidQuery.rows[0].publicid
     if (publicid) cloudinary.v2.uploader.destroy(publicid, function(result) { console.log(result) })
     const deletePost = await client.query('DELETE FROM galeriepics WHERE id=$1', [id])
-    if(!deletePost) throw "ERROR";
+    if(!deletePost) {
+      client.end();
+      next (new Error("Could not delete picture"))
+    }
     res.json({ success:true })
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })
@@ -62,10 +67,14 @@ router.post('/new', parser.single('picture'), async (req,res,next)=>{
       file.originalname,
       file.public_id
     ])
-    if(!addedPicture) throw "ERROR";
+    if(!addedPicture) {
+      client.end();
+      next (new Error("Could not create picture"))
+    }
     res.json({ success:true })
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })

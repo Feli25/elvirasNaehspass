@@ -49,8 +49,8 @@ require('./passport')(app)
 
 
 app.use('/api', require('./routes/index'))
-// app.use('/api', require('./routes/auth'))
-app.use('/api', require('./routes/authPSQL'))
+app.use('/api', require('./routes/auth'))
+// app.use('/api', require('./routes/authPSQL'))
 // app.use('/api/equipment', require('./routes/equipment'))
 app.use('/api/equipment', require('./routes/equipmentPSQL'))
 // app.use('/api/galerie', require('./routes/galerie'))

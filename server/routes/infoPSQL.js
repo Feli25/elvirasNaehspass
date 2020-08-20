@@ -41,15 +41,16 @@ router.get('/', async (req,res,next)=>{
     res.json( info )
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })
 
 router.get('/byid/:id', async (req,res,next)=>{
   try{
+    let id = req.params.id
     const client = new Client(configs);
     client.connect();
-    let id = req.params.id
   
     const infoQuery = await client.query('SELECT id AS _id, category, header, content, list AS liststring, teacher FROM infos WHERE id=$1',[id])
     const info = infoQuery.rows.map(kurs => {
@@ -59,30 +60,35 @@ router.get('/byid/:id', async (req,res,next)=>{
     res.json( info )
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })
 
 router.get('/delete/:id', async (req,res,next)=>{
   try{
+    let id = req.params.id
     const client = new Client(configs);
     client.connect();
-    let id = req.params.id
   
     const deletePost = await client.query('DELETE FROM infos WHERE id=$1', [id])
-    if(!deletePost) throw "ERROR";
+    if(!deletePost) {
+      client.end();
+      next( new Error("Could not delete info"))
+    }
     res.json({ success:true })
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })
 
 router.get('/:category', async (req,res,next)=>{
   try{
+    let category = req.params.category.toUpperCase()
     const client = new Client(configs);
     client.connect();
-    let category = req.params.category.toUpperCase()
   
     const tableQuery = await client.query('SELECT id AS _id, category, header, content, list AS liststring, teacher FROM infos WHERE category=$1',[category])
     const table = tableQuery.rows.map(kurs => {
@@ -92,15 +98,17 @@ router.get('/:category', async (req,res,next)=>{
     res.json( table )
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })
 
 router.post('/new', async (req,res,next)=>{
   try{
+    let { header, content, category, list,teacher } = req.body
     const client = new Client(configs);
     client.connect();
-    let { header, content, category, list,teacher } = req.body
+
     const insertedPost = await client.query('INSERT INTO infos (category, header, content, list, teacher) VALUES($1,$2,$3,$4,$5)',[
       category,
       header,
@@ -108,22 +116,26 @@ router.post('/new', async (req,res,next)=>{
       JSON.stringify(list),
       teacher
     ])
-    if(!insertedPost) throw "ERROR";
+    if(!insertedPost) {
+      client.end();
+      next( new Error("Could not create info"))
+    }
     res.json({ success:true })
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })
 
 router.post('/edit/:id', async (req,res,next)=>{
   try{
-    const client = new Client(configs);
-    client.connect();
     let id = req.params.id
     let { header, content, list, category,teacher } = req.body
+    const client = new Client(configs);
+    client.connect();
   
-    const updatedPost = await client.query('UPDATE infos SET category=$1, header=$2, content=$3, list=$4, teacher=$5 WHERE id=$6',[
+    const updatedInfo = await client.query('UPDATE infos SET category=$1, header=$2, content=$3, list=$4, teacher=$5 WHERE id=$6',[
       category,
       header,
       content,
@@ -131,10 +143,14 @@ router.post('/edit/:id', async (req,res,next)=>{
       teacher,
       id
     ])
-    if(!updatedPost) throw "ERROR";
+    if(!updatedInfo) {
+      client.end();
+      next( new Error("Could not update info"))
+    }
     res.json({ success:true })
     client.end();
   } catch(err){
+    client.end();
     next(err)
   }
 })
