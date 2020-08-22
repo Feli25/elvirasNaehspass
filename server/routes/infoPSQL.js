@@ -41,7 +41,6 @@ router.get('/', async (req,res,next)=>{
     res.json( info )
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -60,7 +59,6 @@ router.get('/byid/:id', async (req,res,next)=>{
     res.json( info )
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -79,7 +77,6 @@ router.get('/delete/:id', async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -98,7 +95,6 @@ router.get('/:category', async (req,res,next)=>{
     res.json( table )
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -123,7 +119,6 @@ router.post('/new', async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -150,7 +145,6 @@ router.post('/edit/:id', async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })

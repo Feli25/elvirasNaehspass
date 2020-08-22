@@ -9,7 +9,7 @@ const cloudinary = require('cloudinary');
 // id, status, header, content, creator, imgpath, imgname, publicid
 
 // ALWAYS export it this way though:
-// _id, status, header, content, _creator (object), imgPath, imgName, public_id
+// _id, status, header, content, _creator:{username}, imgPath, imgName, public_id
 // this is what the frontend is expecting
 
 const { Client } = require('pg');
@@ -18,138 +18,156 @@ const configs = {
   ssl: false,
 }
 
-router.get('/latest', (req, res, next) => {
-  Post.find({ status: "ACTIVE" }, null, { sort: { created_at: -1 }, limit: 10 })
-    .populate('_creator')
-    .then(posts => {
-      res.json(posts);
-    })
-    .catch(err => next(err))
-});
-// router.get('/latest', async (req,res,next)=>{
-//   try{
-//     const client = new Client(configs);
-//     client.connect();
-  
-//     const query = await client.query('SELECT posts.id AS _id, status, header, content, imgpath, imgname, publicid AS public_id, users.username AS creator FROM posts LEFT JOIN users ON CAST(users.id AS text) = posts.creator WHERE status=$1',["ACTIVE"])
-//     const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname}})
-//     res.json(postArray)
-//     client.end();
-//   } catch(err){
-//     next(err)
-//   }
-// })
-
-router.get('/all', (req, res, next) => {
-  Post.find({ status: "ACTIVE" }, null, { sort: { created_at: -1 } })
-    .populate('_creator')
-    .then(posts => {
-      res.json(posts);
-    })
-    .catch(err => next(err))
-});
-
-router.post('/new-pic', isLoggedIn, parser.single('picture'), (req,res,next)=>{
-  let { header, content } = req.body
-  let file = req.file
-  Post.create({
-    header:header,
-    content:content,
-    imgPath:file.url,
-    imgName:file.originalname,
-    public_id:file.public_id,
-    _creator:req.user._id,
-    status:"ACTIVE",
-  })
-  .then(post => {
-    res.json({
-      success: true,
-      post
-    });
-  })
-  .catch(err => console.log(err))
+router.get('/latest', async (req,res,next)=>{
+  try{
+    const client = new Client(configs);
+    client.connect();
+    const query = await client.query('SELECT posts.id AS _id, status, header, content, imgpath, imgname, publicid AS public_id, users.username AS creator FROM posts LEFT JOIN users ON CAST(users.id AS text) = posts.creator WHERE status=$1 ORDER BY posts.id DESC LIMIT 10',["ACTIVE"])
+    const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname, _creator: { username : elem.creator }}})
+    res.json(postArray)
+    client.end();
+  } catch(err){
+    next(err)
+  }
 })
 
-router.post('/new', isLoggedIn, (req,res,next)=>{
-  let { header, content } = req.body
-  Post.create({
-    header:header,
-    content:content,
-    _creator:req.user._id,
-    status:"ACTIVE",
-    imgPath:null,
-    imgName:null,
-    public_id:null,
-  })
-  .then(post => {
-    res.json({
-      success: true,
-      post
-    });
-  })
-  .catch(err => console.log(err))
+router.get('/all', async (req,res,next)=>{
+  try{
+    const client = new Client(configs);
+    client.connect();
+  
+    const query = await client.query('SELECT posts.id AS _id, status, header, content, imgpath, imgname, publicid AS public_id, users.username AS creator FROM posts LEFT JOIN users ON CAST(users.id AS text) = posts.creator WHERE status=$1 ORDER BY posts.id DESC',["ACTIVE"])
+    const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname, _creator: { username : elem.creator }}})
+    res.json(postArray)
+    client.end();
+  } catch(err){
+    next(err)
+  }
 })
 
-router.post('/edit-pic/:id', isLoggedIn, parser.single('picture'), (req,res,next)=>{
-  let id = req.params.id
-  let { header, content, public_id } = req.body
-  cloudinary.v2.uploader.destroy(public_id, function(result) { console.log(result) });
-  let file = req.file;
+router.post('/new-pic', isLoggedIn, parser.single('picture'), async (req,res,next)=>{
+  try{
+    let { header, content } = req.body
+    let file = req.file
+    const client = new Client(configs);
+    client.connect();
   
-  Post.findByIdAndUpdate(id,{
-    header:header,
-    content:content,
-    imgPath:file.url,
-    imgName:file.originalname,
-    status:"ACTIVE",
-    public_id: file.public_id
-  })
-    .then(post => {
-      res.json({
-        success: true,
-      })
-    })
-    .catch(err=>{console.log(err)})
+    const addNewWithPic = await client.query('INSERT INTO posts (status, header, content, creator, imgPath, imgName, publicId) VALUES($1, $2, $3, $4, $5, $6, $7)',[
+      "ACTIVE",
+      header,
+      content,
+      req.user._id,
+      file.url,
+      file.originalname,
+      file.public_id
+    ])
+    if(!addNewWithPic) {
+      client.end();
+      next (new Error("Could not create new post picture"))
+    }
+    res.json({ success:true })
+    client.end();
+  } catch(err){
+    next(err)
+  }
 })
 
-router.post('/edit/:id', isLoggedIn, (req,res,next)=>{
-  let id = req.params.id
-  let { header, content } = req.body
+router.post('/new', isLoggedIn, async (req,res,next)=>{
+  try{
+    let { header, content } = req.body
+    const client = new Client(configs);
+    client.connect();
   
-  Post.findByIdAndUpdate(id,{
-    header:header,
-    content:content,
-    status:"ACTIVE",
-  })
-    .then(post => {
-      res.json({
-        success: true,
-      })
-    })
-    .catch(err=>{console.log(err)})
+    const addNewWithPic = await client.query('INSERT INTO posts (status, header, content, creator) VALUES($1, $2, $3, $4)',[
+      "ACTIVE",
+      header,
+      content,
+      req.user._id
+    ])
+    if(!addNewWithPic) {
+      client.end();
+      next (new Error("Could not create new post"))
+    }
+    res.json({ success:true })
+    client.end();
+  } catch(err){
+    next(err)
+  }
 })
 
-router.get('/delete/:id', isLoggedIn, (req,res,next)=>{
-  let id = req.params.id
-  Post.findById(id)
-    .then(post=>{
-      if(post.public_id){
-        cloudinary.v2.uploader.destroy(eq.public_id, function(result) { console.log(result) });
-      }
-    })
-    .then(sth=>
-          Post.findByIdAndDelete(id)
-        .then(sth=>{
-          res.json({
-            success:true
-          })
-        })
-        .catch(err=>{
-          console.log(err)
-        })
-      )
-    .catch(err=>console.log(err))
+router.post('/edit-pic/:id', isLoggedIn, parser.single('picture'), async (req,res,next)=>{
+  try{
+    let id = req.params.id
+    let { header, content, public_id } = req.body
+    cloudinary.v2.uploader.destroy(public_id, function(result) { console.log(result) });
+    let file = req.file;
+    const client = new Client(configs);
+    client.connect();
   
+    const updatetPost = await client.query('UPDATE posts SET status=$1, header=$2, content=$3, imgpath=$4, imgname=$5, publicid=$6 WHERE id=$7',[
+      "ACTIVE",
+      header,
+      content,
+      file.url,
+      file.originalname,
+      file.public_id,
+      id
+    ])
+    if(!updatetPost) {
+      client.end();
+      next (new Error("Could not update post picture"))
+    }
+    res.json({ success:true })
+    client.end();
+  } catch(err){
+    next(err)
+  }
+})
+
+router.post('/edit/:id', isLoggedIn, async (req,res,next)=>{
+  try{
+    let id = req.params.id
+    let { header, content } = req.body
+    const client = new Client(configs);
+    client.connect();
+  
+    const updatetPost = await client.query('UPDATE posts SET status=$1, header=$2, content=$3 WHERE id=$4',[
+      "ACTIVE",
+      header,
+      content,
+      id
+    ])
+    if(!updatetPost) {
+      client.end();
+      next (new Error("Could not update post"))
+    }
+    res.json({ success:true })
+    client.end();
+  } catch(err){
+    next(err)
+  }
+})
+
+router.get('/delete/:id', async (req,res,next)=>{
+  try{
+    let id = req.params.id
+    const client = new Client(configs);
+    client.connect();
+  
+    const publicidQuery = await client.query('SELECT publicid FROM posts WHERE id=$1',[id])
+    const publicid = publicidQuery && publicidQuery.rows && publicidQuery.rows[0] && publicidQuery.rows[0].publicid
+    if(publicid) cloudinary.v2.uploader.destroy(publicid, function(result) { console.log("destroyed",result) });
+    const deletePost = await client.query('DELETE FROM posts WHERE id=$1',[id])
+    if(!deletePost) {
+      client.end();
+      next (new Error("Could not delete post"))
+    }
+
+    res.json({ success:true })
+    client.end();
+  } catch(err){
+    next(err)
+  }
 })
 
 module.exports = router;

@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Info = require('../models/Info')
+
+const { Client } = require('pg');
+const configs = {
+  connectionString: process.env.DATABASE_URL,
+  ssl: false,
+}
 
 router.post('/kontakt', (req,res,next)=>{
   const sgMail = require('@sendgrid/mail');
@@ -130,8 +135,11 @@ router.post("/anmeldung/:type", (req,res,next)=>{
     
   } else if(req.params.type="workshop"){
     //choice object is the course id
-    Info.findById(req.body.choice)
-      .then(course=>{
+    const client = new Client(configs);
+    client.connect();
+    client.query('SELECT id AS _id, category, header, content, teacher FROM infos WHERE id=$1',[req.body.choice])
+      .then(courseQuery=>{
+        const course = courseQuery.rows[0]
         const html = createHTMLWorkshop(req.body, course)
         messageToTeachers.html = html
         

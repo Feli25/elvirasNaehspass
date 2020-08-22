@@ -1,14 +1,21 @@
 const passport = require('passport');
-const User = require('../models/User');
+const { Client } = require('pg');
+const configs = {
+  connectionString: process.env.DATABASE_URL,
+  ssl: false,
+}
 
 passport.serializeUser((loggedInUser, cb) => {
   cb(null, loggedInUser._id);
 });
 
 passport.deserializeUser((userIdFromSession, cb) => {
-  User.findById(userIdFromSession)
-    .then(userDocument => {
-      cb(null, userDocument);
+  const client = new Client(configs);
+  client.connect();
+
+  client.query('SELECT id AS _id, username, password, email FROM users WHERE id=$1', [userIdFromSession])
+    .then(userQuery => {
+      cb(null, userQuery.rows[0]);
     })
     .catch(err => {
       cb(err);

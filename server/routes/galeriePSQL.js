@@ -22,12 +22,11 @@ router.get('/', async (req,res,next)=>{
     const client = new Client(configs);
     client.connect();
   
-    const query = await client.query('SELECT id AS _id, header, imgpath, imgname, publicid AS public_id FROM galeriepics ORDER BY id ASC')
+    const query = await client.query('SELECT id AS _id, header, imgpath, imgname, publicid AS public_id FROM galeriepics ORDER BY id DESC')
     const pictureArray = query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname}})
     res.json(pictureArray)
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -49,7 +48,6 @@ router.get('/delete/:id', async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -74,7 +72,6 @@ router.post('/new', parser.single('picture'), async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })

@@ -22,12 +22,11 @@ router.get('/', async (req,res,next)=>{
     const client = new Client(configs);
     client.connect();
   
-    const query = await client.query('SELECT id AS _id, header, content, imgpath, imgname, publicid AS public_id FROM equipment ORDER BY id ASC;')
+    const query = await client.query('SELECT id AS _id, header, content, imgpath, imgname, publicid AS public_id FROM equipment ORDER BY id DESC;')
     const equipmentArray = query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname}})
     res.json(equipmentArray)
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -53,7 +52,6 @@ router.post('/new-pic', parser.single('picture'), async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -72,7 +70,6 @@ router.post('/new', async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -101,7 +98,6 @@ router.post('/edit-pic/:id', async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -125,7 +121,6 @@ router.post('/edit/:id', async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })
@@ -148,7 +143,6 @@ router.get('/delete/:id', async (req,res,next)=>{
     res.json({ success:true })
     client.end();
   } catch(err){
-    client.end();
     next(err)
   }
 })

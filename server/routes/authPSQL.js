@@ -55,8 +55,7 @@ router.post('/signup', async (req,res,next)=>{
       res.json( findUsersByUsername.rows[0] );
     });
   } catch(err){
-      client.end();
-      next(err)
+    next(err)
   }
 })
 
@@ -96,8 +95,7 @@ router.post('/login', async (req,res,next)=>{
       res.json(userDoc)
     })
   } catch(err){
-      client.end();
-      next(err)
+    next(err)
   }
 })
 
