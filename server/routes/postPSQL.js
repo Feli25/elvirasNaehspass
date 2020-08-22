@@ -1,7 +1,6 @@
 const express = require('express');
 const { isLoggedIn } = require('../middlewares')
 const router = express.Router();
-const Post = require('../models/Post')
 const parser = require('../configs/cloudinary.js');
 const cloudinary = require('cloudinary');
 

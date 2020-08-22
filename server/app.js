@@ -5,13 +5,9 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const express = require('express')
-// const mongoose = require('mongoose')
 const logger = require('morgan')
 const nocache = require('nocache')
 const session = require("express-session")
-// const MongoStore = require('connect-mongo')(session)
-
-// require('./configs/database')
 
 const app_name = require('./package.json').name
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`)
@@ -39,12 +35,6 @@ app.use(express.static(path.join(__dirname, '../client/build')))
 
 
 // Enable authentication using session + passport
-// app.use(session({
-//   secret: process.env.SESSION_SECRET || 'irongenerator',
-//   resave: true,
-//   saveUninitialized: true,
-//   store: new MongoStore({ mongooseConnection: mongoose.connection })
-// }))
 app.use(session({
   secret: process.env.SESSION_SECRET || 'irongenerator',
   resave: true,
@@ -56,15 +46,10 @@ require('./passport')(app)
 
 
 app.use('/api', require('./routes/index'))
-// app.use('/api', require('./routes/auth'))
 app.use('/api', require('./routes/authPSQL'))
-// app.use('/api/equipment', require('./routes/equipment'))
 app.use('/api/equipment', require('./routes/equipmentPSQL'))
-// app.use('/api/galerie', require('./routes/galerie'))
 app.use('/api/galerie', require('./routes/galeriePSQL'))
-// app.use('/api/post', require('./routes/post'))
 app.use('/api/post', require('./routes/postPSQL'))
-// app.use('/api/info', require('./routes/info'))
 app.use('/api/info', require('./routes/infoPSQL'))
 // app.use('/api/admin', require('./routes/admin'))
 
