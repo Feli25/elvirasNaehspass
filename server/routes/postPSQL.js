@@ -23,8 +23,8 @@ router.get('/latest', async (req,res,next)=>{
     client.connect();
     const query = await client.query('SELECT posts.id AS _id, status, header, content, imgpath, imgname, publicid AS public_id, users.username AS creator FROM posts LEFT JOIN users ON CAST(users.id AS text) = posts.creator WHERE status=$1 ORDER BY posts.id DESC LIMIT 10',["ACTIVE"])
     const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname, _creator: { username : elem.creator }}})
-    res.json(postArray)
     client.end();
+    res.json(postArray)
   } catch(err){
     next(err)
   }
@@ -37,8 +37,8 @@ router.get('/all', async (req,res,next)=>{
   
     const query = await client.query('SELECT posts.id AS _id, status, header, content, imgpath, imgname, publicid AS public_id, users.username AS creator FROM posts LEFT JOIN users ON CAST(users.id AS text) = posts.creator WHERE status=$1 ORDER BY posts.id DESC',["ACTIVE"])
     const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname, _creator: { username : elem.creator }}})
-    res.json(postArray)
     client.end();
+    res.json(postArray)
   } catch(err){
     next(err)
   }
@@ -64,8 +64,8 @@ router.post('/new-pic', isLoggedIn, parser.single('picture'), async (req,res,nex
       client.end();
       next (new Error("Could not create new post picture"))
     }
-    res.json({ success:true })
     client.end();
+    res.json({ success:true })
   } catch(err){
     next(err)
   }

@@ -17,6 +17,7 @@ passport.use(new LocalStrategy({
 
     client.query('SELECT id AS _id, username, password, email FROM users WHERE username=$1',[ username ])
       .then(foundUserQuery => {
+        client.end();
         const foundUser = foundUserQuery.rows[0]
         if (!foundUser) {
           done(null, false, { message: 'Incorrect username' });
@@ -30,6 +31,8 @@ passport.use(new LocalStrategy({
 
         done(null, foundUser);
       })
-      .catch(err => done(err));
+      .catch(err => {
+        client && client.end()
+        done(err)});
   }
 ));

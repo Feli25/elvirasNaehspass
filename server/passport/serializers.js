@@ -15,9 +15,11 @@ passport.deserializeUser((userIdFromSession, cb) => {
 
   client.query('SELECT id AS _id, username, password, email FROM users WHERE id=$1', [userIdFromSession])
     .then(userQuery => {
+      client.end()
       cb(null, userQuery.rows[0]);
     })
     .catch(err => {
+      client && client.end()
       cb(err);
     })
 });

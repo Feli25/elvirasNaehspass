@@ -40,8 +40,8 @@ router.post('/signup', async (req,res,next)=>{
     const hashPass = bcrypt.hashSync(password, salt)
     const newUser = await client.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3)', [username,email,hashPass])
     const findUsersByUsername = await client.query('SELECT id AS _id, username, password, email FROM users WHERE username=$1',[ username ])
+    client.end();
     if(!findUsersByUsername || !findUsersByUsername.rows || !findUsersByUsername.rows.length===1) {
-      client.end();
       next(new Error("Something went wrong"))
     }
 
@@ -51,10 +51,10 @@ router.post('/signup', async (req,res,next)=>{
     req.logIn(findUsersByUsername.rows[0], () => {
       // hide "encryptedPassword" before sending the JSON (it's a security risk)
       findUsersByUsername.rows[0].password = undefined;
-      client.end();
       res.json( findUsersByUsername.rows[0] );
     });
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -67,11 +67,11 @@ router.post('/login', async (req,res,next)=>{
   
     // first check to see if there's a document with that username
     const findUsersByUsername = await client.query('SELECT id AS _id, username, password, email FROM users WHERE username=$1',[ username ])
+    client.end();
     // "findUsersByUsername" will be empty if the username is wrong (no document in database)
     if (!findUsersByUsername.rows || !findUsersByUsername.rows.length===1) {
       // create an error object to send to our error handler with "next()"
       next(new Error("Incorrect username "))
-      client.end();
       return
     }
     const userDoc = findUsersByUsername.rows[0]
@@ -81,7 +81,6 @@ router.post('/login', async (req,res,next)=>{
     if (!bcrypt.compareSync(password, userDoc.password)) {
       // create an error object to send to our error handler with "next()"
       next(new Error("Password is wrong"))
-      client.end();
       return
     }
 
@@ -91,7 +90,6 @@ router.post('/login', async (req,res,next)=>{
     req.logIn(userDoc, () => {
       // hide "encryptedPassword" before sending the JSON (it's a security risk)
       userDoc.password = undefined
-      client.end();
       res.json(userDoc)
     })
   } catch(err){
