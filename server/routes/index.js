@@ -139,6 +139,7 @@ router.post("/anmeldung/:type", (req,res,next)=>{
     client.connect();
     client.query('SELECT id AS _id, category, header, content, teacher FROM infos WHERE id=$1',[req.body.choice])
       .then(courseQuery=>{
+        client.end()
         const course = courseQuery.rows[0]
         const html = createHTMLWorkshop(req.body, course)
         messageToTeachers.html = html
@@ -160,7 +161,9 @@ router.post("/anmeldung/:type", (req,res,next)=>{
           })
           .catch(err => { console.log(err) })
       })
-      .catch(err=>console.log(err))
+      .catch(err=>{
+        client && client.end()
+        console.log(err)})
   }
  
 })

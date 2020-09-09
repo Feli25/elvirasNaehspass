@@ -22,10 +22,11 @@ router.get('/latest', async (req,res,next)=>{
     const client = new Client(configs);
     client.connect();
     const query = await client.query('SELECT posts.id AS _id, status, header, content, imgpath, imgname, publicid AS public_id, users.username AS creator FROM posts LEFT JOIN users ON CAST(users.id AS text) = posts.creator WHERE status=$1 ORDER BY posts.id DESC LIMIT 10',["ACTIVE"])
-    const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname, _creator: { username : elem.creator }}})
     client.end();
+    const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname, _creator: { username : elem.creator }}})
     res.json(postArray)
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -36,10 +37,11 @@ router.get('/all', async (req,res,next)=>{
     client.connect();
   
     const query = await client.query('SELECT posts.id AS _id, status, header, content, imgpath, imgname, publicid AS public_id, users.username AS creator FROM posts LEFT JOIN users ON CAST(users.id AS text) = posts.creator WHERE status=$1 ORDER BY posts.id DESC',["ACTIVE"])
-    const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname, _creator: { username : elem.creator }}})
     client.end();
+    const postArray =  query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname, _creator: { username : elem.creator }}})
     res.json(postArray)
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -60,13 +62,13 @@ router.post('/new-pic', isLoggedIn, parser.single('picture'), async (req,res,nex
       file.originalname,
       file.public_id
     ])
+    client.end();
     if(!addNewWithPic) {
-      client.end();
       next (new Error("Could not create new post picture"))
     }
-    client.end();
     res.json({ success:true })
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -83,13 +85,13 @@ router.post('/new', isLoggedIn, async (req,res,next)=>{
       content,
       req.user._id
     ])
+    client.end();
     if(!addNewWithPic) {
-      client.end();
       next (new Error("Could not create new post"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -112,13 +114,13 @@ router.post('/edit-pic/:id', isLoggedIn, parser.single('picture'), async (req,re
       file.public_id,
       id
     ])
+    client.end();
     if(!updatetPost) {
-      client.end();
       next (new Error("Could not update post picture"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -136,13 +138,13 @@ router.post('/edit/:id', isLoggedIn, async (req,res,next)=>{
       content,
       id
     ])
+    client.end();
     if(!updatetPost) {
-      client.end();
       next (new Error("Could not update post"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -157,14 +159,14 @@ router.get('/delete/:id', async (req,res,next)=>{
     const publicid = publicidQuery && publicidQuery.rows && publicidQuery.rows[0] && publicidQuery.rows[0].publicid
     if(publicid) cloudinary.v2.uploader.destroy(publicid, function(result) { console.log("destroyed",result) });
     const deletePost = await client.query('DELETE FROM posts WHERE id=$1',[id])
+    client.end();
     if(!deletePost) {
-      client.end();
       next (new Error("Could not delete post"))
     }
 
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })

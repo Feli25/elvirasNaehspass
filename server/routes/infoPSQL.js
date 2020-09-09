@@ -34,13 +34,14 @@ router.get('/', async (req,res,next)=>{
     client.connect();
   
     const infoQuery = await client.query('SELECT id AS _id, category, header, content, list AS liststring, teacher FROM infos')
+    client.end();
     const info = infoQuery.rows.map(kurs => {
       let list = convertStringToJson(kurs.liststring)
       return {...kurs, list: list}
     })
     res.json( info )
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -52,13 +53,14 @@ router.get('/byid/:id', async (req,res,next)=>{
     client.connect();
   
     const infoQuery = await client.query('SELECT id AS _id, category, header, content, list AS liststring, teacher FROM infos WHERE id=$1',[id])
+    client.end();
     const info = infoQuery.rows.map(kurs => {
       let list = convertStringToJson(kurs.liststring)
       return {...kurs, list: list}
     })
     res.json( info )
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -70,13 +72,13 @@ router.get('/delete/:id', async (req,res,next)=>{
     client.connect();
   
     const deletePost = await client.query('DELETE FROM infos WHERE id=$1', [id])
+    client.end();
     if(!deletePost) {
-      client.end();
       next( new Error("Could not delete info"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -88,13 +90,14 @@ router.get('/:category', async (req,res,next)=>{
     client.connect();
   
     const tableQuery = await client.query('SELECT id AS _id, category, header, content, list AS liststring, teacher FROM infos WHERE category=$1',[category])
+    client.end();
     const table = tableQuery.rows.map(kurs => {
       let list = convertStringToJson(kurs.liststring)
       return {...kurs, list: list}
     })
     res.json( table )
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -112,13 +115,13 @@ router.post('/new', async (req,res,next)=>{
       JSON.stringify(list),
       teacher
     ])
+    client.end();
     if(!insertedPost) {
-      client.end();
       next( new Error("Could not create info"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -138,13 +141,13 @@ router.post('/edit/:id', async (req,res,next)=>{
       teacher,
       id
     ])
+    client.end();
     if(!updatedInfo) {
-      client.end();
       next( new Error("Could not update info"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })

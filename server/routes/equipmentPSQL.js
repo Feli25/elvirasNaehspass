@@ -24,9 +24,10 @@ router.get('/', async (req,res,next)=>{
   
     const query = await client.query('SELECT id AS _id, header, content, imgpath, imgname, publicid AS public_id FROM equipment ORDER BY id DESC;')
     const equipmentArray = query.rows.map(elem=>{return {...elem, imgPath: elem.imgpath, imgName: elem.imgname}})
-    res.json(equipmentArray)
     client.end();
+    res.json(equipmentArray)
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -45,13 +46,13 @@ router.post('/new-pic', parser.single('picture'), async (req,res,next)=>{
       file.originalname,
       file.public_id
     ])
+    client.end();
     if(!addNewWithPic) {
-      client.end();
       next (new Error("Could not create new equipment picture"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -63,13 +64,13 @@ router.post('/new', async (req,res,next)=>{
     client.connect();
 
     const addNewEquipment = await client.query('INSERT INTO equipment (header, content) VALUES($1, $2)',[header, content])
+    client.end();
     if(!addNewEquipment) {
-      client.end();
       next (new Error("Could not create new equipment"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -91,13 +92,13 @@ router.post('/edit-pic/:id', async (req,res,next)=>{
       file.public_id,
       id
     ])
+    client.end();
     if(!updatedEquipment) {
-      client.end();
       next (new Error("Could not update equipment picture"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -114,13 +115,13 @@ router.post('/edit/:id', async (req,res,next)=>{
       content,
       id
     ])
+    client.end();
     if(!updatedPost) {
-      client.end();
       next (new Error("Could not update equipment"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
@@ -131,18 +132,17 @@ router.get('/delete/:id', async (req,res,next)=>{
     const client = new Client(configs);
     client.connect();
   
-    console.log("delete")
     const publicidQuery = await client.query('SELECT publicid FROM equipment WHERE id=$1',[id])
     const publicid = publicidQuery && publicidQuery.rows && publicidQuery.rows[0] && publicidQuery.rows[0].publicid
     if(publicid) cloudinary.v2.uploader.destroy(publicid, function(result) { console.log("destroyed",result) });
     const deletePost = await client.query('DELETE FROM equipment WHERE id=$1',[id])
+    client.end();
     if(!deletePost) {
-      client.end();
       next (new Error("Could not delete equipment"))
     }
     res.json({ success:true })
-    client.end();
   } catch(err){
+    client && client.end()
     next(err)
   }
 })

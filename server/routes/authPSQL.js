@@ -93,6 +93,7 @@ router.post('/login', async (req,res,next)=>{
       res.json(userDoc)
     })
   } catch(err){
+    client && client.end()
     next(err)
   }
 })
