@@ -188,6 +188,7 @@ a {
 .card-title {
   font-family: "Open Sans", sans-serif;
   justify-self: center;
+  font-size: 2.5rem;
 }
 
 .card-text {
@@ -490,10 +491,6 @@ option {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-  }
-
-  .card-title {
-    font-size: 2.5rem;
   }
 
   .card-text {

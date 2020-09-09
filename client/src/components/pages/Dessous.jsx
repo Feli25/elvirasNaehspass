@@ -6,7 +6,8 @@ export default class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      infoBoxes:[]
+      infoBoxes:[],
+      active: false
     }
   }
   componentDidMount(){
@@ -47,21 +48,44 @@ export default class Home extends Component {
       </section>    
     )
   }
+  currentlyPausedCard=()=>{
+    return (
+      <section className="card-container">
+        <div className="card" style={{width: "30rem"}} key="pauseBox">
+          <div className="card-body">
+            <h5 className="card-title">Die Dessous Kurse sind zur Zeit leider pausiert!</h5>
+            <p className="card-text">Aufgrund der aktuellen Situation sind wir leider gezwungen, die Dessous Kurse eine Zeit 
+            lang bei Elviras Nähspass zu pausieren. Alle Teilnehmer der geplanten Workshops erhalten eine Information.
+            Sollten Sie über uns einen Dessous Workshop gebucht haben, und noch keine Information erhalten haben, dann würden wir Sie bitten sich bei uns zu melden!
+            <br/>Schaut gerne auf der <a href="https://www.bblingerie.de/dessous-n%C3%A4hkurse-in-nrw/" style={{textDecoration: 'underline'}}>Website von Barbara</a> vorbei.<br/>
+            Bleibt gesund und bis bald bei dem nächsten Dessous Workshop!</p>
+          </div>
+        </div>
+      </section>
+    )
+  }
   render() {                
     return (
       <div className="Home">
         <div className="page-title">
           <h1 className="page-title">Dessous-Workshops</h1>
         </div>
-          <div className="card-container">
-            <div className="card book-workshop" style={{width: "30rem"}}>
-              <div className="card-body">
-                <a href="/anmeldung/workshop">Einen Dessous-Workshop buchen</a>
+        {this.state.active ?
+          <React.Fragment>
+            <div className="card-container">
+              <div className="card book-workshop" style={{width: "30rem"}}>
+                <div className="card-body">
+                  <a href="/anmeldung/workshop">Einen Dessous-Workshop buchen</a>
+                </div>
               </div>
             </div>
-          </div>
-            <StaticContentDessous />
-            {this.createCards()}
+              <StaticContentDessous />
+              {this.createCards()}
+          </React.Fragment>:
+          <React.Fragment>
+            {this.currentlyPausedCard()}
+          </React.Fragment>
+        }
       </div>
     );
   }
