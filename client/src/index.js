@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import { BrowserRouter as Router } from 'react-router-dom';
+
+// import './index.scss';
+import './styles/slider.scss';
+import './styles/layout.scss';
+import './styles/home.scss';
+
 import App from './components/App.jsx';
-// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<Router><App /></Router>, document.getElementById('root'));
-// registerServiceWorker();

@@ -1,56 +1,64 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Home from './pages/Home';
-import Posts from './pages/Posts';
-import Naehkurse from './pages/Naehkurse';
-import Workshops from './pages/Workshops';
-import Kurse from './pages/Kurse';
-import Dessous from './pages/Dessous';
-import Atelier from './pages/Atelier';
-import About from './pages/About';
-import Galerie from './pages/Galerie';
-import Anmeldung from './pages/Anmeldung';
-import AnmeldungKurs from './pages/AnmeldungKurs';
-import AnmeldungWorkshop from './pages/AnmeldungWorkshop';
-import Kontakt from './pages/Kontakt';
-import Impressum from './pages/Impressum';
-import Datenschutz from './pages/Datenschutz';
-import Login from './pages/auth/Login';
+// import api from '../api';
+// import CountDownClock from './CountDownClock';
 
-import Admin from './pages/admin/Admin';
-import EditPosts from './pages/admin/EditPosts';
-import EditKurse from './pages/admin/EditKurse';
-import EditWorkshops from './pages/admin/EditWorkshops';
-import EditDessous from './pages/admin/EditDessous';
-import EditAtelier from './pages/admin/EditAtelier';
-import EditGalerie from './pages/admin/EditGalerie';
-
-// import Signup from './pages/auth/Signup';
-
-import api from '../api';
-import CountDownClock from './CountDownClock';
+import Home from './pagesNew/Home'
 
 export default class App extends Component {
 
-  // componentDidMount(){
-  //   console.log("test")
-  //   api.getTestUsers()
-  //     .then(response=>{
-  //       console.log("test users",response)
-  //     })
-  //     .catch(err=>{console.log("error",err)})
-  // }
-
-  handleLogoutClick(e) {
-    api.logout()
+  state = {
+    navOpen: false
   }
+
+  // handleLogoutClick(e) {
+  //   api.logout()
+  // }
 
   render() {
     return (
       <div className="App">
-        <section id="header-container">
-          {!api.isLoggedIn() &&
+        
+
+        <section className="header">
+          <img className="header__icon" id="icon" alt="icon" src="../images/icon.png"/>
+          <h1 className="header__title">Elvira's Nähspass</h1>
+          <div className={this.state.navOpen?'nav--is-expanded nav':'nav'}>
+            <button className="nav__button" onClick={()=>this.setState({navOpen:!this.state.navOpen})}>
+              <span className="nav__button-line"/>
+              <span className="nav__button-line"/>
+              <span className="nav__button-line"/>
+              <span className="nav__button-close">&#x2715;</span>
+            </button>
+            <div className="nav__links">
+              {/* <span>test</span> */}
+              <a>Home</a>
+              <a>Nähkurse</a>
+              <a>Atelier</a>
+              <a>Über uns</a>
+              {/* <a>Galerie</a> */}
+              <a>Kontakt</a>
+            </div>
+          </div>
+        </section>
+        
+        <div className="content">
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route render={() => <h2>404</h2>} />
+          </Switch>
+        </div>
+
+        <footer>
+          Footer
+        </footer>
+
+
+
+
+        {/* <section id="header-container"> */}
+          {/* {!api.isLoggedIn() &&
           <a className="login-logout" href="/login">Login</a>
           }
           {api.isLoggedIn() &&
@@ -150,7 +158,7 @@ export default class App extends Component {
 
 
           {/* <Route path="/signup" component={Signup} /> */}
-          <Route render={() => <h2>404</h2>} />
+          {/* <Route render={() => <h2>404</h2>} />
         </Switch>
         <br/><br/>
         <footer className="navbar fixed-bottom" style={{backgroundColor: "white"}}>
@@ -160,7 +168,7 @@ export default class App extends Component {
             <a className="navbar-brand" href="/datenschutz">Datenschutz</a>
           </span>
           <p>© created by Emina and Feli</p>
-        </footer>
+        </footer> */}
       </div>
     );
   }
