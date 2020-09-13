@@ -14,6 +14,8 @@ import Anmeldung from './pages/Anmeldung';
 import AnmeldungKurs from './pages/AnmeldungKurs';
 import AnmeldungWorkshop from './pages/AnmeldungWorkshop';
 import Kontakt from './pages/Kontakt';
+import Impressum from './pages/Impressum';
+import Datenschutz from './pages/Datenschutz';
 import Login from './pages/auth/Login';
 
 import Admin from './pages/admin/Admin';
@@ -131,6 +133,8 @@ export default class App extends Component {
           <Route path="/anmeldung/kurse" component={AnmeldungKurs} />
           <Route path="/anmeldung/workshop" component={AnmeldungWorkshop} />
           <Route path="/kontakt"  component={Kontakt} />
+          <Route path="/impressum"  component={Impressum} />
+          <Route path="/datenschutz"  component={Datenschutz} />
 
           <Route path="/login" component={Login} />
 
@@ -150,7 +154,11 @@ export default class App extends Component {
         </Switch>
         <br/><br/>
         <footer className="navbar fixed-bottom" style={{backgroundColor: "white"}}>
-          <a className="navbar-brand" href="/kontakt">Kontakt</a>
+          <span>
+            <a className="navbar-brand" href="/kontakt">Kontakt</a>
+            <a className="navbar-brand" href="/impressum">Impressum</a>
+            <a className="navbar-brand" href="/datenschutz">Datenschutz</a>
+          </span>
           <p>© created by Emina and Feli</p>
         </footer>
       </div>
