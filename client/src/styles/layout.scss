@@ -21,6 +21,7 @@ body {
   box-sizing: border-box;
   font-family: 'Alegreya', serif;
   color: #5A1F69;
+  background-image: none;
 
   p, h1, h2, h3 {
     padding: 0;
@@ -172,7 +173,7 @@ body {
 
     .title {
       position: fixed;
-      top: 61px;
+      top: 60px;
       width: 100%;
       background-color: white;
       text-align: center;
@@ -247,7 +248,7 @@ body {
     color: white;
     text-align: right;
     margin: 5px 0;
-    width: 170px;
+    width: 185px;
     padding: 5px 15px 5px 0;
     font-family: "Open Sans",sans-serif;
 

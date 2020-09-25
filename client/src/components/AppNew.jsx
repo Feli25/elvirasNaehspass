@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import HomeNew from './pagesNew/Home'
+import Kontakt from './pagesNew/Kontakt'
 import Datenschutz from './pagesNew/Datenschutz';
 
 import '../styles/card.scss';
 import '../styles/slider.scss';
 import '../styles/layout.scss';
 import '../styles/home.scss';
+
+import '../styles/kontakt.scss';
 
 export default class NewHome extends Component {
   state = {
@@ -29,12 +32,12 @@ export default class NewHome extends Component {
             </button>
             <div className="nav__links">
               {/* <span>test</span> */}
-              <a>Home</a>
-              <a>Nähkurse</a>
-              <a>Atelier</a>
-              <a>Über uns</a>
+              <a href="/new">Home</a>
+              <a href="/new/naehkurse">Nähkurse</a>
+              <a href="/new/atelier">Atelier</a>
+              <a href="/new/ueberuns">Über uns</a>
               {/* <a>Galerie</a> */}
-              <a>Kontakt</a>
+              <a href="/new/kontakt">Kontakt</a>
             </div>
           </div>
         </section>
@@ -42,7 +45,12 @@ export default class NewHome extends Component {
         <div className="content">
           <Switch>
             <Route path="/new" exact component={HomeNew} />
+            {/* <Route path="/new/naehkurse" exact component={Naehkurse} /> */}
+            {/* <Route path="/new/atelier" exact component={Atelier} /> */}
+            {/* <Route path="/new/ueberuns" exact component={About} /> */}
+            <Route path="/new/kontakt" exact component={Kontakt} />
             <Route path="/new/datenschutz" exact component={Datenschutz} />
+            {/* <Route path="/new/impressum" exact component={Impressum} /> */}
             <Route render={() => <h2>404</h2>} />
           </Switch>
         </div>
