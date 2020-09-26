@@ -1,7 +1,8 @@
 # Elviras Naehspass in React
 
 push to the live environment (only from master branch)<br/>
-git push heroku master
+git push heroku master<br/>
+link: http://www.elviras-naehspass.com/
 
 push from a feature branch to the testing environment<br/>
 git push staging *nameofbranch*:master<br/>

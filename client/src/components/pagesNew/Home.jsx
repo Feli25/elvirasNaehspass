@@ -16,11 +16,11 @@ export default class HomeNew extends Component {
     api.getLatestPosts()
       .then(result=>{
         const formattedResult = result.map(post=>
-          <div className="card-new">
-            {/* {post.imgPath && <img className="card-new__img" src={post.imgPath}/>} */}
-            <h3 className="card-new__header">{post.header}</h3>
-            <p className="card-new__text line-clamp">{post.content}</p>
-            <a href="#" className="card-new__read-more">Mehr lesen</a>
+          <div className="card">
+            {/* {post.imgPath && <img className="card__img" src={post.imgPath}/>} */}
+            <h3 className="card__header">{post.header}</h3>
+            <p className="card__text line-clamp">{post.content}</p>
+            <a href="#" className="card__read-more">Mehr lesen</a>
           </div>
           )
         this.setState({posts:formattedResult})
