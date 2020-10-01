@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .card {
   // max-width: 100%;
   display: flex;
@@ -22,6 +24,12 @@
 
   &__text {
     font-size: 16px;
+  }
+
+  &__subText {
+    color: $base-grey;
+    padding-top: $base-spacing-half;
+    align-self: flex-start;
   }
 
   &__read-more {

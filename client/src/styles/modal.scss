@@ -1,0 +1,39 @@
+@import './variables.scss';
+
+.modal {
+  position: fixed;
+  top: $total-header-height + $total-title-height;
+  left: 0;
+  width: 100vw;
+  height: $content-height;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 80;
+  padding: 5vw;
+  box-sizing: border-box;
+  overflow: scroll;
+
+  &__close {
+    position: absolute;
+    right: 5vw;
+    top: 5vw;
+    font-size: 24px;
+    padding: 10px;
+    line-height: 24px;
+    z-index: 90;
+  }
+
+  .card {
+    background: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: 10px;
+
+
+    // @media (min-width: $bp-smallTablet) {
+    //   flex-direction: row;
+    // }
+
+    &__img {
+      padding-top: $base-spacing;
+    }
+  }
+}

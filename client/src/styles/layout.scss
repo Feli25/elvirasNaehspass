@@ -1,19 +1,4 @@
-//breakpoints:
-// standard: 320px - 425
-// kleines tablet: 425 - 758
-// tablet: 768 - 1024
-// desktop: 1024
-
-/* 
-
-dark purple #5A1F69
-blue-purple #351F69
-grey #A5ABBC
-light purple #F9F3FD 
-
-*/
-
-//standard spacing: 10px
+@import './variables.scss';
 
 body {
   margin: 0;
@@ -43,7 +28,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 60px;
+    height: $header-height;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -161,7 +146,7 @@ body {
   }
 
   .content {
-    padding-top: 92px;
+    padding-top: $total-header-height + $total-title-height;
     padding-bottom: 40px;
     overflow: auto;
     background-image: url("../images/woman.png");
@@ -169,11 +154,11 @@ body {
     background-attachment: fixed;
     background-size: 28vh;
     background-position: 100% 80%;
-    min-height: calc(100vh - 60px - 32px - 30px);
+    min-height: $content-height;
 
     .title {
       position: fixed;
-      top: 60px;
+      top: $total-header-height;
       width: 100%;
       background-color: white;
       text-align: center;
@@ -189,7 +174,7 @@ body {
     bottom: 0;
     right: 0;
     left: 0;
-    height: 30px;
+    height: $footer-height;
     width: 100%;
 
     border-top: 1px solid #5A1F69;

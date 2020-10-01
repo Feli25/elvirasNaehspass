@@ -4,7 +4,18 @@ import { Route, Switch } from 'react-router-dom';
 // import api from '../api';
 // import CountDownClock from './CountDownClock';
 
+// import './index.scss';
+import '../styles/card.scss';
+import '../styles/slider.scss';
+import '../styles/modal.scss';
+import '../styles/layout.scss';
+import '../styles/home.scss';
+import '../styles/news.scss';
+import '../styles/kontakt.scss';
+
+
 import Home from './pagesNew/Home'
+import News from './pagesNew/News'
 import Kontakt from './pagesNew/Kontakt'
 import Datenschutz from './pagesNew/Datenschutz';
 
@@ -47,6 +58,7 @@ export default class App extends Component {
         <div className="content">
           <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/news" exact component={News} />
             {/* <Route path="/naehkurse" exact component={Naehkurse} /> */}
             {/* <Route path="/atelier" exact component={Atelier} /> */}
             {/* <Route path="/ueberuns" exact component={About} /> */}

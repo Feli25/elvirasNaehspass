@@ -1,0 +1,35 @@
+//breakpoints:
+$bp-base: 320px;
+$bp-smallTablet: 425px;
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+
+/* 
+
+dark purple #5A1F69
+blue-purple #351F69
+grey #A5ABBC
+light purple #F9F3FD 
+
+*/
+
+//standard spacing: 10px
+
+$base-purple: #5A1F69;
+$base-grey: #A5ABBC;
+
+$base-spacing-half: 5px;
+$base-spacing: 10px;
+$base-spacing-double: 20px;
+$base-spacing-triple: 30px;
+
+$header-height: 60px;
+$total-header-height: $header-height + 1px;
+$footer-height: $base-spacing-triple;
+$total-footer-height: $footer-height + 1px;
+$title-height: $base-spacing-triple;
+$total-title-height: $base-spacing-triple + 1px;
+
+$content-height: calc(100vh - #{$total-header-height} - #{$total-footer-height} - #{$total-title-height});
+
+// $base-font: 24px;

@@ -20,7 +20,7 @@ export default class HomeNew extends Component {
             {/* {post.imgPath && <img className="card__img" src={post.imgPath}/>} */}
             <h3 className="card__header">{post.header}</h3>
             <p className="card__text line-clamp">{post.content}</p>
-            <a href="#" className="card__read-more">Mehr lesen</a>
+            <a onClick={()=>this.props.history.push('/news', {id: post._id})} className="card__read-more">Mehr lesen</a>
           </div>
           )
         this.setState({posts:formattedResult})
@@ -80,7 +80,7 @@ export default class HomeNew extends Component {
               content={this.state.posts}
               slideMultiple={true}
             />
-            <a href="#" className="info-block__link">{"Alle Neuigkeiten >>"}</a>
+            <a href="/news" className="info-block__link">{"Alle Neuigkeiten >>"}</a>
           </div>
         </div>
 
