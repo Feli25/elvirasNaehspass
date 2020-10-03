@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 // import CountDownClock from './CountDownClock';
 
 // import './index.scss';
+import '../styles/variables.scss'
 import '../styles/card.scss';
 import '../styles/slider.scss';
 import '../styles/modal.scss';
@@ -16,8 +17,12 @@ import '../styles/kontakt.scss';
 
 import Home from './pagesNew/Home'
 import News from './pagesNew/News'
+import About from './pagesNew/About'
 import Kontakt from './pagesNew/Kontakt'
 import Datenschutz from './pagesNew/Datenschutz';
+import Impressum from './pagesNew/Impressum';
+
+import Error from './pagesNew/Error';
 
 export default class App extends Component {
 
@@ -46,7 +51,9 @@ export default class App extends Component {
             </button>
             <div className="nav__links">
               <a href="/">Home</a>
+              <a href="/news">Neuigkeiten</a>
               <a href="/naehkurse">Nähkurse</a>
+              {/* <a href="/anmeldung">Anmeldung</a> */}
               <a href="/atelier">Atelier</a>
               <a href="/ueberuns">Über uns</a>
               {/* <a>Galerie</a> */}
@@ -61,11 +68,11 @@ export default class App extends Component {
           <Route path="/news" exact component={News} />
             {/* <Route path="/naehkurse" exact component={Naehkurse} /> */}
             {/* <Route path="/atelier" exact component={Atelier} /> */}
-            {/* <Route path="/ueberuns" exact component={About} /> */}
+            <Route path="/ueberuns" exact component={About} />
             <Route path="/kontakt" exact component={Kontakt} />
             <Route path="/datenschutz" exact component={Datenschutz} />
-            {/* <Route path="/impressum" exact component={Impressum} /> */}
-            <Route render={() => <h2>404</h2>} />
+            <Route path="/impressum" exact component={Impressum} />
+            <Route component={Error} />
           </Switch>
         </div>
 

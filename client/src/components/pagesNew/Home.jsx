@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Slider from '../Slider'
+import Card from '../Card'
 import api from '../../api';
 
 const pictures = [
@@ -16,12 +17,14 @@ export default class HomeNew extends Component {
     api.getLatestPosts()
       .then(result=>{
         const formattedResult = result.map(post=>
-          <div className="card">
-            {/* {post.imgPath && <img className="card__img" src={post.imgPath}/>} */}
-            <h3 className="card__header">{post.header}</h3>
-            <p className="card__text line-clamp">{post.content}</p>
-            <a onClick={()=>this.props.history.push('/news', {id: post._id})} className="card__read-more">Mehr lesen</a>
-          </div>
+          <Card 
+            id = {post._id}
+            header = {post.header}
+            text = {post.content}
+            lineclamp = {true}
+            link = "Mehr lesen"
+            onlinkclick = {()=>this.props.history.push('/news', {id: post._id})}
+          />
           )
         this.setState({posts:formattedResult})
       })

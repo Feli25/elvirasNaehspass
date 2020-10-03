@@ -1,0 +1,39 @@
+@import './variables.scss';
+
+.kontakt {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .mail-img {
+    display: none;
+
+    @media (min-width: $bp-smallTablet) {
+      display: block;
+      flex: 0 1 300px;
+      height: 450px;
+      overflow: hidden;
+      object-fit: cover;
+      margin: $base-spacing-double;
+    }
+  }
+
+  .block-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+  
+    @media (min-width: $bp-smallTablet) {
+      justify-content: center;
+      flex-wrap: nowrap;
+      flex: 0 0 250px;
+    }
+
+    .info-block {
+      min-width: 250px;
+    }
+  }
+}

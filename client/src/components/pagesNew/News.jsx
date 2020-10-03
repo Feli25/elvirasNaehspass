@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import api from '../../api';
 import queryString from 'query-string';
 
+import Card from '../Card'
+
 export default class Datenschutz extends Component {
   state={
     posts: [],
@@ -21,12 +23,16 @@ export default class Datenschutz extends Component {
   }
   renderPosts=()=>{
     return this.state.posts.map(post=>{
-      return <div className="card" key={post._id}>
-      {post.imgPath && <img className="card__img" src={post.imgPath} alt={post.imgName}/>}
-        <h3 className="card__header">{post.header}</h3>
-        <p className="card__text line-clamp">{post.content}</p>
-        <a onClick={()=>this.setState({selectedPost:post._id})} className="card__read-more">Mehr lesen</a>
-      </div>
+      return <Card 
+        id = {post._id}
+        imgPath = {post.imgPath}
+        imgName = {post.imgName}
+        header = {post.header}
+        text = {post.content}
+        lineclamp = {true}
+        link = "Mehr lesen"
+        onlinkclick = {()=>this.setState({selectedPost:post._id})}
+      />
     })
   }
   renderSinglePost = () => {
@@ -36,23 +42,25 @@ export default class Datenschutz extends Component {
       return;
     }
     let post = postFiltered[0]
-    console.log(post)
 
     return <div className="modal">
       <div className="modal__close" onClick={() => this.setState({selectedPost: false})}>&#x2715;</div>
-      <div className="card" key={post._id}>
-        {post.imgPath && <img className="card__img" src={post.imgPath} alt={post.imgName}/>}
-        <h3 className="card__header">{post.header}</h3>
-        <p className="card__text">{post.content}</p>
-        <p className="card__subText">Erstellt von: {post.creator}</p>
-      </div>
+      <Card 
+        id = {post._id}
+        imgPath = {post.imgPath}
+        imgName = {post.imgName}
+        header = {post.header}
+        text = {post.content}
+        lineclamp = {false}
+        subtext = {"Erstellt von: " + post.creator}
+      />
     </div>
   }
   render () {
     return (
       <div className="news">
         <h2 className="title">Neuigkeiten</h2>
-          <div className="info-block">
+          <div className="card-block">
             {this.renderPosts()}
           </div>
           {this.state.selectedPost && this.state.posts && this.renderSinglePost()}

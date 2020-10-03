@@ -24,6 +24,32 @@ body {
     }
   }
 
+  button {
+    border: 2px solid $base-purple;
+    border-radius: 5px;
+    color: white;
+    background-color: $base-purple;
+    padding: $base-spacing-half;
+
+    &:hover {
+      color: $base-purple;
+      background-color: white;
+    }
+  }
+
+  input, textarea {
+    border: none;
+    font-family: "Open Sans",sans-serif;
+    color: #5A1F69;
+    border-bottom: 1px solid $base-purple;
+
+    &:focus {
+      outline: none;
+      border: 1px solid $base-grey;
+      border-radius: 3px;
+    }
+  }
+
   .header {
     position: fixed;
     top: 0;
@@ -155,17 +181,24 @@ body {
     background-size: 28vh;
     background-position: 100% 80%;
     min-height: $content-height;
+    display: flex;
+    justify-content: center;
+
+    & > * {
+      max-width: $bp-desktop;
+    }
 
     .title {
       position: fixed;
       top: $total-header-height;
-      width: 100%;
+      left: 0;
       background-color: white;
       text-align: center;
       font-size: 18px;
       border-bottom: 1px solid #5A1F69;
       padding: 3px;
       z-index: 90;
+      width: 100vw;
     }
   }
 
@@ -240,6 +273,12 @@ body {
     &:hover {
       color: white
     }
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding-right: 10px;
+    text-align: right;
   }
 }
 

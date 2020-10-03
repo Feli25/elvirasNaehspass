@@ -3,7 +3,8 @@
 .modal {
   position: fixed;
   top: $total-header-height + $total-title-height;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100vw;
   height: $content-height;
   background: rgba(255, 255, 255, 0.9);
@@ -11,6 +12,7 @@
   padding: 5vw;
   box-sizing: border-box;
   overflow: scroll;
+  max-width: $bp-tablet;
 
   &__close {
     position: absolute;
@@ -27,13 +29,25 @@
     border-radius: 15px;
     padding: 10px;
 
-
-    // @media (min-width: $bp-smallTablet) {
-    //   flex-direction: row;
-    // }
-
     &__img {
       padding-top: $base-spacing;
+    }
+
+    @media (min-width: $bp-bigSmartphone) and (max-width: $bp-tablet) {
+      flex-direction: column-reverse;
+
+      .card__img {
+        max-width: 200px;
+        flex: none;
+      }
+
+      .card__content {
+        flex: none;
+
+        .card__header {
+          margin-top: $base-spacing-double;
+        }
+      }
     }
   }
 }

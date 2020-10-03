@@ -41,10 +41,6 @@
     }
   }
 
-  // div {
-  //   width: 100%;
-  // }
-
   .slider__multiple {
     margin-left: 12px;
 
@@ -62,6 +58,14 @@
       &-two {
         display: block;
       }
+    }
+  }
+
+  .card {
+    min-height: 170px;
+
+    &__img {
+      display: none;
     }
   }
 }
