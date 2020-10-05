@@ -1,0 +1,54 @@
+{
+  "table" : {"_id":1,
+    "category":"TABLE",
+    "header":"Dauerhafte Kurstermine",
+    "content":"platzhalter",
+    "liststring":"[{name:\"Montag morgen 9 Uhr$09:00 - 11:30$BB\",belegt:true},  {name:\"Montag abend$19:00 - 21:30$ED\",belegt:true},  {name:\"Dienstag morgen$09:00 - 12:00$SB\",belegt:false},  {name:\"Dienstag Mittag$14:00 - 16:30$ED\",belegt:true},  {name:\"Mittwoch Morgen$9:00 - 12:00$ED\",belegt:true},  {name:\"Mittwoch Abend$19:00 - 21:30$ED\",belegt:true},  {name:\"Donnersta g morgen$09:00 - 12:00$ED\",belegt:true},  {name:\"Donnerstag Mittag$16:30 - 19:00$NM\",belegt:true},  {name:\"Donnerstag Abend$19:30 - 22:00$BB\",belegt:true}]",
+    "teacher":"platzhalter",
+    "list":[{"name":"Montag morgen","time":"09:00 - 11:30","teacher":"BB","belegt":true},
+      {"name":"Montag abend","time":"19:00 - 21:30","teacher":"ED","belegt":true},
+      {"name":"Dienstag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
+      {"name":"Dienstag Mittag","time":"14:00 - 16:30","teacher":"ED","belegt":true},
+      {"name":"Mittwoch Morgen","time":"9:00 - 12:00","teacher":"ED","belegt":true},
+      {"name":"Mittwoch Abend","time":"19:00 - 21:3","teacher":"ED","belegt":true},
+      {"name":"Donnerstag morgen","time":"09:00 - 12:00","teacher":"ED","belegt":true},
+      {"name":"Donnerstag Mittag","time":"16:30 - 19:00","teacher":"NM","belegt":true},
+      {"name":"Donnerstag Abend","time":"19:30 - 22:00","teacher":"BB","belegt":true}]},
+  
+   "workshops": [
+     {"_id":2,
+      "category":"WORKSHOPS",
+      "header":"Sommerferienworkshop",
+      "content":"Ein Workshop vorrangig für Kinder in den Sommerferien. Jeweils von 10:00 - 14:00 Uhr 45,- € Einen Termin gibt es im Moment noch nicht. Wir arbeiten daran.",
+      "liststring":"[]",
+      "teacher":"Elvira",
+      "list":[]},
+    {"_id":4,
+      "category":"WORKSHOPS",
+      "header":"Boomerang Bags nähen",
+      "content":"Am 05.01.2020 wollen wir mit vielen helfenden Händen Einkaufstaschen nähen, die hoffentlich ganz schnell sämtliche Plastikeinkaufstüten ersetzen. Um kurze Anmeldung wird gebeten.  :)",
+      "liststring":"[{name:\"05.01.2020    ab  11 Uhr\",belegt:false}]",
+      "teacher":"Sheila und Elvira",
+      "list":[{"name":"05.01.2020    ab  11 Uhr","belegt":false}]}
+  ],
+  
+  "weekend": [
+    {"_id":5,
+      "category":"WORKSHOPS",
+      "header":"Nähwochenende am dritten Advent",
+      "content":"Am dritten Advent 2020 sind wir ein ganzes Wochenende lang zum Nähen am Sorpsee in der Nähe von Soest",
+      "liststring":"[{name:\"11. - 13.12.2020\",belegt:false}]",
+      "teacher":"Elvira Deutges",
+      "list":[{"name":"11. - 13.12.2020","belegt":false}]}
+  ],
+
+    "dessous": [
+      {"_id":6,
+        "category":"DESSOUS",
+        "header":"Dessouskurs am 4.Advent",
+        "content":"Am 4. Advent gibt einen Workshop unter Leitung von Barbara Beckmann von Freitagsabends bis Sonntagsmittags . Nähere Informationen dazu finden sie unter VHS Ansberg/ Sundern  T-214-092 Dessous nähen",
+        "liststring":"[{name:\"\",belegt:false}]",
+        "teacher":"",
+        "list":[{"name":"","belegt":false}]}
+    ]
+}

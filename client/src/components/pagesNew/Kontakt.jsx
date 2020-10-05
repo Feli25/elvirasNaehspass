@@ -18,11 +18,11 @@ export default class Kontakt extends Component {
     })
   }
   submitContact=()=>{
-    this.setState({loading:true})
     if(this.state.name!==""
     &&this.state.email!==""
     &&this.state.message!==""
     &&this.state.subject!==""){
+      this.setState({loading:true})
       api.sendKontakt(this.state)
       .then(sth=>{
         this.setState({success:true,loading:false})
@@ -47,7 +47,7 @@ export default class Kontakt extends Component {
             header = {this.state.success? "Vielen Dank!":"Ohje!"}
             text = {this.state.success? "Wir haben Ihre Anfrage erhalten und setzen uns möglichst bald mit Ihnen in Verbindung!!" : "Da ist wohl was schief gelaufen! Überprüfen Sie doch bitte Ihre Internetverbindung und probieren es später nochmal. Sollte es trotzdem nicht gehen kontaktieren Sie uns doch bitte direkt."}
             lineclamp = {false}
-            button = "Zurück"
+            button = {this.state.success ? "Zurück" : null}
             onbuttonclick = {()=>this.props.history.push('/')}
           />
         </div>
@@ -59,7 +59,7 @@ export default class Kontakt extends Component {
     return (
       <div className="kontakt">
         <h2 className="title">Kontakt</h2>
-        <img className="mail-img" alt="mail" src="../images/mail.jpg"/>
+        <img className="mail-img" alt="mail" src="https://res.cloudinary.com/mcfrihfd/image/upload/v1601927335/project2React/kontaktsignup/mail.jpg"/>
         <div className="block-wrapper">
           <div className="info-block">
             <h3 className="info-block__header">Unsere Kontaktdaten</h3>
@@ -73,18 +73,18 @@ export default class Kontakt extends Component {
           </div>
 
           <div className="info-block">
-          <h3 className="info-block__header">Kontaktformular</h3>
-          <p className="info-block__content">
-            <input type="text" name="name" id="name" placeholder="Name*" size="30" value={this.state.name} onChange={(e)=>this.onChange(e)}/><br/>
-            <input type="text" name="email" id="email" placeholder="Email*" size="30" value={this.state.email} onChange={(e)=>this.onChange(e)}/><br/>
-            <input type="text" name="subject" id="subject" placeholder="Betreff" size="30" value={this.state.subject} onChange={(e)=>this.onChange(e)}/><br/>
-            <textarea rows="4" cols="29" type="text" name="message" id="message" placeholder="Nachricht" size="30" value={this.state.message} onChange={(e)=>this.onChange(e)}/><br/>
-            <br/>
-            {this.state.loading ? 
-            <button className="info-block__button">Lädt...</button>
-            : <button className="info-block__button" onClick={this.submitContact}>Senden</button>}
-          </p>
-        </div>
+            <h3 className="info-block__header">Kontaktformular</h3>
+            <p className="info-block__content">
+              <input type="text" name="name" id="name" placeholder="Name*" size="30" value={this.state.name} onChange={(e)=>this.onChange(e)}/>
+              <input type="text" name="email" id="email" placeholder="Email*" size="30" value={this.state.email} onChange={(e)=>this.onChange(e)}/>
+              <input type="text" name="subject" id="subject" placeholder="Betreff" size="30" value={this.state.subject} onChange={(e)=>this.onChange(e)}/>
+              <textarea rows="4" cols="29" type="text" name="message" id="message" placeholder="Nachricht" size="30" value={this.state.message} onChange={(e)=>this.onChange(e)}/>
+              
+              {this.state.loading ? 
+              <button className="info-block__button">Lädt...</button>
+              : <button className="info-block__button" onClick={this.submitContact}>Senden</button>}
+            </p>
+          </div>
         </div>
         {this.renderModal()}
       </div>

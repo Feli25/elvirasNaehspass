@@ -6,6 +6,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  @media (min-width: $bp-smallTablet) {
+    align-items: center;
+  }
 
   .mail-img {
     display: none;
@@ -27,7 +30,6 @@
     align-items: center;
   
     @media (min-width: $bp-smallTablet) {
-      justify-content: center;
       flex-wrap: nowrap;
       flex: 0 0 250px;
     }

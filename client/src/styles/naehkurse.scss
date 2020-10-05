@@ -1,0 +1,59 @@
+@import './variables.scss';
+
+.naehkurse {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-end;
+
+  .slider, .home__kurse-table {
+    width: 100%;
+
+    @media (min-width: $bp-tablet) {
+      width: 60%;
+    }
+  }
+
+  .home__text {
+    width: 100%;
+
+    @media (min-width: $bp-tablet) {
+      width: 40%;
+    }
+  }
+
+  .home__kurse-table {
+    font-size: 15px;
+    @media (min-width: $bp-bigSmartphone) {
+      font-size: 18px;
+
+      table, .info-block__text {
+        padding-right: 20px;
+      }
+    }
+  }
+
+  .home__block-reverse {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+
+    @media (min-width: $bp-tablet) {
+      flex-direction: row-reverse;
+    }
+  }
+
+  .info-block  {
+
+    .workshop-cards {
+      .card {
+        @media (min-width: $bp-smallTablet) {
+          flex: 1 1 48%;
+        }
+      }
+      .card:first-child {
+        padding-top: 10px;
+      }
+    }
+  }
+}

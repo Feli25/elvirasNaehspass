@@ -37,6 +37,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    max-width: 100%;
     @media (min-width: $bp-bigSmartphone) {
       flex: 1 0 48%;
     }
@@ -67,6 +68,14 @@
       position: absolute;
       bottom: 0%;
       right: 0%;
+      text-decoration: none;
+      color: #5A1F69;
+
+      &:hover {
+        text-decoration: underline;
+        color: #A5ABBC;
+        cursor: pointer;
+      }
     }
   }
 }
@@ -89,9 +98,11 @@
   @media (min-width: $bp-smallTablet) {
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: stretch;
 
     .card {
       flex: 0 1 48%;
+      border-bottom: 2px solid $base-grey;
     }
 
     .card:nth-child(even) {

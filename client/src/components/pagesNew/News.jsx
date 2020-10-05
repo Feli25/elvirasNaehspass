@@ -1,22 +1,16 @@
 import React, { Component } from 'react';
-import api from '../../api';
-import queryString from 'query-string';
+// import api from '../../api';
+// import queryString from 'query-string';
 
+import posts from '../../data/posts.json'
 import Card from '../Card'
 
-export default class Datenschutz extends Component {
+export default class News extends Component {
   state={
-    posts: [],
+    posts: posts,
     selectedPost: false,
   }
   componentDidMount(){
-    api.getAllPosts()
-      .then(result=>{
-        this.setState({posts:result})
-      })
-      .catch(err=>{
-        console.log(err)
-      })
     if(this.props?.location?.state?.id) {
       this.setState({selectedPost: this.props.location.state.id})
     }
@@ -24,6 +18,7 @@ export default class Datenschutz extends Component {
   renderPosts=()=>{
     return this.state.posts.map(post=>{
       return <Card 
+        key = {post._id}
         id = {post._id}
         imgPath = {post.imgPath}
         imgName = {post.imgName}

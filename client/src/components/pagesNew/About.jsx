@@ -4,7 +4,7 @@ import Card from '../Card'
 const teachers = [
   {
     name: "Elvira Deutges",
-    picturePath: "../images/Elvira.jpg",
+    picturePath: "https://res.cloudinary.com/mcfrihfd/image/upload/v1601927422/project2React/about/Elvira.jpg",
     cv: <span>geboren: 03.08.1965<br/>
     Ausbildung:<br/>
     1982 – 1984 Fachoberschule mit Fachabitur Bekleidung<br/>
@@ -19,7 +19,7 @@ const teachers = [
   },
   {
     name: "Barbara Beckmann",
-    picturePath: "../images/barbara.jpg",
+    picturePath: "https://res.cloudinary.com/mcfrihfd/image/upload/v1601927444/project2React/about/barbara.jpg",
     cv: <span>geboren 12.07.1967<br/>
     Ausbildung:<br/>
     1983 – 1985 Ausbildung zur Bekleidungsfertigerin<br/>
@@ -28,7 +28,7 @@ const teachers = [
     Seit 2010 tätig in der Erwachsenenbildung<br/>
     Weiterbildung:<br/>
     1987 – 1990 Ausbildung zur Industrieschneidermeisterin<br/>
-    (mit Anerkennung im Handwerk)<br/><br/>
+    (mit Anerkennung im Handwerk)<br/>
     1992 Ausbildung zur Schnittdirectrice</span>
   },
   {
@@ -52,7 +52,7 @@ const teachers = [
   {
     name: "Nicola Münter",
     // picturePath: "",
-    // cv: <span></span>
+    cv: <span>Lebenslauf folgt...</span>
   }
 ]
 
@@ -60,6 +60,7 @@ export default class About extends Component {
   renderCards=()=>{
     return teachers.map(teacher=>
       <Card 
+        key = {teacher.name}
         id = {teacher.name}
         imgPath = {teacher.picturePath}
         imgName = {teacher.name}

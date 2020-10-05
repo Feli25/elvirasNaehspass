@@ -1,0 +1,38 @@
+@import './variables.scss';
+
+.about {
+  .card-block {
+    flex-direction: column;
+    // @media (min-width: $bp-smallTablet) {
+    //   flex-direction: row;
+    // }
+
+    .card {
+      flex-direction: column;
+      @media (min-width: $bp-smallTablet) {
+        flex-direction: row;
+        flex: none;
+        margin-left: 0;
+        justify-content: center;
+      }
+
+      .card__img {
+        max-width: 200px;
+
+        @media (min-width: $bp-bigSmartphone){
+          flex: none;
+        }
+      }
+
+      .card__content {
+        @media (min-width: $bp-bigSmartphone){
+          flex: none;
+        }
+
+        p {
+          max-width: 600px;
+        }
+      }
+    }
+  } 
+}

@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 
 import Slider from '../Slider'
 import Card from '../Card'
-import api from '../../api';
+import posts from '../../data/posts.json'
 
 const pictures = [
-  'https://res.cloudinary.com/mcfrihfd/image/upload/v1558623517/project2React/dessous.jpg.jpg',
-  'https://res.cloudinary.com/mcfrihfd/image/upload/v1558623547/project2React/kursdurchgang.jpg.jpg'
+  'https://res.cloudinary.com/mcfrihfd/image/upload/v1558628756/project2React/IMG_6122.JPG.jpg'
   ]
 
 export default class HomeNew extends Component {
@@ -14,23 +13,19 @@ export default class HomeNew extends Component {
     posts: []
   }
   componentDidMount(){
-    api.getLatestPosts()
-      .then(result=>{
-        const formattedResult = result.map(post=>
-          <Card 
-            id = {post._id}
-            header = {post.header}
-            text = {post.content}
-            lineclamp = {true}
-            link = "Mehr lesen"
-            onlinkclick = {()=>this.props.history.push('/news', {id: post._id})}
-          />
-          )
-        this.setState({posts:formattedResult})
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+    const latestPosts = posts.slice(0,10);
+    const formattedResult = latestPosts.map(post=>
+      <Card 
+        key = {post._id}
+        id = {post._id}
+        header = {post.header}
+        text = {post.content}
+        lineclamp = {true}
+        link = "Mehr lesen"
+        onlinkclick = {()=>this.props.history.push('/news', {id: post._id})}
+      />
+      )
+    this.setState({posts:formattedResult})
   }
   render () {
     return (
@@ -47,31 +42,30 @@ export default class HomeNew extends Component {
             <h3 className="info-block__header">Elviras Nähspass</h3>
             <p className="info-block__text">Wie schön, dass Sie unsere Seite gefunden haben! Schauen Sie sich um, entdecken Sie unsere Kursangebote und melden Sie sich gerne bei uns, wenn Fragen sein sollten. Wir freuen uns, Sie bald in unseren Kursen begrüßen zu können!</p>
           </div>
-          {/* <img src='../../images/woman.png' className="home__intro-img"/> */}
         </div>
 
         <div className="home__category-mobile">
-          <a href="#">{"Unser Angebot >>"}</a>
-          <a href="#">{"Das sind wir >>"}</a>
-          <a href="#">{"Das Atelier >>"}</a>
-          <a href="#">{"Kontakt >>"}</a>
+          <a href="/naehkurse">{"Unser Angebot >>"}</a>
+          <a href="/about">{"Das sind wir >>"}</a>
+          <a href="/atelier">{"Das Atelier >>"}</a>
+          <a href="/kontakt">{"Kontakt >>"}</a>
         </div>
         <div className="home__category-tablet">
             <div>
               <img src="../icons/button.svg" className="home__category-icon" alt="Angebot"/>
-              <a href="#">{"Unser Angebot >>"}</a>
+              <a href="/naehkurse">{"Unser Angebot >>"}</a>
             </div>
             <div>
               <img src="../icons/face.svg" className="home__category-icon" alt="Wir"/>
-              <a href="#">{"Das sind wir >>"}</a>
+              <a href="/about">{"Das sind wir >>"}</a>
             </div>
             <div>
               <img src="../icons/house.svg" className="home__category-icon" alt="Atelier"/>
-              <a href="#">{"Das Atelier >>"}</a>
+              <a href="/atelier">{"Das Atelier >>"}</a>
             </div>
             <div>
               <img src="../icons/mail.svg" className="home__category-icon" alt="Kontakt"/>
-              <a href="#">{"Kontakt >>"}</a>
+              <a href="/kontakt">{"Kontakt >>"}</a>
             </div>
         </div>
 

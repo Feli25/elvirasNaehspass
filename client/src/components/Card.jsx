@@ -19,7 +19,7 @@ export default class Card extends Component {
           {text && <p className={lineclamp ? "card__text line-clamp" : "card__text"}>{text}</p>}
           {subtext && <p className="card__subText">{subtext}</p>}
           {button && onbuttonclick && <button onClick={onbuttonclick}>{button}</button>}
-          {link && onlinkclick && <a onClick={onlinkclick} className="card__link">{link}</a>}
+          {link && onlinkclick && <span onClick={onlinkclick} className="card__link">{link}</span>}
         </div>
       </div>
     )
