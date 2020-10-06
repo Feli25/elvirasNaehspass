@@ -64,6 +64,7 @@ export default class App extends Component {
           </div>
         </section>
         
+        <div className="fixed-bg"><img src="../images/woman.png" alt=""/></div>
         <div className="content">
           <Switch>
           <Route path="/" exact component={Home} />
