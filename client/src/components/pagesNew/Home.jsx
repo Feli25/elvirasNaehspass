@@ -5,7 +5,8 @@ import Card from '../Card'
 import posts from '../../data/posts.json'
 
 const pictures = [
-  'https://res.cloudinary.com/mcfrihfd/image/upload/v1558628756/project2React/IMG_6122.JPG.jpg'
+  // 'https://res.cloudinary.com/mcfrihfd/image/upload/v1558628756/project2React/IMG_6122.JPG.jpg',
+  'https://res.cloudinary.com/mcfrihfd/image/upload/v1602009956/project2React/home/home-slider.jpg'
   ]
 
 export default class HomeNew extends Component {

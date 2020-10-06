@@ -47,9 +47,9 @@ export default class App extends Component {
           <h1 className="header__title">Elvira's Nähspass</h1>
           <div className={this.state.navOpen?'nav--is-expanded nav':'nav'}>
             <button className="nav__button" onClick={()=>this.setState({navOpen:!this.state.navOpen})}>
-              <span className="nav__button-line"/>
-              <span className="nav__button-line"/>
-              <span className="nav__button-line"/>
+              <span className="nav__button-line">------</span>
+              <span className="nav__button-line">------</span>
+              <span className="nav__button-line">------</span>
               <span className="nav__button-close">&#x2715;</span>
             </button>
             <div className="nav__links">
