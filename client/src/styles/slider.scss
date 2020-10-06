@@ -1,5 +1,8 @@
+@import './variables.scss';
+
 .slider {
   position: relative;
+  box-sizing: border-box;
 
   &__content-border {
     padding: 0 20px;
