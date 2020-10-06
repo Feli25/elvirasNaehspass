@@ -94,20 +94,20 @@ export default class HomeNew extends Component {
 
           <div className="image-tiles">
             <div className="image-tiles-column">
-              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495663/project2React/WhatsApp_Image_2020-02-23_at_10.53.19_PM_2.jpg" alt="modell"/>
-              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.21_PM.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495663/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.19_PM_2.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.21_PM.jpg" alt="modell"/>
             </div>
             <div className="image-tiles-column">
-              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.22_PM_1.jpg" alt="modell"/>
-              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.20_PM_1.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.22_PM_1.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.20_PM_1.jpg" alt="modell"/>
             </div>
             <div className="image-tiles-column">
-              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/WhatsApp_Image_2020-02-23_at_10.53.42_PM.jpg" alt="modell"/>
-              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/WhatsApp_Image_2020-02-23_at_10.53.24_PM.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.42_PM.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.24_PM.jpg" alt="modell"/>
             </div>
             <div className="image-tiles-column">
-              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.23_PM.jpg" alt="modell"/>
-              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.23_PM_1.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.23_PM.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.23_PM_1.jpg" alt="modell"/>
             </div>
           </div>
       </div>

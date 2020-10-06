@@ -5,7 +5,7 @@ import Card from '../Card'
 import naehkurse from '../../data/naehkurse.json'
 const picturesKurse = [
   'https://res.cloudinary.com/mcfrihfd/image/upload/v1560006430/project2React/kurseworkshops/kurse.jpg',
-  'https://res.cloudinary.com/mcfrihfd/image/upload/v1558623547/project2React/kursdurchgang.jpg.jpg'
+  'https://res.cloudinary.com/mcfrihfd/image/upload/v1558623547/project2React/news/kursdurchgang.jpg.jpg'
   ]
 const picturesWorkshops = [
   'https://res.cloudinary.com/mcfrihfd/image/upload/v1572813405/project2React/kurseworkshops/IMG_2701.JPG.jpg'
