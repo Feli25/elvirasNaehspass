@@ -70,7 +70,8 @@ export default class Naehkurse extends Component {
                 <th></th>
               </tr>
               {naehkurse.table.list.map((row,index)=>{
-                return <tr key={index}>
+                if (row.subheader) return <p>{row.subheader}</p>
+                else return <tr key={index}>
                   <td>{row.name}</td>
                   <td>{row.time}</td>
                   <td>{row.teacher}</td>
@@ -113,7 +114,7 @@ export default class Naehkurse extends Component {
                     id = {wsh._id}
                     header = {wsh.header}
                     text = {content}
-                    subtext = {"Unterrichtet von: " + wsh.teacher}
+                    subtext = {wsh.teacher ? "Unterrichtet von: " + wsh.teacher : false}
                   />
             })}
           </div>

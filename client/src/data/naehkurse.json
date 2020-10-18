@@ -5,15 +5,22 @@
     "content":"platzhalter",
     "liststring":"[{name:\"Montag morgen 9 Uhr$09:00 - 11:30$BB\",belegt:true},  {name:\"Montag abend$19:00 - 21:30$ED\",belegt:true},  {name:\"Dienstag morgen$09:00 - 12:00$SB\",belegt:false},  {name:\"Dienstag Mittag$14:00 - 16:30$ED\",belegt:true},  {name:\"Mittwoch Morgen$9:00 - 12:00$ED\",belegt:true},  {name:\"Mittwoch Abend$19:00 - 21:30$ED\",belegt:true},  {name:\"Donnersta g morgen$09:00 - 12:00$ED\",belegt:true},  {name:\"Donnerstag Mittag$16:30 - 19:00$NM\",belegt:true},  {name:\"Donnerstag Abend$19:30 - 22:00$BB\",belegt:true}]",
     "teacher":"platzhalter",
-    "list":[{"name":"Montag morgen","time":"09:00 - 11:30","teacher":"BB","belegt":true},
+    "list":[
+      {"subheader":"wöchentlich"},
+      {"name":"Montag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":true},
+      {"name":"Montag Mittag","time":"14:00 - 16:30","teacher":"ED","belegt":true},
       {"name":"Montag abend","time":"19:00 - 21:30","teacher":"ED","belegt":true},
       {"name":"Dienstag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
-      {"name":"Dienstag Mittag","time":"14:00 - 16:30","teacher":"ED","belegt":true},
       {"name":"Mittwoch Morgen","time":"9:00 - 12:00","teacher":"ED","belegt":true},
-      {"name":"Mittwoch Abend","time":"19:00 - 21:3","teacher":"ED","belegt":true},
+      {"name":"Mittwoch Abend","time":"19:00 - 21:30","teacher":"ED","belegt":true},
       {"name":"Donnerstag morgen","time":"09:00 - 12:00","teacher":"ED","belegt":true},
       {"name":"Donnerstag Mittag","time":"16:30 - 19:00","teacher":"NM","belegt":true},
-      {"name":"Donnerstag Abend","time":"19:30 - 22:00","teacher":"BB","belegt":true}]},
+      {"name":"Donnerstag Abend","time":"19:30 - 22:00","teacher":"NM","belegt":true},
+      {"name":"Freitag Abend","time": "19:00 - 23:00","teacher":"ED","belegt":true},
+      {"subheader":"1 mal im Monat"},
+      {"name":"Samstag vormittag","time":"10:00 - 13:00","teacher":"ED","belegt":true},
+      {"name":"Samstag nachmittag","time":"14:00 - 17:00","teacher":"ED","belegt":true}
+      ]},
   
    "workshops": [
      {"_id":2,
@@ -28,7 +35,6 @@
       "header":"Boomerang Bags nähen",
       "content":"Am 05.01.2020 wollen wir mit vielen helfenden Händen Einkaufstaschen nähen, die hoffentlich ganz schnell sämtliche Plastikeinkaufstüten ersetzen. Um kurze Anmeldung wird gebeten.  :)",
       "liststring":"[{name:\"05.01.2020    ab  11 Uhr\",belegt:false}]",
-      "teacher":"Sheila und Elvira",
       "list":[{"name":"05.01.2020    ab  11 Uhr","belegt":false}]}
   ],
   

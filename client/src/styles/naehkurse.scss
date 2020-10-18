@@ -29,6 +29,10 @@
 
       table, .info-block__text {
         padding-right: 20px;
+
+        p:not(:first-child) {
+          margin-top: 15px;
+        }
       }
     }
   }
