@@ -14,7 +14,7 @@ const errHandler = err => {
   throw err
 }
 
-export default {
+const api = {
   service: service,
 
   sendKontakt(data){
@@ -32,3 +32,5 @@ export default {
   },
 
 }
+
+export default api

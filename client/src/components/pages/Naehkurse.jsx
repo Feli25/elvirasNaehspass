@@ -63,21 +63,25 @@ export default class Naehkurse extends Component {
               SB = Simone Becher
             </p>
             <table>
-              <tr>
-                <th>Tag</th>
-                <th>Uhrzeit</th>
-                <th>Lehrer</th>
-                <th></th>
-              </tr>
-              {naehkurse.table.list.map((row,index)=>{
-                if (row.subheader) return <p>{row.subheader}</p>
-                else return <tr key={index}>
-                  <td>{row.name}</td>
-                  <td>{row.time}</td>
-                  <td>{row.teacher}</td>
-                  <td>{row.belegt&& "belegt"}</td>
+              <tbody>
+                <tr>
+                  <th>Tag</th>
+                  <th>Uhrzeit</th>
+                  <th>Lehrer</th>
+                  <th></th>
                 </tr>
-              })}
+                {naehkurse.table.list.map((row,index)=>{
+                  if (row.subheader) return <tr key={index} className="subHeaderTable">
+                      <td>{row.subheader}</td>
+                    </tr>
+                  else return <tr key={index}>
+                    <td>{row.name}</td>
+                    <td>{row.time}</td>
+                    <td>{row.teacher}</td>
+                    <td>{row.belegt&& "belegt"}</td>
+                  </tr>
+                })}
+              </tbody>
             </table>
           </div>
         </div>
@@ -167,7 +171,7 @@ export default class Naehkurse extends Component {
             <div className="info-block">
               <h3 className="info-block__header">Dessous</h3>
               <p className="info-block__text">
-                  <h3>Die Dessous Kurse sind zur Zeit leider pausiert!<br/></h3>
+                  <span className="info-block__text-subheader">Die Dessous Kurse sind zur Zeit leider pausiert!<br/></span>
                   Aufgrund der aktuellen Situation sind wir leider gezwungen, die Dessous Kurse eine Zeit 
                   lang bei Elviras Nähspass zu pausieren. Alle Teilnehmer der geplanten Workshops erhalten eine Information.
                   Sollten Sie über uns einen Dessous Workshop gebucht haben, und noch keine Information erhalten haben, dann würden wir Sie bitten sich bei uns zu melden!

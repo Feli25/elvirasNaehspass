@@ -28,10 +28,10 @@
       font-size: 18px;
 
       table, .info-block__text {
-        padding-right: 20px;
+        padding-right: $base-spacing-double;
 
-        p:not(:first-child) {
-          margin-top: 15px;
+        .subHeaderTable>td {
+          padding-top: 15px;
         }
       }
     }
@@ -56,7 +56,7 @@
         }
       }
       .card:first-child {
-        padding-top: 10px;
+        padding-top: $base-spacing;
       }
     }
   }

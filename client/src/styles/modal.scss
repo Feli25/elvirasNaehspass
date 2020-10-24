@@ -19,7 +19,7 @@
     right: 5vw;
     top: 5vw;
     font-size: 24px;
-    padding: 10px;
+    padding: $base-spacing;
     line-height: 24px;
     z-index: 90;
   }
@@ -27,7 +27,7 @@
   .card {
     background: rgb(255, 255, 255);
     border-radius: 15px;
-    padding: 10px;
+    padding: $base-spacing;
 
     &__img {
       padding-top: $base-spacing;

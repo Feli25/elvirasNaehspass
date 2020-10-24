@@ -8,24 +8,23 @@ import '../styles/modal.scss';
 import '../styles/layout.scss';
 
 import '../styles/home.scss';
-import '../styles/news.scss';
 import '../styles/naehkurse.scss';
 import '../styles/atelier.scss';
 import '../styles/about.scss';
 import '../styles/kontakt.scss';
 
 
-import Home from './pagesNew/Home'
-import News from './pagesNew/News'
-import Naehkurse from './pagesNew/Naehkurse'
-import Anmeldung from './pagesNew/Anmeldung'
-import Atelier from './pagesNew/Atelier'
-import About from './pagesNew/About'
-import Kontakt from './pagesNew/Kontakt'
-import Datenschutz from './pagesNew/Datenschutz';
-import Impressum from './pagesNew/Impressum';
+import Home from './pages/Home'
+import News from './pages/News'
+import Naehkurse from './pages/Naehkurse'
+import Anmeldung from './pages/Anmeldung'
+import Atelier from './pages/Atelier'
+import About from './pages/About'
+import Kontakt from './pages/Kontakt'
+import Datenschutz from './pages/Datenschutz';
+import Impressum from './pages/Impressum';
 
-import Error from './pagesNew/Error';
+import Error from './pages/Error';
 
 export default class App extends Component {
 

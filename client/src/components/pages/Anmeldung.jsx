@@ -14,11 +14,12 @@ export default class Anmeldung extends Component {
     choice: "none", //name of the course
     success:false,
     error:false,
-    loading:false
+    loading:false,
+    warningMessage:null,
   }
   createChoices=()=>{
     const choices = [<option value="none" key="none">&#x25BC; Ihre Kurswahl</option>]
-    naehkurse.table.list.forEach((course,index)=>{
+    naehkurse.table.list.filter(course=>!course.subheader).forEach((course,index)=>{
       choices.push(<option key={"Kurs"+index} value={course.name}>Kurs: {course.name}</option>)
     })
     naehkurse.workshops.forEach((course,index)=>{
@@ -33,6 +34,9 @@ export default class Anmeldung extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+    if(this.state.warningMessage && this.state.warningMessage.type===event.target.name) {
+      this.setState({warningMessage:null})
+    }
   }
   submit=()=>{
     if(this.state.name!==""
@@ -43,8 +47,9 @@ export default class Anmeldung extends Component {
       this.setState({loading:true})
       api.sendAnmeldung(this.state)
         .then(response=>{
-          console.log(response)
-          this.setState({success:true, loading:false})
+          // console.log(response)
+          if(response.success === false && response.error === "reply_to.email") this.setState({success:false, error:false, loading: false, warningMessage:{type:"email", text:"Bitte eine korrekte Email angeben"}})
+          else this.setState({success:true, loading:false})
         })
         .catch(err=>{
           console.log(err)
@@ -86,6 +91,7 @@ export default class Anmeldung extends Component {
         <div className="block-wrapper">
           <div className="info-block">
             <h3 className="info-block__header">Anmeldung</h3>
+            {this.state.warningMessage && this.state.warningMessage.text && <p className="info-block__text warning">{this.state.warningMessage.text}</p>}
             <p className="info-block__content">
               <input type="text" name="name" id="name" placeholder="Name*" size="30" value={this.state.name} onChange={(e)=>this.onChange(e)}/>
               <input type="text" name="email" id="email" placeholder="Email*" size="30" value={this.state.email} onChange={(e)=>this.onChange(e)}/>

@@ -10,12 +10,16 @@ export default class Kontakt extends Component {
     message:"",
     success:false,
     error:false,
-    loading:false
+    loading:false,
+    warningMessage:null,
   }
   onChange=(event)=>{
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     })
+    if(this.state.warningMessage && this.state.warningMessage.type===event.target.name) {
+      this.setState({warningMessage:null})
+    }
   }
   submitContact=()=>{
     if(this.state.name!==""
@@ -24,10 +28,12 @@ export default class Kontakt extends Component {
     &&this.state.subject!==""){
       this.setState({loading:true})
       api.sendKontakt(this.state)
-      .then(sth=>{
-        this.setState({success:true,loading:false})
+      .then(response=>{
+        if(response.success === false && response.error === "reply_to.email") this.setState({success:false, error:false, loading: false, warningMessage:{type:"email", text:"Bitte eine korrekte Email angeben"}})
+        else this.setState({success:true,loading:false})
       })
-      .catch(err=>{console.log(err)
+      .catch(err=>{
+        console.log(err)
         this.setState({error:true,loading:false})})
     }
     else {
@@ -74,6 +80,7 @@ export default class Kontakt extends Component {
 
           <div className="info-block">
             <h3 className="info-block__header">Kontaktformular</h3>
+            {this.state.warningMessage && this.state.warningMessage.text && <p className="info-block__text warning">{this.state.warningMessage.text}</p>}
             <p className="info-block__content">
               <input type="text" name="name" id="name" placeholder="Name*" size="30" value={this.state.name} onChange={(e)=>this.onChange(e)}/>
               <input type="text" name="email" id="email" placeholder="Email*" size="30" value={this.state.email} onChange={(e)=>this.onChange(e)}/>

@@ -5,17 +5,17 @@
   box-sizing: border-box;
 
   &__content-border {
-    padding: 0 20px;
+    padding: 0 $base-spacing-double;
   }
 
   &__content-grid {
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 100%;
-    @media (min-width: 425px) {
+    @media (min-width: $bp-bigSmartphone) {
       grid-template-columns: 50% 50%;
     }
-    @media (min-width: 768px) {
+    @media (min-width: $bp-tablet) {
       grid-template-columns: 33% 33% 34%;
     }
   }
@@ -26,7 +26,7 @@
     overflow: hidden;
     object-fit: cover;
 
-    @media (min-width: 425px) {
+    @media (min-width: $bp-bigSmartphone) {
       height: 400px;
     }
   }
@@ -52,12 +52,12 @@
       display: none;
     }
 
-    @media (min-width: 425px) {
+    @media (min-width: $bp-bigSmartphone) {
       &-one {
         display: block;
       }
     }
-    @media (min-width: 768px) {
+    @media (min-width: $bp-tablet) {
       &-two {
         display: block;
       }
