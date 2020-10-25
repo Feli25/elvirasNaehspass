@@ -1,0 +1,53 @@
+@import './variables.scss';
+
+.modal {
+  position: fixed;
+  top: $total-header-height + $total-title-height;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: $content-height;
+  background: rgba(255, 255, 255, 0.9);
+  z-index: 80;
+  padding: 5vw;
+  box-sizing: border-box;
+  overflow: scroll;
+  max-width: $bp-tablet;
+
+  &__close {
+    position: absolute;
+    right: 5vw;
+    top: 5vw;
+    font-size: 24px;
+    padding: $base-spacing;
+    line-height: 24px;
+    z-index: 90;
+  }
+
+  .card {
+    background: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: $base-spacing;
+
+    &__img {
+      padding-top: $base-spacing;
+    }
+
+    @media (min-width: $bp-bigSmartphone) and (max-width: $bp-tablet) {
+      flex-direction: column-reverse;
+
+      .card__img {
+        max-width: 200px;
+        flex: none;
+      }
+
+      .card__content {
+        flex: none;
+
+        .card__header {
+          margin-top: $base-spacing-double;
+        }
+      }
+    }
+  }
+}

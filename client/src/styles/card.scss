@@ -1,0 +1,113 @@
+@import './variables.scss';
+
+.card {
+  // max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  // padding-bottom: 24px;
+  min-height: auto;
+  padding: $base-spacing-triple 0;
+  flex-wrap: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (min-width: $bp-bigSmartphone) {
+    flex-direction: row;
+  }
+
+  &__img {
+    height: 150px;
+    max-width: 100%;
+    overflow: hidden;
+    object-fit: cover;
+    height: auto;
+    width: 100%;
+    margin-bottom: $base-spacing;
+    
+    @media (min-width: $bp-bigSmartphone) {
+      flex: 0 1 200px;
+      margin-right: 4%;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 100%;
+    @media (min-width: $bp-bigSmartphone) {
+      flex: 1 0 48%;
+    }
+
+    .card__header {
+      font-size: 20px;
+      border-bottom: 5px solid #5A1F69;
+      text-align: center;
+      margin-bottom: $base-spacing;
+    }
+
+    .card__text {
+      font-size: 16px;
+    }
+
+    .card__subText {
+      color: $base-grey;
+      padding-top: $base-spacing-half;
+      align-self: flex-start;
+    }
+
+    button {
+      margin-top: $base-spacing;
+    }
+
+    .card__link {
+      align-self: flex-end;
+      position: absolute;
+      bottom: 0%;
+      right: 0%;
+      text-decoration: none;
+      color: #5A1F69;
+
+      &:hover {
+        text-decoration: underline;
+        color: #A5ABBC;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+//Card wrapper -> multiple cards
+// alternatives: modal or slider
+.card-block {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  padding: 0 $base-spacing;
+
+  .card:not(:last-child) {
+    border-bottom: 2px solid $base-grey;
+  }
+
+  @media (min-width: $bp-smallTablet) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: stretch;
+
+    .card {
+      flex: 0 1 48%;
+      border-bottom: 2px solid $base-grey;
+    }
+
+    .card:nth-child(even) {
+      margin-left: 4%;
+    }
+  }
+}

@@ -35,22 +35,17 @@ app.use(express.static(path.join(__dirname, '../client/build')))
 
 
 // Enable authentication using session + passport
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'irongenerator',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
-  store: new (require('connect-pg-simple')(session))(),
-}));
-require('./passport')(app)
+// app.use(session({
+//   secret: process.env.SESSION_SECRET || 'irongenerator',
+//   resave: true,
+//   saveUninitialized: true,
+//   cookie: { maxAge: 30 * 24 * 60 * 60 * 1000 }, // 30 days
+//   store: new (require('connect-pg-simple')(session))(),
+// }));
+// require('./passport')(app)
 
 
 app.use('/api', require('./routes/index'))
-app.use('/api', require('./routes/authPSQL'))
-app.use('/api/equipment', require('./routes/equipmentPSQL'))
-app.use('/api/galerie', require('./routes/galeriePSQL'))
-app.use('/api/post', require('./routes/postPSQL'))
-app.use('/api/info', require('./routes/infoPSQL'))
 // app.use('/api/admin', require('./routes/admin'))
 
 // For any routes that starts with "/api", catch 404 and forward to error handler

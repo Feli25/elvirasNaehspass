@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
-const { Client } = require('pg');
-const configs = {
-  connectionString: process.env.DATABASE_URL,
-  ssl: false,
-}
+// const { Client } = require('pg');
+// const configs = {
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: false,
+// }
 
 router.post('/kontakt', (req,res,next)=>{
   const sgMail = require('@sendgrid/mail');
@@ -22,150 +22,89 @@ router.post('/kontakt', (req,res,next)=>{
   };
   sgMail.send(msg)
     .then(response=>{ res.json( { success: true })})
-    .catch(err=>{console.log(err)})
+    .catch(err=>{
+      if(err.response && 
+        err.response.body && 
+        err.response.body.errors && 
+        err.response.body.errors[0] && 
+        err.response.body.errors[0].field && 
+        err.response.body.errors[0].field==="reply_to.email"){
+        res.json({success:false, error:"reply_to.email"})
+      } else {
+        next(err)
+      }
+      // console.log(err)
+      // console.log(err.response.body)
+    })
 })
 
 function createHTML(body){
   let html = `<h1>Die Anfrage:</h1><hr>`
-  if(body.sharing){
-    html += `<p>${body.name} (${body.email}) und ${body.shareName} (${body.shareEmail}) möchten gemeinsam diesem Kurs betreten:<br/>Wahlen: ${body.choice1}<br/>${body.choice2}<br/>${body.choice3}`
-    html += `<br/>Die eingetragenen Infos:<br/>Person 1:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.adress}<br/>Person 2:<br/>Name: ${body.shareName}<br/>Email: ${body.shareEmail}`
-  } else {
-    html += `<p>${body.name} (${body.email}) möchte diesem Kurs betreten:<br>Wahlen:<br/> ${body.choice1}<br/>${body.choice2}<br/>${body.choice3}`
-    html += `<br/>Die eingetragenen Infos:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.adress}`
-  }
+  html += `<p>${body.name} (${body.email}) möchte diesem Kurs betreten:<br>Wahlen:<br/> ${body.choice}`
+  html += `<br/>Die eingetragenen Infos:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.adress}`
   html += `</p><p>Weitere Mitteilung: ${body.message}</p><br><hr><br>`
   return html
 }
 
 function createHTMLThankYou(body){
   let htmlThankYou = `Sehr geehrte/r ${body.name} <br/><br/>
-                          Wir danken vielmals für Ihre Anmeldung für folgenden Kurs(e):<br/> 
-                          1ste Wahl: ${body.choice1}<br/>`
-      if(body.choice2!=="none"){
-        htmlThankYou+="2te Wahl: "+body.choice2+"<br/>"
-      }
-      if(body.choice3!=="none"){
-        htmlThankYou+="3te Wahl: "+body.choice3+"<br/>"
-      }
-      htmlThankYou+=`Folgende Person(en) wurden angemeldet: ${body.name}`
-      if(body.sharing){
-        htmlThankYou+=` und ${body.shareName}`
-      } 
+                          Wir danken vielmals für Ihre Anmeldung für folgenden Kurs/Workshop:<br/> 
+                          Deine Wahl: ${body.choice}<br/>`
       htmlThankYou+=`<br/>In Kürze werden Sie eine Information erhalten, ob Sie erfolgreich aufgenommen worden sind, sowie alle weiteren benötigten Informationen!<br/><br/>
                           Mit lieben Grüßen<br/>
                           Ihr Team von Elviras Nähspass</p>`
   return htmlThankYou 
 }
 
-function createHTMLThankYouShare(body){
-  let htmlThankYouShare = 
-            `Sehr geehrte/r ${body.shareName} <br/><br/>
-            Wir danken vielmals für Ihre Anmeldung für folgenden Kurs(e):<br/> 
-            1ste Wahl: ${body.choice1}<br/>`
-            if(body.choice2!=="none"){
-              htmlThankYouShare+="2te Wahl: "+body.choice2+"<br/>"
-            }
-            if(body.choice3!=="none"){
-              htmlThankYouShare+="3te Wahl: "+body.choice3+"<br/>"
-            }
-            htmlThankYouShare+=`Sie wurden von ${body.name} angemeldet.<br/>
-            In Kürze werden Sie eine Information erhalten, ob Sie erfolgreich aufgenommen worden sind, sowie alle weiteren benötigten Informationen!<br/><br/>
-            Mit lieben Grüßen<br/>
-            Ihr Team von Elviras Nähspass</p>`
-  return htmlThankYouShare
-}
-function createHTMLWorkshop(body, course){
-  let html = `<h1>Die Anfrage:</h1><hr>`
-  html += `<p>${body.name} (${body.email}) möchte an diesem Workshop teilnehmen: ${course.header}<br/>Die eingetragenen Infos:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.adress}`
-  html += `</p><p>Weitere Mitteilung: ${body.message}</p><br><hr><br>`
-  return html
-}
-function createHTMLThankYouWorkshop(body,course){
-  let htmlThankYou = 
-  `Sehr geehrte/r ${body.name} <br/><br/>
-  Wir danken vielmals für Ihre Anmeldung für folgenden Workshop:<br/> ${course.header}<br/>
-  In Kürze werden Sie eine Information erhalten, ob Sie erfolgreich aufgenommen worden sind, sowie alle weiteren benötigten Informationen!<br/><br/>
-  Mit lieben Grüßen<br/>
-  Ihr Team von Elviras Nähspass</p>`
-  return htmlThankYou
-}
+// req.body =    
+// name: "",
+// email: "",
+// phone: "",
+// address: "",
+// message: "",
+// choice: "none", //name of the course
 
-router.post("/anmeldung/:type", (req,res,next)=>{
+router.post("/anmeldung", (req,res,next)=>{
   const sgMail = require('@sendgrid/mail');
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   let messageToTeachers = {
     to: "elvirasnaehspass@gmail.com",
     from: 'elvirasnaehspass@gmail.com',
     reply_to:req.body.email,
-    subject: "Eine neue "+req.params.type+ " Anmeldung",
+    subject: "Eine neue Anmeldung",
+    html: createHTML(req.body)
   }
   let messageToStudents = {
     to: req.body.email,
     from: 'elvirasnaehspass@gmail.com',
     subject: "Vielen Dank für Ihre Anmeldung!",
+    html: createHTMLThankYou(req.body)
   }
 
-  if(req.params.type==="kurs"){
-    //choice object is the course name string
-    const html = createHTML(req.body)
-    messageToTeachers.html = html
-    sgMail.send(messageToTeachers)
-      .then(sth => {
-        console.log("sent")
-        const htmlThankYou = createHTMLThankYou(req.body)
-        messageToStudents.html=htmlThankYou
-        sgMail.send(messageToStudents)
-          .then(sth2=>{
-            console.log("sentstudent")
-            if(req.body.shareName){
-              const htmlThankYouShare = createHTMLThankYouShare(req.body)
-              messageToStudents.html=htmlThankYouShare
-              messageToStudents.to = req.body.shareEmail
-              sgMail.send(messageToStudents)
-                .then(sth3=>{res.json( { success: true })})
-                .catch(err => { console.log(err) })
-            } else {
-              res.json( { success: true })
-            }
-          })
-          .catch(err => { console.log(err) })
-      })
-      .catch(err => { console.log(err) })
-    
-  } else if(req.params.type="workshop"){
-    //choice object is the course id
-    const client = new Client(configs);
-    client.connect();
-    client.query('SELECT id AS _id, category, header, content, teacher FROM infos WHERE id=$1',[req.body.choice])
-      .then(courseQuery=>{
-        client.end()
-        const course = courseQuery.rows[0]
-        const html = createHTMLWorkshop(req.body, course)
-        messageToTeachers.html = html
-        
-        sgMail.send(messageToTeachers)
-          .then(sth => {
-            if(course.category==="DESSOUS"){
-              messageToTeachers.to = "beckmannbarbara@web.de"
-              sgMail.send(messageToTeachers)
-                .then(sth=>console.log("success"))
-                .catch(err=>console.log("ERROR",err))
-            }
-            console.log("sent")
-            const htmlThankYou = createHTMLThankYouWorkshop(req.body,course)
-            messageToStudents.html = htmlThankYou
-            sgMail.send(messageToStudents)
-              .then(sth2=>{res.json( { success: true })})
-              .catch(err => { console.log(err) })
-          })
-          .catch(err => { console.log(err) })
-      })
-      .catch(err=>{
-        client && client.end()
-        console.log(err)})
-  }
- 
+  sgMail.send(messageToTeachers)
+    .then(sth => {
+      console.log("sent")
+      sgMail.send(messageToStudents)
+        .then(sth2=>{
+          console.log("sentstudent")
+          res.json( { success: true })
+        })
+        .catch(err => { 
+          next(err)
+         })
+    })
+    .catch(err => {
+      if(err.response && 
+        err.response.body && 
+        err.response.body.errors && 
+        err.response.body.errors[0] && 
+        err.response.body.errors[0].field && 
+        err.response.body.errors[0].field==="reply_to.email"){
+        res.json({success:false, error:"reply_to.email"})
+      } else {
+        next(err)
+      }
+    })
 })
 
 

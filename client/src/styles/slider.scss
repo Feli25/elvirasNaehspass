@@ -1,0 +1,74 @@
+@import './variables.scss';
+
+.slider {
+  position: relative;
+  box-sizing: border-box;
+
+  &__content-border {
+    padding: 0 $base-spacing-double;
+  }
+
+  &__content-grid {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 100%;
+    @media (min-width: $bp-bigSmartphone) {
+      grid-template-columns: 50% 50%;
+    }
+    @media (min-width: $bp-tablet) {
+      grid-template-columns: 33% 33% 34%;
+    }
+  }
+
+  &__img {
+    height: 250px;
+    width: 100%;
+    overflow: hidden;
+    object-fit: cover;
+
+    @media (min-width: $bp-bigSmartphone) {
+      height: 400px;
+    }
+  }
+
+  &__arrow {
+    &-left {
+      position: absolute;
+      top:50%;
+      left: 0%;
+    }
+    &-right {
+      position: absolute;
+      top:50%;
+      left:100%;
+    }
+  }
+
+  .slider__multiple {
+    margin-left: 12px;
+
+    &-one,
+    &-two {
+      display: none;
+    }
+
+    @media (min-width: $bp-bigSmartphone) {
+      &-one {
+        display: block;
+      }
+    }
+    @media (min-width: $bp-tablet) {
+      &-two {
+        display: block;
+      }
+    }
+  }
+
+  .card {
+    min-height: 170px;
+
+    &__img {
+      display: none;
+    }
+  }
+}

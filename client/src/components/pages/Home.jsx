@@ -1,113 +1,116 @@
 import React, { Component } from 'react';
-// import CountDownClock from '../CountDownClock'
-import api from '../../api';
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      posts : [],
-      pictures:[
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495663/project2React/WhatsApp_Image_2020-02-23_at_10.53.19_PM_2.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.22_PM.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.21_PM.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.22_PM_1.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.20_PM_1.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.23_PM_1.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/WhatsApp_Image_2020-02-23_at_10.53.23_PM.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/WhatsApp_Image_2020-02-23_at_10.53.21_PM_1.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/WhatsApp_Image_2020-02-23_at_10.53.24_PM.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/WhatsApp_Image_2020-02-23_at_10.53.42_PM.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495663/project2React/WhatsApp_Image_2020-02-23_at_10.53.19_PM.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495662/project2React/WhatsApp_Image_2020-02-23_at_10.53.18_PM.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495663/project2React/WhatsApp_Image_2020-02-23_at_10.53.19_PM_1.jpg",
-        "https://res.cloudinary.com/mcfrihfd/image/upload/v1582495663/project2React/WhatsApp_Image_2020-02-23_at_10.53.20_PM.jpg"]
-    }
+import Slider from '../Slider'
+import Card from '../Card'
+import posts from '../../data/posts.json'
+
+const pictures = [
+  // 'https://res.cloudinary.com/mcfrihfd/image/upload/v1558628756/project2React/IMG_6122.JPG.jpg',
+  'https://res.cloudinary.com/mcfrihfd/image/upload/v1602009956/project2React/home/home-slider.jpg'
+  ]
+
+export default class HomeNew extends Component {
+  state={
+    posts: []
   }
   componentDidMount(){
-    api.getLatestPosts()
-      .then(result=>{
-        this.setState({posts:result})
-      })
-      .catch(err=>{
-        console.log(err)
-      })
+    const latestPosts = posts.slice(0,10);
+    const formattedResult = latestPosts.map(post=>
+      <Card 
+        key = {post._id}
+        id = {post._id}
+        header = {post.header}
+        text = {post.content}
+        lineclamp = {true}
+        link = "Mehr lesen"
+        onlinkclick = {()=>this.props.history.push('/news', {id: post._id})}
+      />
+      )
+    this.setState({posts:formattedResult})
   }
-  createPosts=()=>{
-    return this.state.posts.map(post=>{
-      return (
-        <div className="card" style={{width: "30rem"}} key={post._id}>
-          {post.imgPath && <img src={ post.imgPath } alt={ post.imgName } className="card-img-top" />}
-          <div className="card-body">
-            <h5 className="card-title">{post.header}</h5>
-            <p className="card-text">{post.content}</p>
-            <h6 className="card-subtitle mb-2 text-muted">by {post._creator.username}</h6>
-            {/* <h6 className="card-subtitle mb-2 text-muted">by {post.creator}</h6> */}
+  render () {
+    return (
+      <div className="home">
+        <h2 className="title">Willkommen</h2>
+
+        <Slider
+          automaticMovement={true}
+          content={pictures.map(pic=><img src={pic} alt="galerie" className="slider__img"/>)}
+        />
+
+        <div className="home__intro">
+          <div className="info-block">
+            <h3 className="info-block__header">Elviras Nähspass</h3>
+            <p className="info-block__text">Wie schön, dass Sie unsere Seite gefunden haben! Schauen Sie sich um, entdecken Sie unsere Kursangebote und melden Sie sich gerne bei uns, wenn Fragen sein sollten. Wir freuen uns, Sie bald in unseren Kursen begrüßen zu können!</p>
           </div>
         </div>
-      )
-    })
-  }
-  createSpecialGalleryPost=()=>{
-    return (
-      <div className="card" style={{width: "30rem"}} key="SpecialGalleryPost">
-          <div id="carouselExampleControls" className="carousel slide card-img-top" data-ride="carousel">
-            <div className="carousel-inner">
-              <div className="carousel-item active">
-                <img className="d-block w-100" src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495636/project2React/WhatsApp_Image_2020-02-23_at_10.52.10_PM.jpg" alt="Nähkurs"/>
-              </div>
-              {this.state.pictures.map((pic,i)=>{
-                return(
-                  <div className="carousel-item" key={i}>
-                    <img className="d-block w-100" src={pic} alt="Schnitt"/>
-                  </div>
-              )
-              })}
+
+        <div className="home__category-mobile">
+          <a href="/naehkurse">{"Unser Angebot >>"}</a>
+          <a href="/about">{"Das sind wir >>"}</a>
+          <a href="/atelier">{"Das Atelier >>"}</a>
+          <a href="/kontakt">{"Kontakt >>"}</a>
+        </div>
+        <div className="home__category-tablet">
+            <div>
+              <img src="../icons/button.svg" className="home__category-icon" alt="Angebot"/>
+              <a href="/naehkurse">{"Unser Angebot >>"}</a>
             </div>
-            <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="sr-only">Previous</span>
-            </a>
-            <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="sr-only">Next</span>
-            </a>
+            <div>
+              <img src="../icons/face.svg" className="home__category-icon" alt="Wir"/>
+              <a href="/about">{"Das sind wir >>"}</a>
+            </div>
+            <div>
+              <img src="../icons/house.svg" className="home__category-icon" alt="Atelier"/>
+              <a href="/atelier">{"Das Atelier >>"}</a>
+            </div>
+            <div>
+              <img src="../icons/mail.svg" className="home__category-icon" alt="Kontakt"/>
+              <a href="/kontakt">{"Kontakt >>"}</a>
+            </div>
+        </div>
+
+        <div className="home__news">
+          <div className="info-block">
+            <h3 className="info-block__header">Neuigkeiten</h3>
+            <Slider
+              automaticMovement={false}
+              content={this.state.posts}
+              slideMultiple={true}
+            />
+            <a href="/news" className="info-block__link">{"Alle Neuigkeiten >>"}</a>
           </div>
-          <div className="card-body">
-            <h5 className="card-title">Ein Modell</h5>
-            <p className="card-text">kann so unterschiedlich aussehen</p>
-            <h6 className="card-subtitle mb-2 text-muted">by Elvira</h6>
+        </div>
+
+        <div className="home__selfmade">
+          <div className="info-block">
+            <h3 className="info-block__header">Das habe ich selbst genäht</h3>
+            <p className="info-block__text">Wolltest du das auch schon immer mal sagen?<br/>
+              Dann bist du bei uns genau richtig! In unseren Kursen gehen wir auf individuelle Wünsche ein, und so entstehen jedes Mal einzigartige Meisterstücke.
+              Taschen oder Kleidungsstücke, Kissen oder Kuscheltiere, alles ist möglich.</p>
+            <p className="info-block__text">Hier seht ihr Fotos von Kleidungsstücken, die in den Kursen gefertigt wurden. Alle sind aus dem gleichen Modell entstanden, und doch ist jedes einzigartig!</p>
+          </div>
+        </div>
+
+          <div className="image-tiles">
+            <div className="image-tiles-column">
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495663/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.19_PM_2.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.21_PM.jpg" alt="modell"/>
+            </div>
+            <div className="image-tiles-column">
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.22_PM_1.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.20_PM_1.jpg" alt="modell"/>
+            </div>
+            <div className="image-tiles-column">
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.42_PM.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495665/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.24_PM.jpg" alt="modell"/>
+            </div>
+            <div className="image-tiles-column">
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.23_PM.jpg" alt="modell"/>
+              <img src="https://res.cloudinary.com/mcfrihfd/image/upload/v1582495664/project2React/home/WhatsApp_Image_2020-02-23_at_10.53.23_PM_1.jpg" alt="modell"/>
+            </div>
           </div>
       </div>
     )
-  }
-  render() {   
-    return (
-      <React.Fragment>
-        <div className="page-title">
-          <h1 className="page-title">Willkommen</h1>
-        </div>
-        {/* <section className="card-container">
-          <div className="countDownHome" key="countdown">
-            <CountDownClock/>
-          </div>
-        </section> */}
-          <section className="card-container">
-              {this.createSpecialGalleryPost()}
-              {this.createPosts()}
-          </section>
-          <section className="button-container"> 
-            <a href="/posts" className="btnHref" id="all-posts">Alle Beiträge ansehen</a>
-          </section>
-          <section className="card-container women-container">
-            <div className="card women-card" style={{width: "20rem"}}>
-              <div className="card-body">
-                <img src="./images/woman.png" alt="Woman" className="card-img-top"/>
-              </div>
-            </div>
-          </section>
-
-      </React.Fragment>
-    );
   }
 }
