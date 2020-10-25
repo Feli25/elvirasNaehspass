@@ -41,7 +41,7 @@ router.post('/kontakt', (req,res,next)=>{
 function createHTML(body){
   let html = `<h1>Die Anfrage:</h1><hr>`
   html += `<p>${body.name} (${body.email}) möchte diesem Kurs betreten:<br>Wahlen:<br/> ${body.choice}`
-  html += `<br/>Die eingetragenen Infos:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.adress}`
+  html += `<br/>Die eingetragenen Infos:<br/>Name: ${body.name}<br/>Email: ${body.email}<br/>Telefon: ${body.phone}<br/>Adresse: ${body.address}`
   html += `</p><p>Weitere Mitteilung: ${body.message}</p><br><hr><br>`
   return html
 }
