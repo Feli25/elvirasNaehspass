@@ -22,7 +22,20 @@ router.post('/kontakt', (req,res,next)=>{
   };
   sgMail.send(msg)
     .then(response=>{ res.json( { success: true })})
-    .catch(err=>{console.log(err)})
+    .catch(err=>{
+      if(err.response && 
+        err.response.body && 
+        err.response.body.errors && 
+        err.response.body.errors[0] && 
+        err.response.body.errors[0].field && 
+        err.response.body.errors[0].field==="reply_to.email"){
+        res.json({success:false, error:"reply_to.email"})
+      } else {
+        next(err)
+      }
+      // console.log(err)
+      // console.log(err.response.body)
+    })
 })
 
 function createHTML(body){
@@ -77,12 +90,21 @@ router.post("/anmeldung", (req,res,next)=>{
           res.json( { success: true })
         })
         .catch(err => { 
-          console.log(err)
-          console.log(err.response.body)
           next(err)
          })
     })
-    .catch(err => { console.log(err) })
+    .catch(err => {
+      if(err.response && 
+        err.response.body && 
+        err.response.body.errors && 
+        err.response.body.errors[0] && 
+        err.response.body.errors[0].field && 
+        err.response.body.errors[0].field==="reply_to.email"){
+        res.json({success:false, error:"reply_to.email"})
+      } else {
+        next(err)
+      }
+    })
 })
 
 
