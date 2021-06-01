@@ -1,5 +1,13 @@
 # Elviras Naehspass in React
 
+um mit Heroku zu arbeiten muss dieses im Repo eingerichtet sein, falls es neu gecloned wird.
+Die command line installieren: https://devcenter.heroku.com/articles/heroku-cli
+dann per heroku checken ob sie funktioniert. Wenn ja, heroku login aufrufen, einloggen.
+Die beiden Remotes hinzufügen:
+heroku git:remote -a frozen-wave-86999 -r staging
+heroku git:remote -a elvirasnaehspass
+Das fügt master und staging hinzu
+
 push to the live environment (only from master branch)<br/>
 git push heroku master<br/>
 link: http://www.elviras-naehspass.com/
