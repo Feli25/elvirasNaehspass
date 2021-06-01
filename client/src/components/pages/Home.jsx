@@ -9,12 +9,12 @@ const pictures = [
   'https://res.cloudinary.com/mcfrihfd/image/upload/v1602009956/project2React/home/home-slider.jpg'
   ]
 
-export default class HomeNew extends Component {
+export default class Home extends Component {
   state={
     posts: []
   }
   componentDidMount(){
-    const latestPosts = posts.slice(0,10);
+    const latestPosts = posts.slice(0,5);
     const formattedResult = latestPosts.map(post=>
       <Card 
         key = {post._id}
@@ -32,6 +32,13 @@ export default class HomeNew extends Component {
     return (
       <div className="home">
         <h2 className="title">Willkommen</h2>
+
+         <div className="home__news-banner">
+             <span className="home__news-banner-header">Es geht wieder los!<br/></span>
+             <div className="home__news-banner-content">
+             Nach einer sehr langen Zwangspause können wir mit kleinen Gruppen und Hygieneregeln endlich wieder starten.
+             Wir freuen uns darauf, euch in den renovierten Nähräumen zu begrüßen!</div>
+         </div>
 
         <Slider
           automaticMovement={true}
@@ -114,11 +121,11 @@ export default class HomeNew extends Component {
          <iframe 
           title="videoKirschpups"
           src="https://www.youtube.com/embed/gf_hijPN_Jk?rel=0&amp;modestbranding=1" 
-          frameborder="0" 
+          frameBorder="0"
           // allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen="allowfullscreen"
-          mozallowfullscreen="mozallowfullscreen" 
-          msallowfullscreen="msallowfullscreen" 
+          allowFullScreen="allowFullScreen"
+          mozallowfullscreen="mozallowfullscreen"
+          msallowfullscreen="msallowfullscreen"
           oallowfullscreen="oallowfullscreen" 
           webkitallowfullscreen="webkitallowfullscreen"
           className="video">
