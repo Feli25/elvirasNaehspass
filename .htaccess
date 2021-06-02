@@ -1,0 +1,6 @@
+
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} !^www.elviras-naehspass.com$ [NC]
+RewriteRule ^(.*)$ https//www.elviras-naehspass.com/$1 [L,R=301]
+
