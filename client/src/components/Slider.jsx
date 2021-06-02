@@ -27,7 +27,9 @@ export default class Slider extends Component {
     this.setState({sliderNumber:newNumber})
   }
   generateNumber = (number) => {
-    return number < 0 ? this.props.content.length - 1 : number >= this.props.content.length ? 0 : number
+    return number < 0 ?
+        this.props.content.length + number :
+        number >= this.props.content.length ? number - this.props.content.length : number
   }
   generateClassName = () => {
     let className = "slider"
@@ -41,11 +43,11 @@ export default class Slider extends Component {
         {!this.props.automaticMovement && 
         <span className="slider__arrow-left" onClick={()=>this.move(-1)}>&#10094;</span>
         }
-        <div>{this.props.content[this.state.sliderNumber]}</div>
+        <div className="slider__box">{this.props.content[this.generateNumber(this.state.sliderNumber)]}</div>
         {this.props.slideMultiple && 
           <React.Fragment>
-            <div className="slider__multiple slider__multiple-one">{this.props.content[this.generateNumber(this.state.sliderNumber+1)]}</div>
-            <div className="slider__multiple slider__multiple-two">{this.props.content[this.generateNumber(this.state.sliderNumber+2)]}</div>
+            <div className="slider__box slider__multiple slider__multiple-one">{this.props.content[this.generateNumber(this.state.sliderNumber+1)]}</div>
+            <div className="slider__box slider__multiple slider__multiple-two">{this.props.content[this.generateNumber(this.state.sliderNumber+2)]}</div>
           </React.Fragment>
         }
         {!this.props.automaticMovement && 
