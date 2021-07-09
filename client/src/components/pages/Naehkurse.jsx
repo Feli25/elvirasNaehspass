@@ -68,7 +68,7 @@ export default class Naehkurse extends Component {
                   <th>Tag</th>
                   <th>Uhrzeit</th>
                   <th>Lehrer</th>
-                  <th></th>
+                  <th>&#160; &#160; &#160;</th>
                 </tr>
                 {naehkurse.table.list.map((row,index)=>{
                   if (row.subheader) return <tr key={index} className="subHeaderTable">

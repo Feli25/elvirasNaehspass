@@ -7,18 +7,19 @@
     "teacher":"platzhalter",
     "list":[
       {"subheader":"wöchentlich"},
-      {"name":"Montag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":true},
-      {"name":"Montag mittag","time":"14:00 - 16:30","teacher":"ED","belegt":true},
-      {"name":"Montag abend","time":"19:00 - 21:30","teacher":"ED","belegt":true},
+      {"name":"Montag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
+      {"name":"Montag mittag","time":"14:00 - 16:30","teacher":"ED","belegt":false},
+      {"name":"Montag abend","time":"19:00 - 21:30","teacher":"ED","belegt":false},
       {"name":"Dienstag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
-      {"name":"Mittwoch morgen","time":"9:00 - 12:00","teacher":"ED","belegt":true},
-      {"name":"Mittwoch abend","time":"19:00 - 21:30","teacher":"ED","belegt":true},
-      {"name":"Donnerstag morgen","time":"09:00 - 12:00","teacher":"ED","belegt":true},
-      {"name":"Donnerstag abend","time":"19:30 - 22:00","teacher":"ED","belegt":true},
-      {"name":"Freitag abend","time": "19:00 - 23:00","teacher":"ED","belegt":true},
+      {"name":"Mittwoch morgen","time":"9:00 - 12:00","teacher":"ED","belegt":false},
+      {"name":"Mittwoch mittag","time":"16:00 - 18:30","teacher":"NM","belegt":false},
+      {"name":"Mittwoch abend","time":"19:00 - 21:30","teacher":"ED","belegt":false},
+      {"name":"Donnerstag morgen","time":"09:00 - 12:00","teacher":"ED","belegt":false},
+      {"name":"Donnerstag abend","time":"19:00 - 21:30","teacher":"ED","belegt":false},
+      {"name":"Freitag abend","time": "19:00 - 23:00","teacher":"ED","belegt":false},
       {"subheader":"1 mal im Monat"},
-      {"name":"Samstag vormittag","time":"10:00 - 13:00","teacher":"ED","belegt":true},
-      {"name":"Samstag nachmittag","time":"14:00 - 17:00","teacher":"ED","belegt":true}
+      {"name":"Samstag vormittag","time":"10:00 - 13:00","teacher":"ED","belegt":false},
+      {"name":"Samstag nachmittag","time":"14:00 - 17:00","teacher":"ED","belegt":false}
       ]},
   
    "workshops": [

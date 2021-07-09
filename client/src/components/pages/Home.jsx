@@ -34,10 +34,10 @@ export default class Home extends Component {
         <h2 className="title">Willkommen</h2>
 
          <div className="home__news-banner">
-             <span className="home__news-banner-header">Es geht wieder los!<br/></span>
+             <span className="home__news-banner-header">Zurück zur Normalität<br/></span>
              <div className="home__news-banner-content">
-             Nach einer sehr langen Zwangspause können wir mit kleinen Gruppen und Hygieneregeln endlich wieder starten.
-             Wir freuen uns darauf, euch in den renovierten Nähräumen zu begrüßen!</div>
+             Nach den Sommerferien werden wir vorsichtig versuchen wieder zu unseren regulären Gruppen zurückzukehren!
+             Darum<span style={{whiteSpace: "nowrap"}}> bitten wir jetzt</span> um eine Anmeldung per Mail.</div>
          </div>
 
         <Slider
