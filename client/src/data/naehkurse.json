@@ -8,7 +8,7 @@
     "list":[
       {"subheader":"wöchentlich"},
       {"name":"Montag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
-      {"name":"Montag mittag","time":"14:00 - 16:30","teacher":"ED","belegt":false},
+      {"name":"Montag mittag","time":"14:00 - 16:30","teacher":"ED","belegt":true},
       {"name":"Montag abend","time":"19:00 - 21:30","teacher":"ED","belegt":false},
       {"name":"Dienstag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
       {"name":"Mittwoch morgen","time":"9:00 - 12:00","teacher":"ED","belegt":false},
