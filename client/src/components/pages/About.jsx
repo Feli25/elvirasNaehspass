@@ -17,20 +17,6 @@ const teachers = [
     (mit Anerkennung im Handwerk)<br/>
     1992 Ausbildung zur Schnittdirectrice</span>
   },
-  // {
-  //   name: "Barbara Beckmann",
-  //   picturePath: "https://res.cloudinary.com/mcfrihfd/image/upload/v1601927444/project2React/about/barbara.jpg",
-  //   cv: <span>geboren 12.07.1967<br/>
-  //   Ausbildung:<br/>
-  //   1983 – 1985 Ausbildung zur Bekleidungsfertigerin<br/>
-  //   1986 – 1991 Beschäftigung in der Industrie<br/>
-  //   1992 – 1997 Selbstständige Damenschneiderin<br/>
-  //   Seit 2010 tätig in der Erwachsenenbildung<br/>
-  //   Weiterbildung:<br/>
-  //   1987 – 1990 Ausbildung zur Industrieschneidermeisterin<br/>
-  //   (mit Anerkennung im Handwerk)<br/>
-  //   1992 Ausbildung zur Schnittdirectrice</span>
-  // },
   {
     name: "Simone Becher",
     // picturePath: "../images/Simone.jpg",
