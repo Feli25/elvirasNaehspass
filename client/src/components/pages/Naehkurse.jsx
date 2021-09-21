@@ -161,28 +161,7 @@ export default class Naehkurse extends Component {
             })}
           </div>
         </div>
-
-        <div className="home__block-reverse">
-          <Slider
-            automaticMovement={true}
-            content={picturesDessous.map(pic=><img src={pic} alt="galerie" className="slider__img"/>)}
-          />
-          <div className="home__text">
-            <div className="info-block">
-              <h3 className="info-block__header">Dessous</h3>
-              <p className="info-block__text">
-                  <span className="info-block__text-subheader">Die Dessous Kurse sind zur Zeit leider pausiert!<br/></span>
-                  Aufgrund der aktuellen Situation sind wir leider gezwungen, die Dessous Kurse eine Zeit 
-                  lang bei Elviras Nähspass zu pausieren. Alle Teilnehmer der geplanten Workshops erhalten eine Information.
-                  Sollten Sie über uns einen Dessous Workshop gebucht haben, und noch keine Information erhalten haben, dann würden wir Sie bitten sich bei uns zu melden!
-                  <br/>Schaut gerne auf der <a href="https://www.bblingerie.de/dessous-n%C3%A4hkurse-in-nrw/" style={{textDecoration: 'underline'}}>Website von Barbara</a> vorbei.<br/>
-                  Bleibt gesund und bis bald bei dem nächsten Dessous Workshop!
-                {/* Ein ganz besonderes Angebot sind unsere Dessous-Workshops, die immer wieder an Wochenenden stattfinden */}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> 
+      </div>
     )
   }
 }
