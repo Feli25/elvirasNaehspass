@@ -57,10 +57,7 @@ export default class Naehkurse extends Component {
           <div className="info-block">
             <h3 className="info-block__header">Kurstermine</h3>
             <p className="info-block__text">
-              BB = Barbara Beckmann,
-              ED = Elvira Deutges<br/>
-              NM = Nicola Münter,
-              SB = Simone Becher
+              ED = Elvira Deutges, SB = Simone Becher
             </p>
             <table>
               <tbody>
@@ -107,7 +104,8 @@ export default class Naehkurse extends Component {
         <div className="info-block">
           <h3 className="info-block__header">Die nächsten Workshops</h3>
           <div className="card-block workshop-cards">
-            {naehkurse.workshops.map(wsh=>{
+            {naehkurse.workshops.length ?
+                naehkurse.workshops.map(wsh=>{
                 let content = wsh.list && wsh.list.lenght>0 ? 
                 <span>{wsh.content}<br/>Daten:<br/>
                 {wsh.list.map(entry=><span>{entry.name}{entry.belegt && " => belegt"}</span>)}
@@ -120,7 +118,16 @@ export default class Naehkurse extends Component {
                     text = {content}
                     subtext = {wsh.teacher ? "Unterrichtet von: " + wsh.teacher : false}
                   />
-            })}
+            })
+            :
+                <Card
+                    key = "empty"
+                    id = "empty"
+                    header = "Aktuell stehen keine Workshops an. Schau doch demnächst nochmal vorbei!"
+                    text ={false}
+                    subtext ={false}
+                />
+            }
           </div>
         </div>
         

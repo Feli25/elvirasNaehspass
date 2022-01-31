@@ -16,35 +16,23 @@
       {"name":"Donnerstag morgen","time":"09:00 - 12:00","teacher":"ED","belegt":true},
       {"name":"Donnerstag abend","time":"19:30 - 22:00","teacher":"ED","belegt":true},
       {"name":"Freitag abend","time": "19:00 - 23:00","teacher":"ED","belegt":true},
+      {"subheader":"alle 14 Tage"},
+      {"name":"Dienstag Mittag","time": "14:00 - 16:30","teacher":"ED","belegt":true},
       {"subheader":"1 mal im Monat"},
       {"name":"Samstag vormittag","time":"10:00 - 13:00","teacher":"ED","belegt":true},
       {"name":"Samstag nachmittag","time":"14:00 - 17:00","teacher":"ED","belegt":true}
       ]},
   
-   "workshops": [
-     {"_id":2,
-      "category":"WORKSHOPS",
-      "header":"Sommerferienworkshop",
-      "content":"Ein Workshop vorrangig für Kinder in den Sommerferien. Jeweils von 10:00 - 14:00 Uhr 45,- € Einen Termin gibt es im Moment noch nicht. Wir arbeiten daran.",
-      "liststring":"[]",
-      "teacher":"Elvira",
-      "list":[]},
-    {"_id":4,
-      "category":"WORKSHOPS",
-      "header":"Boomerang Bags nähen",
-      "content":"Am 05.01.2020 wollen wir mit vielen helfenden Händen Einkaufstaschen nähen, die hoffentlich ganz schnell sämtliche Plastikeinkaufstüten ersetzen. Um kurze Anmeldung wird gebeten.  :)",
-      "liststring":"[{name:\"05.01.2020    ab  11 Uhr\",belegt:false}]",
-      "list":[{"name":"05.01.2020    ab  11 Uhr","belegt":false}]}
-  ],
+  "workshops": [],
   
   "weekend": [
-    {"_id":5,
+    {"_id":6,
       "category":"WORKSHOPS",
-      "header":"Nähwochenende am dritten Advent",
-      "content":"Am dritten Advent 2020 sind wir ein ganzes Wochenende lang zum Nähen am Sorpsee in der Nähe von Soest",
-      "liststring":"[{name:\"11. - 13.12.2020\",belegt:false}]",
+      "header":"Wochenende in Freckenhorst",
+      "content":"Im Februar sind wir ein ganzes Wochenende lang zum Nähen in Freckenhorst",
+      "liststring":"[{name:\"11. - 13.02.2022\",belegt:false}]",
       "teacher":"Elvira Deutges",
-      "list":[{"name":"11. - 13.12.2020","belegt":false}]}
+      "list":[{"name":"11. - 13.02.2022","belegt":false}]}
   ],
 
     "dessous": [
