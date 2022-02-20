@@ -7,8 +7,8 @@
     "teacher":"platzhalter",
     "list":[
       {"subheader":"wöchentlich"},
-      {"name":"Montag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":true},
-      {"name":"Montag mittag","time":"14:00 - 16:30","teacher":"ED","belegt":true},
+      {"name":"Montag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
+      {"name":"Montag mittag","time":"13:30 - 16:30","teacher":"ED","belegt":true},
       {"name":"Montag abend","time":"19:00 - 21:30","teacher":"ED","belegt":true},
       {"name":"Dienstag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
       {"name":"Mittwoch morgen","time":"9:00 - 12:00","teacher":"ED","belegt":true},
@@ -17,22 +17,48 @@
       {"name":"Donnerstag abend","time":"19:30 - 22:00","teacher":"ED","belegt":true},
       {"name":"Freitag abend","time": "19:00 - 23:00","teacher":"ED","belegt":true},
       {"subheader":"alle 14 Tage"},
-      {"name":"Dienstag Mittag","time": "14:00 - 16:30","teacher":"ED","belegt":true},
+      {"name":"Dienstag Mittag","time": "16:00 - 19:00","teacher":"ED","belegt":true},
       {"subheader":"1 mal im Monat"},
       {"name":"Samstag vormittag","time":"10:00 - 13:00","teacher":"ED","belegt":true},
       {"name":"Samstag nachmittag","time":"14:00 - 17:00","teacher":"ED","belegt":true}
       ]},
   
-  "workshops": [],
+  "workshops": [
+    {"_id":5,
+      "category":"WORKSHOPS",
+      "header":"Osterferienworkshop in Hückelhoven",
+      "content":"Ein Workshop vorrangig für Kinder in den Osterferien.",
+      "teacher":"Elvira",
+      "isFilled": false,
+      "price": "Auf Anfrage",
+      "list":[{"name":"11 - 13.4.2022 von 10-13:30"}]}
+  ],
   
   "weekend": [
-    {"_id":6,
+    {"_id":7,
+      "category":"WORKSHOPS",
+      "header":"Nähwochende in der Wasserburg Rindern",
+      "content":"Im Juni sind wir ein ganzes Wochenende lang zum Nähen in Rindern",
+      "teacher":"Elvira Deutges",
+      "isFilled": true,
+      "list":[{"name":"Juni"}]
+    },
+    {"_id":8,
       "category":"WORKSHOPS",
       "header":"Wochenende in Freckenhorst",
-      "content":"Im Februar sind wir ein ganzes Wochenende lang zum Nähen in Freckenhorst",
-      "liststring":"[{name:\"11. - 13.02.2022\",belegt:false}]",
+      "content":"Im September sind wir ein ganzes Wochenende lang zum Nähen in Freckenhorst",
       "teacher":"Elvira Deutges",
-      "list":[{"name":"11. - 13.02.2022","belegt":false}]}
+      "isFilled": true,
+      "list":[{"name":"September"}]
+    },
+    {"_id":9,
+      "category":"WORKSHOPS",
+      "header":"Nähwochende in der Wasserburg Rindern",
+      "content":"Im Dezember sind wir ein ganzes Wochenende lang zum Nähen in Rindern",
+      "teacher":"Elvira Deutges",
+      "isFilled": true,
+      "list":[{"name":"Dezember"}]
+    }
   ],
 
     "dessous": [
