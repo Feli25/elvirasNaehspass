@@ -19,8 +19,8 @@
       {"subheader":"alle 14 Tage"},
       {"name":"Dienstag Mittag","time": "16:00 - 19:00","teacher":"ED","belegt":true},
       {"subheader":"1 mal im Monat"},
-      {"name":"Samstag vormittag","time":"10:00 - 13:00","teacher":"ED","belegt":true},
-      {"name":"Samstag nachmittag","time":"14:00 - 17:00","teacher":"ED","belegt":true}
+      {"name":"Samstag vormittag","time":"10:00 - 13:00","teacher":"ED","belegt":false},
+      {"name":"Samstag nachmittag","time":"14:00 - 17:00","teacher":"ED","belegt":false}
       ]},
   
   "workshops": [
