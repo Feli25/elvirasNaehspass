@@ -8,44 +8,57 @@
     "list":[
       {"subheader":"wöchentlich"},
       {"name":"Montag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
-      {"name":"Montag mittag","time":"14:00 - 16:30","teacher":"ED","belegt":true},
-      {"name":"Montag abend","time":"19:00 - 21:30","teacher":"ED","belegt":false},
+      {"name":"Montag mittag","time":"13:30 - 16:30","teacher":"ED","belegt":true},
+      {"name":"Montag abend","time":"19:00 - 21:30","teacher":"ED","belegt":true},
       {"name":"Dienstag morgen","time":"09:00 - 12:00","teacher":"SB","belegt":false},
-      {"name":"Mittwoch morgen","time":"9:00 - 12:00","teacher":"ED","belegt":false},
-      {"name":"Mittwoch mittag","time":"16:00 - 18:30","teacher":"NM","belegt":false},
-      {"name":"Mittwoch abend","time":"19:00 - 21:30","teacher":"ED","belegt":false},
-      {"name":"Donnerstag morgen","time":"09:00 - 12:00","teacher":"ED","belegt":false},
-      {"name":"Donnerstag abend","time":"19:00 - 21:30","teacher":"ED","belegt":false},
-      {"name":"Freitag abend","time": "19:00 - 23:00","teacher":"ED","belegt":false},
+      {"name":"Mittwoch morgen","time":"9:00 - 12:00","teacher":"ED","belegt":true},
+      {"name":"Mittwoch abend","time":"19:00 - 21:30","teacher":"ED","belegt":true},
+      {"name":"Donnerstag morgen","time":"09:00 - 12:00","teacher":"ED","belegt":true},
+      {"name":"Donnerstag abend","time":"19:30 - 22:00","teacher":"ED","belegt":true},
+      {"name":"Freitag abend","time": "19:00 - 23:00","teacher":"ED","belegt":true},
+      {"subheader":"alle 14 Tage"},
+      {"name":"Dienstag Mittag","time": "16:00 - 19:00","teacher":"ED","belegt":true},
       {"subheader":"1 mal im Monat"},
       {"name":"Samstag vormittag","time":"10:00 - 13:00","teacher":"ED","belegt":false},
       {"name":"Samstag nachmittag","time":"14:00 - 17:00","teacher":"ED","belegt":false}
       ]},
   
-   "workshops": [
-     {"_id":2,
+  "workshops": [
+    {"_id":5,
       "category":"WORKSHOPS",
-      "header":"Sommerferienworkshop",
-      "content":"Ein Workshop vorrangig für Kinder in den Sommerferien. Jeweils von 10:00 - 14:00 Uhr 45,- € Einen Termin gibt es im Moment noch nicht. Wir arbeiten daran.",
-      "liststring":"[]",
+      "header":"Osterferienworkshop in Hückelhoven",
+      "content":"Ein Workshop vorrangig für Kinder in den Osterferien.",
       "teacher":"Elvira",
-      "list":[]},
-    {"_id":4,
-      "category":"WORKSHOPS",
-      "header":"Boomerang Bags nähen",
-      "content":"Am 05.01.2020 wollen wir mit vielen helfenden Händen Einkaufstaschen nähen, die hoffentlich ganz schnell sämtliche Plastikeinkaufstüten ersetzen. Um kurze Anmeldung wird gebeten.  :)",
-      "liststring":"[{name:\"05.01.2020    ab  11 Uhr\",belegt:false}]",
-      "list":[{"name":"05.01.2020    ab  11 Uhr","belegt":false}]}
+      "isFilled": false,
+      "price": "Auf Anfrage",
+      "list":[{"name":"11 - 13.4.2022 von 10-13:30"}]}
   ],
   
   "weekend": [
-    {"_id":5,
+    {"_id":7,
       "category":"WORKSHOPS",
-      "header":"Nähwochenende am dritten Advent",
-      "content":"Am dritten Advent 2020 sind wir ein ganzes Wochenende lang zum Nähen am Sorpsee in der Nähe von Soest",
-      "liststring":"[{name:\"11. - 13.12.2020\",belegt:false}]",
+      "header":"Nähwochende in der Wasserburg Rindern",
+      "content":"Im Juni sind wir ein ganzes Wochenende lang zum Nähen in Rindern",
       "teacher":"Elvira Deutges",
-      "list":[{"name":"11. - 13.12.2020","belegt":false}]}
+      "isFilled": true,
+      "list":[{"name":"Juni"}]
+    },
+    {"_id":8,
+      "category":"WORKSHOPS",
+      "header":"Wochenende in Freckenhorst",
+      "content":"Im September sind wir ein ganzes Wochenende lang zum Nähen in Freckenhorst",
+      "teacher":"Elvira Deutges",
+      "isFilled": true,
+      "list":[{"name":"September"}]
+    },
+    {"_id":9,
+      "category":"WORKSHOPS",
+      "header":"Nähwochende in der Wasserburg Rindern",
+      "content":"Im Dezember sind wir ein ganzes Wochenende lang zum Nähen in Rindern",
+      "teacher":"Elvira Deutges",
+      "isFilled": true,
+      "list":[{"name":"Dezember"}]
+    }
   ],
 
     "dessous": [

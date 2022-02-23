@@ -34,11 +34,6 @@ const teachers = [
     2002 Schnittkonstruktion, Gradieren, Digitalisieren, Schnittbild legen an CAD-ASSYST<br/>
     2004 Gradierung Müller und Sohn<br/>
     2004 Schnittkonstruktion, Gradieren, Digitalisieren, Schnittbild legen an CAD-Grafis, regelmässige Upgrades auf die jeweils aktuellste Version mit entsprechender Schulung</span>
-  },
-  {
-    name: "Nicola Münter",
-    // picturePath: "",
-    cv: <span>Lebenslauf folgt...</span>
   }
 ]
 

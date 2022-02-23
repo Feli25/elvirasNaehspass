@@ -6,7 +6,7 @@ import equipment from '../../data/equipment.json'
 
 const pictures = [
   'https://res.cloudinary.com/mcfrihfd/image/upload/v1559237957/project2React/atelier/IMG_6011.JPG.jpg',
-  'https://res.cloudinary.com/mcfrihfd/image/upload/v1559237366/project2React/atelier/IMG_6132.JPG.jpg',
+  // 'https://res.cloudinary.com/mcfrihfd/image/upload/v1559237366/project2React/atelier/IMG_6132.JPG.jpg',
   'https://res.cloudinary.com/mcfrihfd/image/upload/v1558624068/project2React/atelier/IMG_6148.JPG.jpg',
   'https://res.cloudinary.com/mcfrihfd/image/upload/v1558628310/project2React/atelier/IMG_6022.JPG.jpg',
   'https://res.cloudinary.com/mcfrihfd/image/upload/v1558627603/project2React/atelier/IMG_5978.JPG.jpg',

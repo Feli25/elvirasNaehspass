@@ -57,10 +57,7 @@ export default class Naehkurse extends Component {
           <div className="info-block">
             <h3 className="info-block__header">Kurstermine</h3>
             <p className="info-block__text">
-              BB = Barbara Beckmann,
-              ED = Elvira Deutges<br/>
-              NM = Nicola Münter,
-              SB = Simone Becher
+              ED = Elvira Deutges, SB = Simone Becher
             </p>
             <table>
               <tbody>
@@ -104,23 +101,43 @@ export default class Naehkurse extends Component {
           </div>
         </div>
 
-        <div className="info-block">
+        <div className="info-block is-workshop">
           <h3 className="info-block__header">Die nächsten Workshops</h3>
-          <div className="card-block workshop-cards">
-            {naehkurse.workshops.map(wsh=>{
-                let content = wsh.list && wsh.list.lenght>0 ? 
-                <span>{wsh.content}<br/>Daten:<br/>
-                {wsh.list.map(entry=><span>{entry.name}{entry.belegt && " => belegt"}</span>)}
-                </span>
-                : wsh.content
-                return <Card 
+          <div className="card-block">
+            {naehkurse.workshops.length ?
+                naehkurse.workshops.map(wsh=>{
+                  let list = wsh.list && wsh.list.length>0 ?
+                      <span><br/>
+                        Daten:{" "}
+                        {wsh.list.map(entry=><span>{wsh.list.length>1 && <br/>}{entry.name}</span>)}
+                      </span>
+                  :
+                    '';
+                  let price = wsh.price ? <span><br/>Preis: {wsh.price}</span> : '';
+                  let filled = wsh.isFilled ? <span><br/>Dieser Workshop ist leider schon ausgebucht.</span>:'';
+                  let content = <span>
+                    {wsh.content}
+                    {list}
+                    {price}
+                    {filled}
+                  </span>
+                return <Card
                     key = {wsh._id}
                     id = {wsh._id}
-                    header = {wsh.header}
+                    header = {wsh.headvzer}
                     text = {content}
                     subtext = {wsh.teacher ? "Unterrichtet von: " + wsh.teacher : false}
                   />
-            })}
+            })
+            :
+                <Card
+                    key = "empty"
+                    id = "empty"
+                    header = "Aktuell stehen keine Workshops an. Schau doch demnächst nochmal vorbei!"
+                    text ={false}
+                    subtext ={false}
+                />
+            }
           </div>
         </div>
         
@@ -142,16 +159,26 @@ export default class Naehkurse extends Component {
           </div>
         </div>
 
-        <div className="info-block">
+        <div className="info-block is-workshop">
           <h3 className="info-block__header">Die nächsten Wochenenden</h3>
-          <div className="card-block workshop-cards">
+          <div className="card-block">
             {naehkurse.weekend.map(wsh=>{
-                let content = wsh.list && wsh.list.lenght>0 ? 
-                <span>{wsh.content}<br/>Daten:<br/>
-                {wsh.list.map(entry=><span>{entry.name}{entry.belegt && <span style={{color: "red"}}>Das Wochenende ist leider schon ausgebucht!</span>}</span>)}
-                </span>
-                : wsh.content
-                return <Card 
+              let list = wsh.list && wsh.list.length>0 ?
+                  <span><br/>
+                        Daten:{" "}
+                    {wsh.list.map(entry=><span>{wsh.list.length>1 && <br/>}{entry.name}</span>)}
+                      </span>
+                  :
+                  '';
+              let price = wsh.price ? <span><br/>Preis: {wsh.price}</span> : '';
+              let filled = wsh.isFilled ? <span><br/>Dieses Wochenende ist bereits ausgebucht.</span>:'';
+              let content = <span>
+                    {wsh.content}
+                    {list}
+                    {price}
+                    {filled}
+                  </span>
+                return <Card
                     key = {wsh._id}
                     id = {wsh._id}
                     header = {wsh.header}

@@ -49,7 +49,21 @@
 
   .info-block  {
 
-    .workshop-cards {
+    &.is-workshop {
+      width: 100%;
+
+      .info-block__header {
+        min-width: 32%;
+      }
+
+      p {
+        text-align: center;
+      }
+
+      .card__subText {
+        align-self: auto;
+      }
+
       .card {
         @media (min-width: $bp-smallTablet) {
           flex: 1 1 48%;
