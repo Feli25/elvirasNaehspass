@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.25.0",
-    "minimist": ">=0.2.1",
+    "minimist": ">=1.2.6",
     "node-sass": "^6.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.14.0",
