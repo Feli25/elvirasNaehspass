@@ -10,7 +10,7 @@ export default class Anmeldung extends Component {
         {/* <img className="mail-img" alt="mail" src="https://res.cloudinary.com/mcfrihfd/image/upload/v1601927335/project2React/kontaktsignup/mail.jpg"/> */}
         <div className="block-wrapper">
           <div className="info-block">
-            <h3 className="info-block__header">Anmeldung</h3>
+            <h3 className="info-block__header">Anmeldung!</h3>
             <p className="info-block__text">
               Sie möchten sich bei einem unserer Kurse anmelden? Dann schicken Sie uns gerne eine Email und wir melden uns schnellstmöglich. <br/><br/>
               elvirasnaehspass@gmail.com</p>
