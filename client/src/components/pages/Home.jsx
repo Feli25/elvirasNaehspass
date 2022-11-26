@@ -48,7 +48,7 @@ export default class Home extends Component {
         <div className="home__intro">
           <div className="info-block">
             <h3 className="info-block__header">Elviras Nähspass</h3>
-            <p className="info-block__text">Wie schön, dass Sie unsere Seite gefunden haben!! Schauen Sie sich um, entdecken Sie unsere Kursangebote und melden Sie sich gerne bei uns, wenn Fragen sein sollten. Wir freuen uns, Sie bald in unseren Kursen begrüßen zu können!</p>
+            <p className="info-block__text">Wie schön, dass Sie unsere Seite gefunden haben! Schauen Sie sich um, entdecken Sie unsere Kursangebote und melden Sie sich gerne bei uns, wenn Fragen sein sollten. Wir freuen uns, Sie bald in unseren Kursen begrüßen zu können!</p>
           </div>
         </div>
 
