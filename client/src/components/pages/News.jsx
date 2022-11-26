@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import api from '../../api';
-// import queryString from 'query-string';
 
 import posts from '../../data/posts.json'
 import Card from '../Card'
